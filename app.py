@@ -2,6 +2,7 @@ import os
 import json
 from flask import Flask
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 
 if os.path.exists("env.py"):
     import env
@@ -13,15 +14,13 @@ app.config["MONGO_URI"] = os.getenv("MONGODB_URI")
 
 mongo = PyMongo(app)
 
-data = []
-with open("data/movie.json", "r") as json_data:
-    data = json.load(json_data)
-test = {"title": "Test insert"}
-
 @app.route("/")
 def index():
-    mongo.db.movies.insert_many(data)
-    return "flask is connected"
+    not_horror = mongo.db.movies.find({"genre": {"$ne": "Horror"}})
+    for movie in not_horror:
+        mongo.db.movies.remove({"_id": ObjectId(movie["_id"])})
+    return "non-horror removed"
+
 
 
 if __name__ == "__main__":
