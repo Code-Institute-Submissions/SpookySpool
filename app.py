@@ -16,10 +16,19 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    old_movies = mongo.db.movies.find()
-    for movie in old_movies:
-        mongo.db.movies.remove({"_id": ObjectId(movie["_id"])})
-    return "old movies removed"
+
+    genre_list = []
+    genres = mongo.db.genres.find()
+    for genre in genres:
+        genre_list.append(genre["genre_name"])
+
+    movies = mongo.db.movies.find()
+    for movie in movies:
+        for movie_genre in movie["genre"]:
+            if movie_genre not in genre_list:
+                mongo.db.genres.insert_one({"genre_name": movie_genre})
+                genre_list.append(movie_genre)
+    return "genres added"
 
 
 
