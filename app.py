@@ -16,10 +16,10 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    not_horror = mongo.db.movies.find({"genre": {"$ne": "Horror"}})
-    for movie in not_horror:
+    old_movies = mongo.db.movies.find()
+    for movie in old_movies:
         mongo.db.movies.remove({"_id": ObjectId(movie["_id"])})
-    return "non-horror removed"
+    return "old movies removed"
 
 
 
