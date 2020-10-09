@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    return "flask is connected"
+    return "flask is connected" + str(mongo.db.genres.find_one())
 
 
 if __name__ == "__main__":
