@@ -16,13 +16,12 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    movies = mongo.db.movies.find({"year": {"$gte": "1990"}})
-    count = 0
+    movies = mongo.db.movies.find({"year": {"$lt": "1990"}})
     for movie in movies:
-        count += 1
-    print(count) 
+        mongo.db.movies.delete({"title": movie["title"], "year": movie["year"]})
+   
 
-    return "There are " + str(count)
+    return "old movies removed"
 
 
 if __name__ == "__main__":
