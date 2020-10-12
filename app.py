@@ -16,15 +16,13 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    movies = mongo.db.movies.find()
+    movies = mongo.db.movies.find({"year": {"$gte": "1990"}})
+    count = 0
     for movie in movies:
-        if not movie["genre"]:
-            print(movie["title"])
+        count += 1
+    print(count) 
 
-
-
-    return "genres added"
-
+    return "There are " + str(count)
 
 
 if __name__ == "__main__":
