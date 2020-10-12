@@ -14,12 +14,15 @@ app.config["MONGO_URI"] = os.getenv("MONGODB_URI")
 
 mongo = PyMongo(app)
 
+with open("data/movie.json", "r") as jason_data:
+    data = json.load(jason_data)
+
+
 @app.route("/")
 def index():
     movies = mongo.db.movies
-    genres = mongo.db.genres.find()
 
-    movies.remove()
+    movies.insert_many(data)
 
 
 
