@@ -19,8 +19,13 @@ def index():
 
     movies = mongo.db.movies
     keep_count = movies.find({"keep": "True"}).count()
-    remove_count = movies.find({ "keep": {"$exists": False}}).count()
+    remove_count = movies.find({"keep": {"$exists": False}}).count()
     all_count = movies.find().count()
+
+    remove_movies = movies.find({"keep": {"$exists": False}})
+
+    for movie in remove_movies:
+        movies.delete_one({"_id": ObjectId(movie["_id"])})
 
     return "Movies to keep: {}, Movies to remove: {}, Movie total: {}".format(keep_count, remove_count, all_count)
         
