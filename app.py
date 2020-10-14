@@ -16,12 +16,18 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    movies = mongo.db.movies.find({"year": {"$lt": "1990"}})
+    movie_db = mongo.db.movies
+    movies = movie_db.find()
+    zombie_movies = []
+    
     for movie in movies:
-        mongo.db.movies.delete({"title": movie["title"], "year": movie["year"]})
-   
+        if ("zombie" in str(movie["description"])) or ("Zombie" in str(movie["description"])):
+            zombie_movies.append(movie["title"])
+            movie_db.update({"_id": ObjectId(movie["_id"])},{"$addToSet":{"genre": "Zombie"}})
+    
+    length = len(zombie_movies)
 
-    return "old movies removed"
+    return str(length) + str(zombie_movies)
 
 
 if __name__ == "__main__":
