@@ -18,19 +18,11 @@ mongo = PyMongo(app)
 def index():
 
     movies = mongo.db.movies
-    all_movies = movies.find().count()
-    scary_movies = movies.find({"$or": [{"genre": ObjectId("5f806ebc0727bbf597c35ba4")}, {"genre": ObjectId("5f806ebc0727bbf597c35ba5")}]})
-    scary_movies_count = movies.find({"$or": [{"genre": ObjectId("5f806ebc0727bbf597c35ba4")}, {"genre": ObjectId("5f806ebc0727bbf597c35ba5")}]}).count()
+    keep_count = movies.find({"keep": "True"}).count()
+    remove_count = movies.find({ "keep": {"$exists": False}}).count()
+    all_count = movies.find().count()
 
-    for movie in scary_movies:
-        try:
-            print(movie["keep"])
-        except KeyError:
-            movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"keep": "True"}})
-
-    movie_count = movies.find({"keep": "True"}).count()
-
-    return "correct movies to keep marked, marked movies = {}, scary movie total: {}".format(movie_count, scary_movies_count)
+    return "Movies to keep: {}, Movies to remove: {}, Movie total: {}".format(keep_count, remove_count, all_count)
         
 
 
