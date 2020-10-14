@@ -1,3 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="container">
+    <div class="row">
+{% for movie in movies %}
+    <div class="card col s3">
+        <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src="{{movie.img_url}}">
+        </div>
+        <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">{{movie.title}}<i class="right fas fa-ellipsis-v"></i></span>
+            <p><a href="#">This is a link</a></p>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4"><i class="material-icons right">close</i>Card Title</span>
+            <p>Here is some more information about this product that is only revealed once clicked on.</p>
+        </div>
+    </div>
+{% endfor %}
+    </div>
+</div>
 {% endblock %}

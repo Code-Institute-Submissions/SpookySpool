@@ -19,11 +19,14 @@ def index():
 
     return render_template("base.html")
 
-
 @app.route("/browse")
 def browse_movies():
 
-    return render_template("browse.html")
+    movie_list = mongo.db.movies
+
+    movies = movie_list.find().sort("year", -1).limit(30)
+
+    return render_template("browse.html", movies=movies)
 
 
 if __name__ == "__main__":
