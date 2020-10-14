@@ -20,6 +20,12 @@ def index():
     return render_template("base.html")
 
 
+@app.route("/browse")
+def browse_movies():
+
+    return render_template("browse.html")
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
