@@ -16,15 +16,23 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    all_movies = mongo.db.movies
 
-    movies = all_movies.find()
+    movies = mongo.db.movies
+    all_movies = movies.find().count()
+    scary_movies = movies.find({"$or": [{"genre": ObjectId("5f806ebc0727bbf597c35ba4")}, {"genre": ObjectId("5f806ebc0727bbf597c35ba5")}]})
+    scary_movies_count = movies.find({"$or": [{"genre": ObjectId("5f806ebc0727bbf597c35ba4")}, {"genre": ObjectId("5f806ebc0727bbf597c35ba5")}]}).count()
 
-    horror_movies = all_movies.find({"genre": {"$elemMatch": {"$eq": ObjectId("5f806ebc0727bbf597c35ba4")}}})
+    for movie in scary_movies:
+        try:
+            print(movie["keep"])
+        except KeyError:
+            movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"keep": "True"}})
 
-    thriller_movies = all_movies.find({"genre": {"$elemMatch": {"$eq": ObjectId("5f806ebc0727bbf597c35ba5")}}})
+    movie_count = movies.find({"keep": "True"}).count()
 
-    return "Normal movies: " + str(movies.count()) + " Horror Movies: " + str(horror_movies.count()) + " Thriller Movies: " + str(thriller_movies.count())
+    return "correct movies to keep marked, marked movies = {}, scary movie total: {}".format(movie_count, scary_movies_count)
+        
+
 
 @app.route("/browse")
 def browse_movies():
