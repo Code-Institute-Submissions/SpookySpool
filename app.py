@@ -16,16 +16,8 @@ mongo = PyMongo(app)
 
 @app.route("/")
 def index():
-    movie_db = mongo.db.movies
-    genres = mongo.db.genres.find()
 
-    for genre in genres:
-        movie_db.update_many(
-            {"genre": genre["genre_name"]},
-            {"$set": {"genre.$": ObjectId(genre["_id"])}}
-        )
-
-    return "Genres updated in movie genre arrays to genre ids from genre collection"
+return render_template("base.html")
 
 
 if __name__ == "__main__":
