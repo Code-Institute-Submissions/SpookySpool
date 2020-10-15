@@ -3,3 +3,60 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/*----- Text and Headings -----*/
+
+.brand-heading {
+    font-family: 'Special Elite', cursive;
+}
+
+.heading-text {
+    font-family: 'Didact Gothic', sans-serif;
+}
+
+.body-text {
+    font-family: 'Raleway', sans-serif;
+}
+
+.lrg {
+    font-size: 2em;
+}
+
+.med {
+    font-size: 1em;
+}
+
+.sml {
+    font-size: 0.75em;
+}
+
+.card .card-content {
+    padding: 1em 0.5em;
+}
+
+.card-info {
+    max-width: 85%;
+    height: 1.5em;
+    overflow: hidden;
+    display: inline-block;
+    margin: 0em;
+    font-weight: bold;
+}
+
+.card-content .fa-ellipsis-v {
+    color: red;
+    padding: 0.5em 0.5em;
+    margin: 0;
+    cursor: pointer;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;  
+}
+
+.card .card-content.icon{
+    font-size: larger;
+    padding-top: 0em;
+}
