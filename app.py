@@ -36,7 +36,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/login_attempt", methods=["POST"])
+@app.route("/login/%", methods=["POST"])
 def attempt_login():
     if request.method == "POST":
         username = request.form.get('username')
@@ -51,7 +51,6 @@ def attempt_login():
             print("login succesful")
             session["username"] = username
             return redirect(url_for("browse_movies"))
-        
         return redirect(url_for("login"))
 
 
