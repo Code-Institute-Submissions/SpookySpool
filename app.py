@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -10,6 +10,7 @@ app = Flask(__name__)
 
 app.config["MONGO_DBNAME"] = "spooky_spool"
 app.config["MONGO_URI"] = os.getenv("MONGODB_URI")
+app.secret_key = os.getenv("SECRET_KEY")
 
 mongo = PyMongo(app)
 
@@ -48,7 +49,10 @@ def attempt_login():
             print("password incorrect")
         elif user_data["username"] and password == user_data["password"]:
             print("login succesful")
+            session["username"] = username
+            session["user_id"] = userdata["_id"]
             return redirect(url_for("browse_movies"))
+        
         return redirect(url_for("login"))
 
 
