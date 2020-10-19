@@ -50,7 +50,6 @@ def attempt_login():
         elif user_data["username"] and password == user_data["password"]:
             print("login succesful")
             session["username"] = username
-            session["user_id"] = userdata["_id"]
             return redirect(url_for("browse_movies"))
         
         return redirect(url_for("login"))
