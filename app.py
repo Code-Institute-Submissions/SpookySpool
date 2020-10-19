@@ -14,11 +14,13 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+movies = mongo.db.movies
+users = mongo.db.users
+genres = mongo.db.genres
 
 @app.route("/")
 def index():
 
-    movies = mongo.db.movies
     keep_count = movies.find({"keep": "True"}).count()
     remove_count = movies.find({"keep": {"$exists": False}}).count()
     all_count = movies.find().count()
@@ -41,7 +43,7 @@ def attempt_login():
     if request.method == "POST":
         username = request.form.get('username')
         password = request.form.get('password')
-        user_data = mongo.db.users.find_one({"username": username})
+        user_data = users.find_one({"username": username})
 
         if user_data is None:
             print("user doesn't exist")
@@ -51,6 +53,32 @@ def attempt_login():
             print("login succesful")
             session["username"] = username
             return redirect(url_for("browse_movies"))
+        return redirect(url_for("login"))
+
+
+@app.route("/login/sign_up", methods=["POST"])
+def sign_up():
+    if request.method == "POST":
+        username = request.form.get('username')
+        email = request.form.get('email')
+        username_check = mongo.db.users.find_one({"username": username})
+        email_check = mongo.db.users.find_one({"email": email})
+
+        if (username_check is None and email_check is None):
+            users.insert_one({
+                "email": request.form.get('email'),
+                "username": request.form.get('username'),
+                "password": request.form.get('password'),
+                "watchlist": [],
+                "favourites": [],
+                "user_submitted_movies": []
+            })
+            print("user added")
+            return redirect(url_for("browse_movies"))
+        elif (username_check is not None):
+            print("username is taken")
+        elif (email_check is not None):
+            print("email is taken")
         return redirect(url_for("login"))
 
 
