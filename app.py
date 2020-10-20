@@ -93,7 +93,9 @@ def browse_movies():
 
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
-    return render_template('movie_template.html')
+    movie_data = movies.find_one({"_id": ObjectId(movie_id)})
+
+    return render_template('movie_template.html', movie=movie_data)
 
 
 if __name__ == "__main__":
