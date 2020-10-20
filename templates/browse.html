@@ -5,10 +5,15 @@
 {% for movie in movies %}
     <div class="card col s6 m3">
         <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="{{movie.img_url}}">
+            <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                <img src="{{movie.img_url}}">
+            </a>
         </div>
         <div class="card-content">
-            <p class="card-info heading-text med">{{movie.title}}</p><i class="activator right fas fa-ellipsis-v"></i>
+            <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                <p class="card-info heading-text med">{{movie.title}}</p>
+            </a>
+            <i class="activator right fas fa-ellipsis-v"></i>
         </div>
         <div class="card-content icon">
             <span>

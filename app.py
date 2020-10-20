@@ -91,6 +91,10 @@ def browse_movies():
 
     return render_template("browse.html", movies=movies)
 
+@app.route("/movie/<movie_id>")
+def movie_page(movie_id):
+    return render_template('movie_template.html')
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
