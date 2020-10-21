@@ -44,7 +44,7 @@ body {
 }
 
 .card-content .fa-ellipsis-v {
-    color: red;
+    color: purple;
     padding: 0.5em 0.5em;
     margin: 0;
     cursor: pointer;

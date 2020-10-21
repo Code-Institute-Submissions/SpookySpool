@@ -94,8 +94,12 @@ def browse_movies():
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
     movie_data = movies.find_one({"_id": ObjectId(movie_id)})
+    genre_data = genres.find()
+    return render_template('movie_template.html', movie=movie_data, genres=genre_data)
 
-    return render_template('movie_template.html', movie=movie_data)
+@app.route("/user_submit")
+def submit_movie():
+    return render_template("movie_form.html" genres=genres.find())
 
 
 if __name__ == "__main__":

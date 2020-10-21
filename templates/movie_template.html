@@ -1,4 +1,74 @@
 {% extends "base.html" %}
 {% block content %}
-    {{movie.title}}
+    <div class="container">
+        <div class="row heading-text">
+            <h1 class="col s12 lrg">{{movie.title}} <span class="med">({{movie.year}})</span></h1>
+        </div>
+        <div class="row heading-text">
+            <h2 class="col s6 med">Rated: {{movie.rating}}</h2><h2 class="col s6 right med">Metascore: {{movie.metascore}}/100</h2>
+        </div>
+        <div class="row">
+            <img class="materialboxed col s12" data-caption="{{movie.tagline}}" width="250" src="{{movie.img_url}}">
+        </div>
+		<div class="row">
+			<ul class="collapsible" data-collapsible="accordion">
+				<li>
+					<div class="collapsible-header">Plot Synopsis</div>
+					<div class="collapsible-body"><span>{{movie.description}}</span></div>
+				</li>
+				<li>
+					<div class="collapsible-header">Cast & Crew</div>
+					<div class="collapsible-body">
+						<div class="row">
+							<ul class="col s12">
+								<p>Featured Actors:</p>
+								{% for actor in movie.actors %}
+								<li>{{actor}}</li>
+								{% endfor %}
+							</ul>
+                            <ul class="col s12">
+								<p>Director(s):</p>
+								{% for director in movie.directors %}
+								<li>{{director}}</li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</li>
+                <li>
+					<div class="collapsible-header">Other Details</div>
+					<div class="collapsible-body">
+                        <div class="row">
+							<div class="col s3">
+								<p>Runtime:</p>
+                                <p>{{movie.runtime}}</p>
+							</div>
+                            <div class="col s3">
+								<ul>
+								    <p>Genre(s):</p>
+								    {% for genre in genres %}
+                                        {% if genre._id in movie.genre %}
+                                            <li>{{genre.genre_name}}</li>
+								        {% endif %}
+								    {% endfor %}
+							    </ul>
+							</div>
+                            <div class="col s3">
+                                <ul>
+								<p>Language(s):</p>
+                                {% for Language in movie.languages %}
+								    <li>{{Language}}</li>
+								{% endfor %}
+                                </ul>
+							</div>
+                            <div class="col s3">
+								<p>Imdb:</p>
+                                <p><a target=_blank href="{{movie.imdb_url}}">Link</a></p>
+							</div>
+						</div>
+                    </div>
+				</li>
+			</ul>
+		</div>
+    </div>
 {% endblock %}
