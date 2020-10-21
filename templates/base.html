@@ -16,18 +16,42 @@
 <body>
 
 Hello World
-
+<div class="container">
 {% block content %}
 {% endblock %}
+</div>
 
 <!-- Materialize & jquery javascript CDNs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script>
+
+    function addInput(event){
+        $(`#${event.data.targetId}`).append(`<div class="col s6 ${event.data.newClass}"><input name="${event.data.name}" type="text" placeholder="${event.data.placeholder}" class="validate" required></div>`)
+    };
+
+    function removeInput(event){
+        $(`.${event.data.class}:last`).remove()
+    };
+
     $(document).ready(function(){
     // Modla trigger
-    $('.modal').modal();
-  });
+        $('.modal').modal();
+   
+        $('select').material_select();
+
+        $('#actor_add').click({targetId: "movie_actors", newClass: "actor-input", name: "actors", placeholder: "Name..."}, addInput)
+
+        $('#actor_remove').click({class: "actor-input"}, removeInput)
+
+        $('#director_add').click({targetId: "movie_directors", newClass: "director-input", name: "directors", placeholder: "Name..."}, addInput)
+        
+        $('#director_remove').click({class: "director-input"}, removeInput)
+
+        $('#language_add').click({targetId: "movie_languages", newClass: "language-input", name: "languages", placeholder: "Add language"}, addInput)
+
+        $('#language_remove').click({class: "language-input"}, removeInput)
+    });
 </script>
 </body>
 </html>

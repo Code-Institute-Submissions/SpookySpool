@@ -99,7 +99,7 @@ def movie_page(movie_id):
 
 @app.route("/user_submit")
 def submit_movie():
-    return render_template("movie_form.html" genres=genres.find())
+    return render_template("movie_form.html", genres=genres.find())
 
 
 if __name__ == "__main__":
