@@ -106,6 +106,9 @@ def submit_movie():
 def insert_movie():
 
     user = users.find_one({"username": session["username"]})
+    genre_list = []
+    for genre in request.form.getlist("genre"):
+        genre_list.append(ObjectId(genre))
 
     query = {"title:": request.form.get("title"),
              "rating": request.form.get("rating"),
@@ -114,7 +117,7 @@ def insert_movie():
              "img_url": request.form.get("img_url"),
              "languages": request.form.getlist("languages[]"),
              "actors": request.form.getlist("actors[]"),
-             "genre": request.form.getlist("genre"),
+             "genre": genre_list,
              "tagline": request.form.get("tagline"),
              "description": request.form.get("description"),
              "directors": request.form.getlist("directors[]"),
