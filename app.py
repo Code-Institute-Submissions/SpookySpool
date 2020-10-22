@@ -30,15 +30,7 @@ def index():
         else:
             continue
 
-
-    deleted = movies.delete_many({"rating": "Approved"})
-
-    print(deleted.deleted_count)
-
-    movies_approved = movies.find({"rating": "Approved"})
-    approved_count = movies_approved.count()
-
-    return str(ratings) + str(approved_count)
+    return str(ratings)
 
 
 @app.route("/login")

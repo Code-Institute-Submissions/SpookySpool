@@ -1,35 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-<!--
-img_url "https://m.media-amazon.com/images/M/MV5BMTU2ODI3ODEyOV5BMl5BanBnXkFtZT..."
-imdb_url "https://www.imdb.com/title/tt2199571/" -->
 <div class="row">
 		<form id="movie_form" action="{{url_for('attempt_login')}}" method="POST" class="col s12">
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="movie_title" placeholder="Alien" name="title" type="text" class="validate" required>
+					<input id="movie_title" placeholder="(i.e.) Alien" name="title" type="text" class="validate" required>
 					<label for="movie_title">Title</label>
 				</div>
 			</div>
             <div class="row">
 				<div class="input-field col s12">
-					<textarea id="tagline" name="tagline" placeholder="In space, no one can hear you scream" class="materialize-textarea"></textarea>
-                    <label for="tagline">Tagline/Slogan</label>
+					<input id="tagline" name="tagline" placeholder="In space, no one can hear you scream" type="text" class="validate">
+                    <label for="tagline">Tagline/Slogan (optional)</label>
 				</div>
 			</div>
             <div class="row">
 				<div class="input-field col s12">
-					<textarea id="movie_description" name="description" placeholder="In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel. The terror begins when the crew encounters a nest of eggs inside the alien ship. An organism from inside an egg leaps out and attaches itself to one of the crew, causing him to fall into a coma." class="materialize-textarea"></textarea>
+					<textarea id="movie_description" name="description" placeholder="In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel..." class="materialize-textarea" required></textarea>
                     <label for="movie_description">Plot Synopsis</label>
 				</div>
 			</div>
             <div class="row">
 				<div class="input-field col s4">
-					<input id="movie_rating" name="rating" type="text" class="validate" required>
-					<label for="movie_rating">Rating</label>
+					<select id="movie_rating" name="rating" required class="validate">
+                        <option value="" selected disabled>Select a rating</option>
+                        <option value="G">G (Genrel Audience)</option>
+                        <option value="PG">PG (Partenal Guidence)</option>
+                        <option value="PG-13">G (Paternal guidence for under 13 year olds)</option>
+                        <option value="R">R (Paternal guidence for under 17 year olds)</option>
+                        <option value="NC-17">NC-17 (Viewers must be over 17)</option>
+                        <option value="Unrated">Unrated (No rating provided for this movie))</option>
+					</select>
+                    <label for="movie_rating">Genres</label>
 				</div>
 				<div class="input-field col s4">
-					<select id="movie_year" name="year">
+					<select id="movie_year" name="year" required>
 				      {% for year in range(2021, 1909, -1) %}
                         <option value="{{year}}">{{year}}</option>
                       {% endfor %}
@@ -42,14 +47,15 @@ imdb_url "https://www.imdb.com/title/tt2199571/" -->
 				</div>
 			</div>
             <div class="row">
-                <h2 class="heading col s12 sml">Runtime</h2>
+                <h2 class="heading col s12 sml">Runtime (minutes)</h2>
 				<div class="input-field col s12">
-					<input type="range" id="runtime" name="runtime" min="1" max="250">
+					<input type="range" id="runtime" name="runtime" min="1" max="250" required>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<select id="movie_genres" name="genre" multiple>
+					<select id="movie_genres" name="genre" multiple required>
+                        <option value="" disabled selected>Pick relevant genres</option>
 				      {% for genre in genres %}
                         <option value="{{genre._id}}">{{genre.genre_name}}</option>
                       {% endfor %}
@@ -92,6 +98,18 @@ imdb_url "https://www.imdb.com/title/tt2199571/" -->
 				</div>
                 <span id="language_add" >Add</span>
                 <span id="language_remove" >Remove</span>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+					<input id="movie_img_url" placeholder="(i.e.) https://images-na.ssl-images-amazon.com/images/I/31dKO0hfksL._AC_.jpg" name="img_url" type="text" class="validate">
+					<label for="movie_img_url">Poster URL (optional)</label>
+				</div>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+					<input id="movie_imdb_url" placeholder="(i.e.) https://www.imdb.com/title/tt0078748/" name="imdb_url" type="text" class="validate">
+					<label for="movie_imdb_url">Link to IMDB page (optional)</label>
+				</div>
 			</div>
 			<div class="row">
 				<button class="btn waves-effect waves-light" form="login_form" type="submit">Login
