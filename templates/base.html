@@ -15,7 +15,7 @@
 </head>
 <body>
 
-Hello World
+<a href="{{url_for('user.html', username=session['username'])}}">User page</a>
 <div class="container">
 {% block content %}
 {% endblock %}

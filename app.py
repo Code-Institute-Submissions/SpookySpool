@@ -139,6 +139,14 @@ def insert_movie():
     return redirect(url_for("browse_movies"))
 
 
+@app.route("/user/<user_id>")
+def user_home(username):
+    user_data = users.find_one({"username": username})
+
+    render_template("user.html", user=user_data)
+
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
