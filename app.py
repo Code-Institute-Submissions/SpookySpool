@@ -101,8 +101,36 @@ def movie_page(movie_id):
 def submit_movie():
     return render_template("movie_form.html", genres=genres.find())
 
+#Inserts movies from the submit form into the database
 @app.route("/insert_movie", methods=["POST"])
 def insert_movie():
+
+    user = users.find_one({"username": session["username"]})
+
+    query = {"title:": request.form.get("title"),
+             "rating": request.form.get("rating"),
+             "year": request.form.get("year"),
+             "metascore": request.form.get("metascore"),
+             "img_url": request.form.get("img_url"),
+             "languages": request.form.get("languages"),
+             "actors": request.form.get("actors[]"),
+             "genre": request.form.get("genre"),
+             "tagline": request.form.get("tagline"),
+             "description": request.form.get("description"),
+             "directors": request.form.get("directors"),
+             "runtime": str(request.form.get("runtime")) + " min",
+             "imdb_url": request.form.get("imdb_url"),
+             "user_submitted": True,
+             "user_id": ObjectId(user["_id"])
+            }
+
+    mongo.db.test_inserts.insert_one(query)
+    print(request.form.get("actors"))
+    #Adds the inserted movie id into the user's submitted movie array
+    new_movie = users.find().sort("_id", -1)
+    user["submitted_movies"].append(ObjectId(new_movie[0]["_id"]))
+    users.update_one({"username": user["username"]},
+                     {"$set": {"submitted_movies": user["submitted_movies"]}})
     return redirect(url_for("browse_movies"))
 
 
