@@ -112,12 +112,12 @@ def insert_movie():
              "year": request.form.get("year"),
              "metascore": request.form.get("metascore"),
              "img_url": request.form.get("img_url"),
-             "languages": request.form.get("languages"),
-             "actors": request.form.get("actors[]"),
-             "genre": request.form.get("genre"),
+             "languages": request.form.getlist("languages[]"),
+             "actors": request.form.getlist("actors[]"),
+             "genre": request.form.getlist("genre"),
              "tagline": request.form.get("tagline"),
              "description": request.form.get("description"),
-             "directors": request.form.get("directors"),
+             "directors": request.form.getlist("directors[]"),
              "runtime": str(request.form.get("runtime")) + " min",
              "imdb_url": request.form.get("imdb_url"),
              "user_submitted": True,
@@ -125,7 +125,8 @@ def insert_movie():
             }
 
     mongo.db.test_inserts.insert_one(query)
-    print(request.form.get("actors"))
+
+    print(request.form.getlist("languages[]"))
     #Adds the inserted movie id into the user's submitted movie array
     new_movie = users.find().sort("_id", -1)
     user["submitted_movies"].append(ObjectId(new_movie[0]["_id"]))
