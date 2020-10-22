@@ -21,16 +21,32 @@ genres = mongo.db.genres
 @app.route("/")
 def index():
 
-    keep_count = movies.find({"keep": "True"}).count()
-    remove_count = movies.find({"keep": {"$exists": False}}).count()
-    all_count = movies.find().count()
+    all_movies = mongo.db.movies.find()
+    ratings = []
 
-    remove_movies = movies.find({"keep": {"$exists": False}})
+    for movie in all_movies:
+        if movie["rating"] not in ratings:
+            ratings.append(movie["rating"])
+        else:
+            continue
 
-    for movie in remove_movies:
-        movies.delete_one({"_id": ObjectId(movie["_id"])})
+    movies.update({"rating": "18"}, {"$set": {"rating": "NC-17"}})
+    movies.update({"rating": "UA"}, {"$set": {"rating": "PG-13"}})
+    movies.update({"rating": "TV-MA"}, {"$set": {"rating": "R"}})
+    movies.update({"rating": "TV-14"}, {"$set": {"rating": "PG-13"}})
+    movies.update({"rating": "Not Rated"}, {"$set": {"rating": "Unrated"}})
+    movies.update({"rating": "M"}, {"$set": {"rating": "PG"}})
+    movies.update({"rating": "TV-PG"}, {"$set": {"rating": "PG"}})
+    movies.update({"rating": "X"}, {"$set": {"rating": "NC-17"}})
+    movies.update({"rating": "18"}, {"$set": {"rating": "NC-17"}})
+    movies.update({"rating": "E"}, {"$set": {"rating": "G"}})
+    movies.update({"rating": "GP"}, {"$set": {"rating": "PG"}})
+    movies.update({"rating": "TV-G"}, {"$set": {"rating": "G"}})
+    movies.update({"rating": "M/PG"}, {"$set": {"rating": "PG"}})
+    movies.update({"rating": "C"}, {"$set": {"rating": "NC-17"}})
 
-    return "Movies to keep: {}, Movies to remove: {}, Movie total: {}".format(keep_count, remove_count, all_count)
+
+    return str(ratings)
 
 
 @app.route("/login")
