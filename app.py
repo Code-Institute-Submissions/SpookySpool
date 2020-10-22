@@ -139,11 +139,10 @@ def insert_movie():
     return redirect(url_for("browse_movies"))
 
 
-@app.route("/user/<user_id>")
+@app.route("/user/<username>")
 def user_home(username):
-    user_data = users.find_one({"username": username})
-
-    render_template("user.html", user=user_data)
+    return render_template("user_home.html",
+                           user=users.find_one({"username": username}))
 
 
 
