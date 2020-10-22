@@ -106,6 +106,7 @@ def submit_movie():
 def insert_movie():
 
     user = users.find_one({"username": session["username"]})
+    
     genre_list = []
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
@@ -129,12 +130,12 @@ def insert_movie():
 
     mongo.db.test_inserts.insert_one(query)
 
-    print(request.form.getlist("languages[]"))
     #Adds the inserted movie id into the user's submitted movie array
     new_movie = users.find().sort("_id", -1)
     user["submitted_movies"].append(ObjectId(new_movie[0]["_id"]))
     users.update_one({"username": user["username"]},
                      {"$set": {"submitted_movies": user["submitted_movies"]}})
+    
     return redirect(url_for("browse_movies"))
 
 

@@ -112,7 +112,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<button class="btn waves-effect waves-light" type="submit">Add Movie</button>
+                <div class="col s12">
+				    <button class="btn waves-effect waves-light left" type="submit">Add Movie</button>
+                    <a class="btn waves-effect waves-light right" href="{{url_for('browse_movies')}}">Cancel</a>
+                </div>
 			</div>
 		</form>
 	</div>
