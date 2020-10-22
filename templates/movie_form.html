@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-		<form id="movie_form" action="{{url_for('attempt_login')}}" method="POST" class="col s12">
+		<form id="movie_form" action="{{url_for('insert_movie')}}" method="POST" class="col s12">
 			<div class="row">
 				<div class="input-field col s12">
 					<input id="movie_title" placeholder="(i.e.) Alien" name="title" type="text" class="validate" required>
@@ -112,8 +112,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<button class="btn waves-effect waves-light" form="login_form" type="submit">Login
-	        </button>
+				<button class="btn waves-effect waves-light" type="submit">Add Movie</button>
 			</div>
 		</form>
 	</div>

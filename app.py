@@ -101,6 +101,10 @@ def movie_page(movie_id):
 def submit_movie():
     return render_template("movie_form.html", genres=genres.find())
 
+@app.route("/insert_movie", methods=["POST"])
+def insert_movie():
+    return redirect(url_for("browse_movies"))
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
