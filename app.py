@@ -30,23 +30,15 @@ def index():
         else:
             continue
 
-    movies.update({"rating": "18"}, {"$set": {"rating": "NC-17"}})
-    movies.update({"rating": "UA"}, {"$set": {"rating": "PG-13"}})
-    movies.update({"rating": "TV-MA"}, {"$set": {"rating": "R"}})
-    movies.update({"rating": "TV-14"}, {"$set": {"rating": "PG-13"}})
-    movies.update({"rating": "Not Rated"}, {"$set": {"rating": "Unrated"}})
-    movies.update({"rating": "M"}, {"$set": {"rating": "PG"}})
-    movies.update({"rating": "TV-PG"}, {"$set": {"rating": "PG"}})
-    movies.update({"rating": "X"}, {"$set": {"rating": "NC-17"}})
-    movies.update({"rating": "18"}, {"$set": {"rating": "NC-17"}})
-    movies.update({"rating": "E"}, {"$set": {"rating": "G"}})
-    movies.update({"rating": "GP"}, {"$set": {"rating": "PG"}})
-    movies.update({"rating": "TV-G"}, {"$set": {"rating": "G"}})
-    movies.update({"rating": "M/PG"}, {"$set": {"rating": "PG"}})
-    movies.update({"rating": "C"}, {"$set": {"rating": "NC-17"}})
 
+    deleted = movies.delete_many({"rating": "Approved"})
 
-    return str(ratings)
+    print(deleted.deleted_count)
+
+    movies_approved = movies.find({"rating": "Approved"})
+    approved_count = movies_approved.count()
+
+    return str(ratings) + str(approved_count)
 
 
 @app.route("/login")
