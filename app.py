@@ -113,6 +113,16 @@ def add_watchlist(movie_id, page):
 
     return redirect(url_for(f"{page}"))
 
+@app.route("/<movie_id>/redirect_from<page>")
+def remove_watchlist(movie_id, page):
+
+    user = users.find_one({"username": session["username"]})
+    user["watchlist"].remove(ObjectId(movie_id))
+    users.update_one({"username": session["username"]},
+                     {"$set": {"watchlist": user["watchlist"]}})
+
+    return redirect(url_for(f"{page}"))
+
 
 @app.route("/favourites/<movie_id>/redirect_from<page>")
 def add_favourites(movie_id, page):
