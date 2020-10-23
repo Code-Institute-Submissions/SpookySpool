@@ -1,30 +1,61 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="row">
-{% for movie in movies %}
-    <div class="card col s6 m3">
-        <div class="card-image waves-effect waves-block waves-light">
-            <a href="{{url_for('movie_page', movie_id=movie._id)}}">
-                <img src="{{movie.img_url}}">
-            </a>
+{% if session["username"] %}
+    {% for movie in movies %}
+        <div class="card col s6 m3">
+            <div class="card-image waves-effect waves-block waves-light">
+                <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    <img src="{{movie.img_url}}">
+                </a>
+            </div>
+            <div class="card-content">
+                <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    <p class="card-info heading-text med">{{movie.title}}</p>
+                </a>
+                <i class="activator right fas fa-ellipsis-v"></i>
+            </div>
+            <div class="card-content icon">
+                <span>
+                    <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
+                    <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
+                </span>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title"><i class=" med right fas fa-times"></i></span>
+                <p class="body-text med">{{movie.description}}</p>
+            </div>
         </div>
-        <div class="card-content">
-            <a href="{{url_for('movie_page', movie_id=movie._id)}}">
-                <p class="card-info heading-text med">{{movie.title}}</p>
-            </a>
-            <i class="activator right fas fa-ellipsis-v"></i>
-        </div>
-        <div class="card-content icon">
-            <span>
-                <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
-                <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
-            </span>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title"><i class=" med right fas fa-times"></i></span>
-            <p class="body-text med">{{movie.description}}</p>
-        </div>
-    </div>
-{% endfor %}
+    {% endfor %}
+    {% else %}
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class=flashes>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        {% for movie in movies %}
+            <div class="card col s6 m3">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                        <img src="{{movie.img_url}}">
+                    </a>
+                </div>
+                <div class="card-content">
+                    <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                        <p class="card-info heading-text med">{{movie.title}}</p>
+                    </a>
+                    <i class="activator right fas fa-ellipsis-v"></i>
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title"><i class=" med right fas fa-times"></i></span>
+                    <p class="body-text med">{{movie.description}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
     </div>
 {% endblock %}

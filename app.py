@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for, session
+from flask import Flask, flash, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -82,14 +82,25 @@ def sign_up():
         return redirect(url_for("login"))
 
 
+@app.route("/logout")
+def logout():
+
+    session["username"] = ""
+
+    return redirect(url_for('login'))
 @app.route("/browse")
 def browse_movies():
 
     movie_list = mongo.db.movies
-
     movies = movie_list.find().sort("year", -1).limit(10)
 
-    return render_template("browse.html", movies=movies)
+    if session["username"]:
+        user = users.find_one({"username": session["username"]})
+    else:
+        flash("Sign in to create watchlists & more!")
+        user=""
+
+    return render_template("browse.html", movies=movies, user=user)
 
 
 @app.route("/watchlist/<movie_id>/redirect_from<page>")
