@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+		<form id="movie_form" action="{{url_for('insert_movie')}}" method="POST" class="col s12">
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="movie_title" placeholder="(i.e.) Alien" name="title" type="text" class="validate" required>
+					<label for="movie_title">Title</label>
+				</div>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+					<input id="tagline" name="tagline" placeholder="In space, no one can hear you scream" type="text" class="validate">
+                    <label for="tagline">Tagline/Slogan (optional)</label>
+				</div>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+					<textarea id="movie_description" name="description" placeholder="In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel..." class="materialize-textarea" required></textarea>
+                    <label for="movie_description">Plot Synopsis</label>
+				</div>
+			</div>
+            <div class="row">
+				<div class="input-field col s4">
+					<select id="movie_rating" name="rating" required class="validate">
+                        <option value="" selected disabled>Select a rating</option>
+                        <option value="G">G (Genrel Audience)</option>
+                        <option value="PG">PG (Partenal Guidence)</option>
+                        <option value="PG-13">G (Paternal guidence for under 13 year olds)</option>
+                        <option value="R">R (Paternal guidence for under 17 year olds)</option>
+                        <option value="NC-17">NC-17 (Viewers must be over 17)</option>
+                        <option value="Unrated">Unrated (No rating provided for this movie))</option>
+					</select>
+                    <label for="movie_rating">Genres</label>
+				</div>
+				<div class="input-field col s4">
+					<select id="movie_year" name="year" required>
+				      {% for year in range(2021, 1909, -1) %}
+                        <option value="{{year}}">{{year}}</option>
+                      {% endfor %}
+				    </select>
+					<label for="movie_year">Release Year</label>
+				</div>
+                <div class="input-field col s4">
+					<input placeholder="1-100" id="movie_metascore" name="metascore" type="number" min="1" max="100" value="50" class="validate" required>
+					<label for="movie_metascore">Metascore</label>
+				</div>
+			</div>
+            <div class="row">
+                <h2 class="heading col s12 sml">Runtime (minutes)</h2>
+				<div class="input-field col s12">
+					<input type="range" id="runtime" name="runtime" min="1" max="250" required>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<select id="movie_genres" name="genre" multiple required>
+                        <option value="" disabled selected>Pick relevant genres</option>
+				      {% for genre in genres %}
+                        <option value="{{genre._id}}">{{genre.genre_name}}</option>
+                      {% endfor %}
+					</select>
+                    <label for="movie_genres">Genres</label>
+				</div>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+                    <div id="movie_actors" class="row">
+                        <div class="col s6">
+					        <input name="actors[]" type="text" class="validate" required>
+					        <label for="actors[]">Actor(s)</label>
+                        </div>
+                    </div>
+				</div>
+                <span id="actor_add" >Add</span>
+                <span id="actor_remove" >Remove</span>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+                    <div id="movie_directors" class="row">
+                        <div class="col s6">
+					        <input name="directors[]" type="text" class="validate" required>
+					        <label for="directors[]">Director(s)</label>
+                        </div>
+                    </div>
+				</div>
+                <span id="director_add" >Add</span>
+                <span id="director_remove" >Remove</span>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+                    <div id="movie_languages" class="row">
+                        <div class="col s6">
+					        <input name="languages[]" type="text" class="validate" placeholder="English" required>
+					        <label for="languages[]">Languages(s)</label>
+                        </div>
+                    </div>
+				</div>
+                <span id="language_add" >Add</span>
+                <span id="language_remove" >Remove</span>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+					<input id="movie_img_url" placeholder="(i.e.) https://images-na.ssl-images-amazon.com/images/I/31dKO0hfksL._AC_.jpg" name="img_url" type="text" class="validate">
+					<label for="movie_img_url">Poster URL (optional)</label>
+				</div>
+			</div>
+            <div class="row">
+				<div class="input-field col s12">
+					<input id="movie_imdb_url" placeholder="(i.e.) https://www.imdb.com/title/tt0078748/" name="imdb_url" type="text" class="validate">
+					<label for="movie_imdb_url">Link to IMDB page (optional)</label>
+				</div>
+			</div>
+			<div class="row">
+                <div class="col s12">
+				    <button class="btn waves-effect waves-light left" type="submit">Add Movie</button>
+                    <a class="btn waves-effect waves-light right" href="{{url_for('browse_movies')}}">Cancel</a>
+                </div>
+			</div>
+		</form>
+	</div>
+
+{% endblock %}
