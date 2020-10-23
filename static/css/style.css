@@ -30,6 +30,10 @@ body {
     font-size: 0.75em;
 }
 
+.card {
+    margin: 0.25em;
+}
+
 .card .card-content {
     padding: 1em 0.5em;
 }

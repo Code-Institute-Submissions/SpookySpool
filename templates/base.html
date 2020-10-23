@@ -5,6 +5,8 @@
     <script src="https://kit.fontawesome.com/f429103af0.js" crossorigin="anonymous"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Raleway&family=Special+Elite&display=swap" rel="stylesheet">
+    <!-- Slick slider CDN-->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!-- Materialize CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
     <!-- Spooky Spool stylesheet -->
@@ -24,6 +26,9 @@
 <!-- Materialize & jquery javascript CDNs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+<!-- Slick slider jquery CDN-->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<!-- -->
 <script>
 
     // Functions to add and remove fields in movie_form.html
@@ -47,6 +52,15 @@
         $('#director_remove').click({class: "director-input"}, removeInput)
         $('#language_add').click({targetId: "movie_languages", newClass: "language-input", name: "languages", placeholder: "Add language"}, addInput)
         $('#language_remove').click({class: "language-input"}, removeInput)
+
+        $('.carousel').carousel();
+        $('.your-class').slick({
+            infinite: true,
+            slidesToShow: 6,
+            slidesToScroll: 3,
+            centerPadding: '60px',
+        });
+        
     });
 </script>
 </body>

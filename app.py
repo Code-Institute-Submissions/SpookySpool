@@ -91,6 +91,18 @@ def browse_movies():
 
     return render_template("browse.html", movies=movies)
 
+
+@app.route("/watch_list/<movie_id>/redirect_from<page>")
+def add_watchlist(movie_id, page):
+
+    user = users.find_one({"username": session["username"]})
+    user["watchlist"].append(ObjectId(movie_id))
+    users.update_one({"username": session["username"]},
+                     {"$set": {"watchlist": user["watchlist"]}})
+
+    return redirect(url_for(f"{page}"))
+
+
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
     movie_data = movies.find_one({"_id": ObjectId(movie_id)})
@@ -135,15 +147,16 @@ def insert_movie():
     user["submitted_movies"].append(ObjectId(new_movie[0]["_id"]))
     users.update_one({"username": user["username"]},
                      {"$set": {"submitted_movies": user["submitted_movies"]}})
-    
+
     return redirect(url_for("browse_movies"))
 
 
 @app.route("/user/<username>")
 def user_home(username):
-    return render_template("user_home.html",
-                           user=users.find_one({"username": username}))
+    user_data = users.find_one({"username": username})
+    favourite_movies = movies.find({"_id": {"$in": user_data["favourites"]}})
 
+    return render_template("user_home.html", user=users.find_one({"username": username}), favourites=favourite_movies)
 
 
 if __name__ == "__main__":
