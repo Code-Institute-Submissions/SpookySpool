@@ -3,7 +3,7 @@
     <div class="row">
 {% if session["username"] %}
     {% for movie in movies %}
-        <div class="card col s6 m3">
+        <div class="card col">
             <div class="card-image waves-effect waves-block waves-light">
                 <a href="{{url_for('movie_page', movie_id=movie._id)}}">
                     <img src="{{movie.img_url}}">
