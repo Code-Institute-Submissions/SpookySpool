@@ -92,7 +92,7 @@ def browse_movies():
     return render_template("browse.html", movies=movies)
 
 
-@app.route("/watch_list/<movie_id>/redirect_from<page>")
+@app.route("/watchlist/<movie_id>/redirect_from<page>")
 def add_watchlist(movie_id, page):
 
     user = users.find_one({"username": session["username"]})
@@ -101,6 +101,18 @@ def add_watchlist(movie_id, page):
                      {"$set": {"watchlist": user["watchlist"]}})
 
     return redirect(url_for(f"{page}"))
+
+
+@app.route("/favourites/<movie_id>/redirect_from<page>")
+def add_favourites(movie_id, page):
+
+    user = users.find_one({"username": session["username"]})
+    user["favourites"].append(ObjectId(movie_id))
+    users.update_one({"username": session["username"]},
+                     {"$set": {"favourites": user["favourites"]}})
+    
+    return redirect(url_for(f"{page}"))
+
 
 
 @app.route("/movie/<movie_id>")
