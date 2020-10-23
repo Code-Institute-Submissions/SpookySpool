@@ -88,6 +88,8 @@ def logout():
     session["username"] = ""
 
     return redirect(url_for('login'))
+
+
 @app.route("/browse")
 def browse_movies():
 
@@ -113,7 +115,7 @@ def add_watchlist(movie_id, page):
 
     return redirect(url_for(f"{page}"))
 
-@app.route("/<movie_id>/redirect_from<page>")
+@app.route("/remove_watchlist/<movie_id>/redirect_from<page>")
 def remove_watchlist(movie_id, page):
 
     user = users.find_one({"username": session["username"]})
@@ -131,9 +133,19 @@ def add_favourites(movie_id, page):
     user["favourites"].append(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"favourites": user["favourites"]}})
-    
+
     return redirect(url_for(f"{page}"))
 
+
+@app.route("/remove_favourite/<movie_id>/redirect_from<page>")
+def remove_favourite(movie_id, page):
+
+    user = users.find_one({"username": session["username"]})
+    user["favourites"].remove(ObjectId(movie_id))
+    users.update_one({"username": session["username"]},
+                     {"$set": {"favourites": user["favourites"]}})
+
+    return redirect(url_for(f"{page}"))
 
 
 @app.route("/movie/<movie_id>")
