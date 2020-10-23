@@ -69,4 +69,24 @@
 				</li>
 			</ul>
 		</div>
+        <div class="row">
+            <div class="col s12">
+                {% if session["username"] %}
+                 <div class="col s4">
+                    Add to Watchlist
+                </div>
+                <div class="col s4">
+                    Add to Favourites
+                </div>
+                {% if movie.user_submitted %}
+                <div class="col s4">
+                    Update Movie
+                </div>
+                {% endif %}
+                {% else %}
+                <h3 class="hide-on-med-and-up">To add this movie to a watchlist or favourites:</h3>
+                <a href="{{url_for('login')}}" class="waves-effect waves-light btn">Login/Signup</a><span class="hide-on-small-only">To add this movie to your favourites or watchlist</span>
+                {% endif %}
+            </div>
+        </div>
 {% endblock %}
