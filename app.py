@@ -203,6 +203,12 @@ def insert_movie():
 
     return redirect(url_for("browse_movies"))
 
+@app.route("/update/<movie_id>")
+def update_movie(movie_id):
+
+    return render_template("movie_update.html", genres=genres.find(),
+                           movie=movies.find_one({"_id": movie_id}))
+
 
 @app.route("/user/<username>")
 def user_home(username):
