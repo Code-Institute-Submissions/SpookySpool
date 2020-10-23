@@ -33,6 +33,8 @@ def index():
     return str(ratings)
 
 
+# Login page and accociated functions
+
 @app.route("/login")
 def login():
     return render_template("login.html")
@@ -90,6 +92,8 @@ def logout():
     return redirect(url_for('login'))
 
 
+# Browse & Movie pages
+
 @app.route("/browse")
 def browse_movies():
 
@@ -104,6 +108,15 @@ def browse_movies():
 
     return render_template("browse.html", movies=movies, user=user)
 
+
+@app.route("/movie/<movie_id>")
+def movie_page(movie_id):
+    movie_data = movies.find_one({"_id": ObjectId(movie_id)})
+    genre_data = genres.find()
+    return render_template('movie_template.html', movie=movie_data, genres=genre_data)
+
+
+# Add to watchlist/favourites and Remove from watchlist/favourites
 
 @app.route("/watchlist/<movie_id>/redirect_from<page>")
 def add_watchlist(movie_id, page):
@@ -147,18 +160,13 @@ def remove_favourite(movie_id, page):
 
     return redirect(url_for(f"{page}"))
 
-
-@app.route("/movie/<movie_id>")
-def movie_page(movie_id):
-    movie_data = movies.find_one({"_id": ObjectId(movie_id)})
-    genre_data = genres.find()
-    return render_template('movie_template.html', movie=movie_data, genres=genre_data)
-
 @app.route("/user_submit")
 def submit_movie():
     return render_template("movie_form.html", genres=genres.find())
 
-#Inserts movies from the submit form into the database
+
+# Inserts movies from the submit form into the database
+
 @app.route("/insert_movie", methods=["POST"])
 def insert_movie():
 
