@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+{% set runtime = movie.runtime.split() %}
+{% set ratings = {
+    "G": "(Genrel Audience)",
+    "PG": "(Partenal Guidence)",
+    "PG-13": "(Paternal guidence for under 13 year olds)",
+    "R": "(Paternal guidence for under 17 year olds)",
+    "NC-17": "(Viewers must be over 17)",
+    "Unrated": "(No rating provided for this movie)"
+    }
+%}
+
 <div class="row">
 		<form id="movie_form" action="#" method="POST" class="col s12">
 			<div class="row">
@@ -23,33 +34,38 @@
             <div class="row">
 				<div class="input-field col s4">
 					<select id="movie_rating" name="rating" required class="validate">
-                        <option value="" selected disabled>Select a rating</option>
-                        <option value="G">G (Genrel Audience)</option>
-                        <option value="PG">PG (Partenal Guidence)</option>
-                        <option value="PG-13">G (Paternal guidence for under 13 year olds)</option>
-                        <option value="R">R (Paternal guidence for under 17 year olds)</option>
-                        <option value="NC-17">NC-17 (Viewers must be over 17)</option>
-                        <option value="Unrated">Unrated (No rating provided for this movie))</option>
+                        <option value="" disabled>Select a rating</option>
+                        {% for rating, description in ratings.items() %}
+                            {% if movie.rating == rating %}
+                                <option value="{{rating}}" selected>{{rating + " " + description}}</option>
+                            {% else %}
+                                <option value="{{rating}}">{{rating + " " + description}}</option>
+                            {% endif %}
+                        {% endfor %}
 					</select>
                     <label for="movie_rating">Genres</label>
 				</div>
 				<div class="input-field col s4">
 					<select id="movie_year" name="year" required>
 				      {% for year in range(2021, 1909, -1) %}
+                        {% if year == movie.year %}
+                        <option value="{{year}}" selected>{{year}}</option>
+                        {% else %}
                         <option value="{{year}}">{{year}}</option>
+                        {% endif %}
                       {% endfor %}
 				    </select>
 					<label for="movie_year">Release Year</label>
 				</div>
                 <div class="input-field col s4">
-					<input placeholder="1-100" id="movie_metascore" name="metascore" type="number" min="1" max="100" value="50" class="validate" required>
+					<input placeholder="1-100" id="movie_metascore" name="metascore" type="number" min="1" max="100" value="{{movie.metascore}}" class="validate" required>
 					<label for="movie_metascore">Metascore</label>
 				</div>
 			</div>
             <div class="row">
                 <h2 class="heading col s12 sml">Runtime (minutes)</h2>
 				<div class="input-field col s12">
-					<input type="range" id="runtime" name="runtime" min="1" max="250" required>
+					<input type="range" id="runtime" name="runtime" min="1" max="250" value="{{runtime[0]}}" required>
 				</div>
 			</div>
 			<div class="row">
@@ -57,7 +73,11 @@
 					<select id="movie_genres" name="genre" multiple required>
                         <option value="" disabled selected>Pick relevant genres</option>
 				      {% for genre in genres %}
+                        {% if genre._id in movie.genre%}
+                        <option value="{{genre._id}}" selected>{{genre.genre_name}}</option>
+                        {% else %}
                         <option value="{{genre._id}}">{{genre.genre_name}}</option>
+                        {% endif %}
                       {% endfor %}
 					</select>
                     <label for="movie_genres">Genres</label>
@@ -67,9 +87,16 @@
 				<div class="input-field col s12">
                     <div id="movie_actors" class="row">
                         <div class="col s6">
-					        <input name="actors[]" type="text" class="validate" required>
+					        <input name="actors[]" type="text" class="validate" value="{{movie.actors[0]}}" required>
 					        <label for="actors[]">Actor(s)</label>
                         </div>
+                        {% if movie.actors|length > 1 %}
+                            {% for actor in movie.actors[1:] %}
+                                <div class="col s6 actor-input">
+                                    <input name="actors[]" type="text" value="{{actor}}" class="validate" required>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 				</div>
                 <span id="actor_add" >Add</span>
@@ -79,9 +106,16 @@
 				<div class="input-field col s12">
                     <div id="movie_directors" class="row">
                         <div class="col s6">
-					        <input name="directors[]" type="text" class="validate" required>
+					        <input name="directors[]" type="text" value="{{movie.directors[0]}}" class="validate" required>
 					        <label for="directors[]">Director(s)</label>
                         </div>
+                        {% if movie.directors|length > 1 %}
+                            {% for director in movie.directors[1:] %}
+                                <div class="col s6 director-input">
+                                    <input name="director[]" type="text" value="{{director}}" class="validate" required>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 				</div>
                 <span id="director_add" >Add</span>
@@ -91,9 +125,16 @@
 				<div class="input-field col s12">
                     <div id="movie_languages" class="row">
                         <div class="col s6">
-					        <input name="languages[]" type="text" class="validate" placeholder="English" required>
+					        <input name="languages[]" type="text" class="validate" placeholder="English" value="{{movie.languages[0]}}" required>
 					        <label for="languages[]">Languages(s)</label>
                         </div>
+                        {% if movie.languages|length > 1 %}
+                            {% for language in movie.languages[1:] %}
+                                <div class="col s6 language-input">
+                                    <input name="languages[]" type="text" value="{{language}}" class="validate" required>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 				</div>
                 <span id="language_add" >Add</span>
@@ -101,13 +142,13 @@
 			</div>
             <div class="row">
 				<div class="input-field col s12">
-					<input id="movie_img_url" placeholder="(i.e.) https://images-na.ssl-images-amazon.com/images/I/31dKO0hfksL._AC_.jpg" name="img_url" type="text" class="validate">
+					<input id="movie_img_url" placeholder="(i.e.) https://images-na.ssl-images-amazon.com/images/I/31dKO0hfksL._AC_.jpg"  value="{{movie.img_url}}" name="img_url" type="text" class="validate">
 					<label for="movie_img_url">Poster URL (optional)</label>
 				</div>
 			</div>
             <div class="row">
 				<div class="input-field col s12">
-					<input id="movie_imdb_url" placeholder="(i.e.) https://www.imdb.com/title/tt0078748/" name="imdb_url" type="text" class="validate">
+					<input id="movie_imdb_url" placeholder="(i.e.) https://www.imdb.com/title/tt0078748/" value="{{movie.imdb_url}}" name="imdb_url" type="text" class="validate">
 					<label for="movie_imdb_url">Link to IMDB page (optional)</label>
 				</div>
 			</div>
