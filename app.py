@@ -21,16 +21,7 @@ genres = mongo.db.genres
 @app.route("/")
 def index():
 
-    all_movies = mongo.db.movies.find()
-    ratings = []
-
-    for movie in all_movies:
-        if movie["rating"] not in ratings:
-            ratings.append(movie["rating"])
-        else:
-            continue
-
-    return str(ratings)
+    return render_template("base.html")
 
 
 # Login page and accociated functions
@@ -196,8 +187,9 @@ def insert_movie():
     mongo.db.movies.insert_one(query)
 
     #Adds the inserted movie id into the user's submitted movie array
-    new_movie = users.find({"user_id": ObjectId(user["_id"])}).sort("_id", -1)
-    user["submitted_movies"].append(ObjectId(new_movie[0]["_id"]))
+
+    inserted_movie = movies.find({"user_id": ObjectId(user["_id"])}).sort("_id", -1)
+    user["submitted_movies"].append(ObjectId(inserted_movie[0]["_id"]))
     users.update_one({"username": user["username"]},
                      {"$set": {"submitted_movies": user["submitted_movies"]}})
 

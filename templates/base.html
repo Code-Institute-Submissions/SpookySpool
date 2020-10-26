@@ -51,10 +51,13 @@
   <li><a href="{{url_for('logout')}}">Logout</a></li>
 </ul>
 
-<div class="container">
+<div class="wrapper">
+<div class="container body-content">
 {% block content %}
 {% endblock %}
 </div>
+</div>
+
 
 <!-- Materialize & jquery javascript CDNs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
