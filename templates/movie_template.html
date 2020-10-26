@@ -78,11 +78,11 @@
                 <div class="col s4">
                     Add to Favourites
                 </div>
-                {% if movie.user_submitted %}
-                <div class="col s4">
-                    Update Movie
-                </div>
-                {% endif %}
+                    {% if movie.user_submitted %}
+                    <div class="col s4">
+                        <a href="{{url_for('update_movie', movie_id=movie._id}}">Update Movie</a>
+                    </div>
+                    {% endif %}
                 {% else %}
                 <h3 class="hide-on-med-and-up">To add this movie to a watchlist or favourites:</h3>
                 <a href="{{url_for('login')}}" class="waves-effect waves-light btn">Login/Signup</a><span class="hide-on-small-only">To add this movie to your favourites or watchlist</span>
