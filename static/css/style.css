@@ -32,8 +32,16 @@ body {
 
 /*----- Colors -----*/
 
-.orange {
-    background-color: #AD391F;
+.btn {
+    background-color: #D24625;
+}
+
+.btn:hover {
+    background-color: #E06C52;
+}
+
+.btn:focus {
+    background-color: #E06C52;
 }
 
 nav {
