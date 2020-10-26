@@ -32,7 +32,32 @@ body {
 
 /*----- Colors -----*/
 
+.orange {
+    background-color: #AD391F;
+}
 
+nav {
+    background-color: #0B1023;
+}
+
+
+/*----- NavBar -----*/
+
+.brand-logo {
+    max-height: 100%;
+}
+
+nav div a img {
+    height: 55px;
+    width: 55px;
+    vertical-align: top;
+}
+
+nav li>a {
+    font-size: 1.2em;
+}
+
+/**/
 
 .card {
     margin: 0.25em;
