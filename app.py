@@ -73,7 +73,7 @@ def sign_up():
                 "password": request.form.get('password'),
                 "watchlist": [],
                 "favourites": [],
-                "user_submitted_movies": []
+                "submitted_movies": []
             })
             print("user added")
             return redirect(url_for("browse_movies"))
@@ -215,9 +215,10 @@ def user_home(username):
     user = users.find_one({"username": username})
     watchlist = movies.find({"_id": {"$in": user["watchlist"]}})
     favourites = movies.find({"_id": {"$in": user["favourites"]}})
+    submitted = movies.find({"_id": {"$in": user["submitted_movies"]}})
 
     return render_template("user_home.html", user=user, favourites=favourites,
-                           watchlist=watchlist)
+                           watchlist=watchlist, submitted=submitted)
 
 
 if __name__ == "__main__":
