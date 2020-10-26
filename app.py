@@ -171,7 +171,7 @@ def submit_movie():
 def insert_movie():
 
     user = users.find_one({"username": session["username"]})
-    
+
     genre_list = []
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
@@ -203,12 +203,43 @@ def insert_movie():
 
     return redirect(url_for("browse_movies"))
 
+
+# Update form for movies already in the database
 @app.route("/update/<movie_id>")
 def update_movie(movie_id):
 
     return render_template("movie_update.html", genres=genres.find(),
                            movie=movies.find_one({"_id": ObjectId(movie_id)}))
 
+
+# Inserts updated movies from the update form into the database
+
+@app.route("/insert_update/<movie_id>", methods=["POST"])
+def insert_update(movie_id):
+    print(movie_id)
+    genre_list = []
+    for genre in request.form.getlist("genre"):
+        genre_list.append(ObjectId(genre))
+
+    updated_movie = {"title": request.form.get("title"),
+                     "rating": request.form.get("rating"),
+                     "year": request.form.get("year"),
+                     "metascore": request.form.get("metascore"),
+                     "img_url": request.form.get("img_url"),
+                     "languages": request.form.getlist("languages[]"),
+                     "actors": request.form.getlist("actors[]"),
+                     "genre": genre_list,
+                     "tagline": request.form.get("tagline"),
+                     "description": request.form.get("description"),
+                     "directors": request.form.getlist("directors[]"),
+                     "runtime": str(request.form.get("runtime")) + " min",
+                     "imdb_url": request.form.get("imdb_url")
+                     }
+
+    mongo.db.movies.update_one({"_id": ObjectId(movie_id)},
+                               {"$set": updated_movie})
+
+    return redirect(url_for("movie_page", movie_id=movie_id))
 
 @app.route("/user/<username>")
 def user_home(username):
