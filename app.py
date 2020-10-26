@@ -193,7 +193,7 @@ def insert_movie():
              "user_id": ObjectId(user["_id"])
             }
 
-    mongo.db.test_inserts.insert_one(query)
+    mongo.db.movies.insert_one(query)
 
     #Adds the inserted movie id into the user's submitted movie array
     new_movie = users.find().sort("_id", -1)
@@ -212,10 +212,12 @@ def update_movie(movie_id):
 
 @app.route("/user/<username>")
 def user_home(username):
-    user_data = users.find_one({"username": username})
-    favourite_movies = movies.find({"_id": {"$in": user_data["favourites"]}})
+    user = users.find_one({"username": username})
+    watchlist = movies.find({"_id": {"$in": user["watchlist"]}})
+    favourites = movies.find({"_id": {"$in": user["favourites"]}})
 
-    return render_template("user_home.html", user=users.find_one({"username": username}), favourites=favourite_movies)
+    return render_template("user_home.html", user=user, favourites=favourites,
+                           watchlist=watchlist)
 
 
 if __name__ == "__main__":

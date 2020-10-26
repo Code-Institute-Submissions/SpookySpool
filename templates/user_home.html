@@ -1,45 +1,98 @@
 {% extends "base.html" %}
 {% block content %}
-{{favourites}}
-    <section id="main-content">
-		<div class="section">
-            <h3>Faourite Movies</h3>
-			<div class="your-class">
-				{% for movie in favourites %}
-				<div class="card">
-					<div class="card-image waves-effect waves-block waves-light">
-						<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-							<img src="{{movie.img_url}}">
-		            </a>
-					</div>
-					<div class="card-content">
-						<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-							<p class="card-info heading-text med">{{movie.title}}</p>
-						</a>
-						<i class="activator right fas fa-ellipsis-v"></i>
-					</div>
-					<div class="card-content icon">
-						<span>
-		                <a class="left" href="#"><i class="fas fa-plus-circle"></i></a>
-		                <a class="right" href="#"><i class="far fa-star"></i></a>
-		            </span>
-					</div>
-					<div class="card-reveal">
-						<span class="card-title"><i class=" med right fas fa-times"></i></span>
-						<p class="body-text med">{{movie.description}}</p>
-					</div>
-				</div>
-				{% endfor %}
+{{watchlist.count()}}
+{{favourites.count()}}
+
+<div class="section">
+    <h3>Watchlist</h3>
+    {% if watchlist.count() == 0 %}
+        <div class="empty_carousel">
+            <blockquote cite="https://allthetropes.fandom.com/wiki/Move_Along,_Nothing_to_See_Here">"Ok folks, show's over, nothing to see here..."</blockquote>
+            <h4><a href="{{url_for('browse_movies')}}">Browse</a> our collection to add movies!</h4>
+        </div>
+    {% else %}
+	<div class="carousel left-align-slick">
+		{% for movie in watchlist %}
+		<div class="card">
+			<div class="card-image waves-effect waves-block waves-light">
+				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
+					<img src="{{movie.img_url}}">
+                </a>
+			</div>
+			<div class="card-content">
+				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
+					<p class="card-info heading-text med">{{movie.title}}</p>
+				</a>
+				<i class="activator right fas fa-ellipsis-v"></i>
+			</div>
+			<div class="card-content icon">
+				<span>
+                    {% if movie._id in user.watchlist %}
+                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
+                    {% else %}
+                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
+                    {% endif %}
+                    {% if movie._id in user.favourites %}
+                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
+                    {% else %}
+                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
+                    {% endif %}
+                </span>
+			</div>
+			<div class="card-reveal">
+				<span class="card-title"><i class=" med right fas fa-times"></i></span>
+				<p class="body-text med">{{movie.description}}</p>
 			</div>
 		</div>
-        <div class="section">
-            <h5>Section 1</h5>
-            <p>Stuff</p>
+		{% endfor %}
+	</div>
+    {% endif %}
+</div>
+<div class="section">
+    <h3>Favourite Movies</h3>
+    {% if favourites.count() == 0 %}
+        <div class="empty_carousel">
+            <blockquote cite="https://www.quotes.net/mquote/1071796">"They're gone! THEY'RE ALL GONE!"</blockquote>
+            <h4><a href="{{url_for('browse_movies')}}">Browse</a> our collection to add movies!</h4>
         </div>
-        <div class="section">
-            <h5>Section 1</h5>
-            <p>Stuff</p>
-        </div>
-    </section>
-    <a href="{{url_for('logout')}}">logout</a>
-{% endblock %}
+    {% else %}
+	<div class="carousel left-align-slick">
+		{% for movie in watchlist %}
+		<div class="card">
+			<div class="card-image waves-effect waves-block waves-light">
+				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
+					<img src="{{movie.img_url}}">
+                </a>
+			</div>
+			<div class="card-content">
+				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
+					<p class="card-info heading-text med">{{movie.title}}</p>
+				</a>
+				<i class="activator right fas fa-ellipsis-v"></i>
+			</div>
+			<div class="card-content icon">
+				<span>
+                    {% if movie._id in user.watchlist %}
+                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
+                    {% else %}
+                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
+                    {% endif %}
+                    {% if movie._id in user.favourites %}
+                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
+                    {% else %}
+                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
+                    {% endif %}
+                </span>
+			</div>
+			<div class="card-reveal">
+				<span class="card-title"><i class=" med right fas fa-times"></i></span>
+				<p class="body-text med">{{movie.description}}</p>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+    {% endif %}
+</div>
+	<h4>Logout</h4>
+	<a href="{{url_for('logout')}}">logout</a>
+	{% endblock %}

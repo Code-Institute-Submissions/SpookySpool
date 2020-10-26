@@ -88,13 +88,16 @@
         $('#language_add').click({targetId: "movie_languages", newClass: "language-input", name: "languages", placeholder: "Add language"}, addInput)
         $('#language_remove').click({class: "language-input"}, removeInput)
 
-        $('.carousel').carousel();
-        $('.your-class').slick({
+        $('.carousel').each(function(i){
+            $(this).slick({
             infinite: true,
             slidesToShow: 6,
             slidesToScroll: 3,
             centerPadding: '60px',
         });
+        })
+     
+        
         
     });
 </script>

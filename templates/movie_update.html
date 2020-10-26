@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-		<form id="movie_form" action="{{url_for('insert_movie')}}" method="POST" class="col s12">
+		<form id="movie_form" action="#" method="POST" class="col s12">
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="movie_title" placeholder="(i.e.) Alien" name="title" type="text" class="validate" required>
+					<input id="movie_title" value="{{movie.title}}" name="title" type="text" class="validate" required>
 					<label for="movie_title">Title</label>
 				</div>
 			</div>
             <div class="row">
 				<div class="input-field col s12">
-					<input id="tagline" name="tagline" placeholder="In space, no one can hear you scream" type="text" class="validate">
+					<input id="tagline" name="tagline" value="{{movie.tagline}}" type="text" class="validate">
                     <label for="tagline">Tagline/Slogan (optional)</label>
 				</div>
 			</div>
             <div class="row">
 				<div class="input-field col s12">
-					<textarea id="movie_description" name="description" placeholder="In deep space, the crew of the commercial starship Nostromo is awakened from their cryo-sleep capsules halfway through their journey home to investigate a distress call from an alien vessel..." class="materialize-textarea" required></textarea>
+					<textarea id="movie_description" name="description" class="materialize-textarea" required>{{movie.description}}</textarea>
                     <label for="movie_description">Plot Synopsis</label>
 				</div>
 			</div>
