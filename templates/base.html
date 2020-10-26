@@ -1,111 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <!-- Font Awesome CDN -->
-    <script src="https://kit.fontawesome.com/f429103af0.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/f429103af0.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Raleway&family=Special+Elite&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Raleway&family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
     <!-- Slick slider CDN-->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
     <!-- Materialize CDN link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+    />
     <!-- Spooky Spool stylesheet -->
-    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css"/>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-<nav>
-    <div class="nav-wrapper">
-      <a href="{{url_for('index')}}" class="brand-logo brand-heading">
-            <img src="{{url_for('static', filename='images/logo-transparent.png')}}" alt="spookyspool-logo">
-            <span class="hide-on-small-only">Spooky Spool</span>
-      </a>
-      <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="fas fa-bars"></i></a>
-      <ul id="nav-mobile" class="right heading-text med hide-on-med-and-down">
-        <li><a href="{{url_for('index')}}">Home</a></li>
-        <li><a href="{{url_for('browse_movies')}}">Movies</a></li>
-        {% if session["username"]%} 
-            <li><a class="dropdown-button" href="#!" data-activates="user_menu">My Stuff</a></li>
-        {% else %}
-            <li><a href="{{url_for('login')}}" class="waves-effect btn">Login</a></li>
-        {% endif %}
-      </ul>
-	<ul class="side-nav heading-text" id="mobile-menu">
-		<li><a href="{{url_for('index')}}">Home</a></li>
-		<li><a href="{{url_for('browse_movies')}}">Movies</a></li>
-        {% if session["username"] %}
-		<li><a href="{{url_for('user_home', username=session['username'])}}">My Movies</a></li>
-		<li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
-		<li><a href="{{url_for('logout')}}">Logout</a></li>
-        {% else %}
-        <li><a href="{{url_for('login')}}">Login</a></li>
-        {% endif %}
-	</ul>
-	</div>
-</nav>
-<!-- User Dropdown -->
-<ul id="user_menu" class="dropdown-content">
-  <li><a href="{{url_for('user_home', username=session['username'])}}">My Movies</a></li>
-  <li class="divider"></li>
-  <li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
-  <li class="divider"></li>
-  <li><a href="{{url_for('logout')}}">Logout</a></li>
-</ul>
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css')}}"
+      type="text/css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    {% block title %}{% endblock %}
+    </title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <li class="seperator left hide-on-med-and-down"></li>
+        <a href="{{url_for('index')}}" class="brand-logo brand-heading">
+          <img
+            src="{{url_for('static', filename='images/logo-transparent.png')}}"
+            alt="spookyspool-logo"
+          />
+          <span class="hide-on-small-only">Spooky Spool</span>
+        </a>
+        <a href="#" data-activates="mobile-menu" class="button-collapse"
+          ><i class="fas fa-bars"></i
+        ></a>
+        <ul id="nav-mobile" class="right heading-text med hide-on-med-and-down">
+          <li><a href="{{url_for('index')}}">Home</a></li>
+          <li><a href="{{url_for('browse_movies')}}">Movies</a></li>
+          {% if session["username"]%}
+          <li>
+            <a class="dropdown-button" href="#!" data-activates="user_menu"
+              >My Stuff</a
+            >
+          </li>
+          {% else %}
+          <li>
+            <a href="{{url_for('login')}}" class="waves-effect btn">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+        <ul class="side-nav heading-text" id="mobile-menu">
+          <li><a href="{{url_for('index')}}">Home</a></li>
+          <li><a href="{{url_for('browse_movies')}}">Movies</a></li>
+          {% if session["username"] %}
+          <li>
+            <a href="{{url_for('user_home', username=session['username'])}}"
+              >My Movies</a
+            >
+          </li>
+          <li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
+          <li><a href="{{url_for('logout')}}">Logout</a></li>
+          {% else %}
+          <li><a href="{{url_for('login')}}">Login</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+    <!-- User Dropdown -->
+    <ul id="user_menu" class="dropdown-content">
+      <li>
+        <a href="{{url_for('user_home', username=session['username'])}}"
+          >My Movies</a
+        >
+      </li>
+      <li class="divider"></li>
+      <li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
+      <li class="divider"></li>
+      <li><a href="{{url_for('logout')}}">Logout</a></li>
+    </ul>
 
-<div class="wrapper">
-<div class="container body-content">
-{% block content %}
-{% endblock %}
-</div>
-</div>
+    <div class="wrapper">
+      <div class="container body-content">
+        {% block content %} {% endblock %}
+      </div>
+    </div>
 
+    <!-- Materialize & jquery javascript CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!-- Slick slider jquery CDN-->
+    <script
+      type="text/javascript"
+      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
+    <!-- -->
+    <script>
+      // Functions to add and remove fields in movie_form.html
+      function addInput(event) {
+        $(`#${event.data.targetId}`).append(
+          `<div class="col s6 ${event.data.newClass}"><input name="${event.data.name}[]" type="text" placeholder="${event.data.placeholder}" class="validate" required></div>`
+        );
+      }
+      function removeInput(event) {
+        $(`.${event.data.class}:last`).remove();
+      }
 
-<!-- Materialize & jquery javascript CDNs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-<!-- Slick slider jquery CDN-->
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<!-- -->
-<script>
-
-    // Functions to add and remove fields in movie_form.html
-    function addInput(event){
-        $(`#${event.data.targetId}`).append(`<div class="col s6 ${event.data.newClass}"><input name="${event.data.name}[]" type="text" placeholder="${event.data.placeholder}" class="validate" required></div>`)
-    };
-    function removeInput(event){
-        $(`.${event.data.class}:last`).remove()
-    };
-
-    $(document).ready(function(){
+      $(document).ready(function () {
         // Sidebar trigger
         $(".button-collapse").sideNav();
         // Modal trigger
-        $('.modal').modal();
-   
-        $('select').material_select();
+        $(".modal").modal();
+
+        $("select").material_select();
 
         //Form add or subtract input button triggers
-        $('#actor_add').click({targetId: "movie_actors", newClass: "actor-input", name: "actors", placeholder: "Name..."}, addInput)
-        $('#actor_remove').click({class: "actor-input"}, removeInput)
-        $('#director_add').click({targetId: "movie_directors", newClass: "director-input", name: "directors", placeholder: "Name..."}, addInput)
-        $('#director_remove').click({class: "director-input"}, removeInput)
-        $('#language_add').click({targetId: "movie_languages", newClass: "language-input", name: "languages", placeholder: "Add language"}, addInput)
-        $('#language_remove').click({class: "language-input"}, removeInput)
+        $("#actor_add").click(
+          {
+            targetId: "movie_actors",
+            newClass: "actor-input",
+            name: "actors",
+            placeholder: "Name...",
+          },
+          addInput
+        );
+        $("#actor_remove").click({ class: "actor-input" }, removeInput);
+        $("#director_add").click(
+          {
+            targetId: "movie_directors",
+            newClass: "director-input",
+            name: "directors",
+            placeholder: "Name...",
+          },
+          addInput
+        );
+        $("#director_remove").click({ class: "director-input" }, removeInput);
+        $("#language_add").click(
+          {
+            targetId: "movie_languages",
+            newClass: "language-input",
+            name: "languages",
+            placeholder: "Add language",
+          },
+          addInput
+        );
+        $("#language_remove").click({ class: "language-input" }, removeInput);
 
-        $('.carousel').each(function(i){
-            $(this).slick({
+        $(".carousel").each(function (i) {
+          $(this).slick({
             infinite: true,
             slidesToShow: 6,
             slidesToScroll: 3,
-            centerPadding: '60px',
+            centerPadding: "60px",
+          });
         });
-        })
-     
-        
-        
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

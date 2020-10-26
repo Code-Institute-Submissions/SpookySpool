@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% block title %}
+    Add Movie
+{% endblock %}
 {% block content %}
 <div class="row">
 		<form id="movie_form" action="{{url_for('insert_movie')}}" method="POST" class="col s12">
