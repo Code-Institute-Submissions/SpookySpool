@@ -176,7 +176,7 @@ def insert_movie():
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
 
-    query = {"title:": request.form.get("title"),
+    query = {"title": request.form.get("title"),
              "rating": request.form.get("rating"),
              "year": request.form.get("year"),
              "metascore": request.form.get("metascore"),
@@ -196,7 +196,7 @@ def insert_movie():
     mongo.db.movies.insert_one(query)
 
     #Adds the inserted movie id into the user's submitted movie array
-    new_movie = users.find().sort("_id", -1)
+    new_movie = users.find({"user_id": ObjectId(user["_id"])}).sort("_id", -1)
     user["submitted_movies"].append(ObjectId(new_movie[0]["_id"]))
     users.update_one({"username": user["username"]},
                      {"$set": {"submitted_movies": user["submitted_movies"]}})
@@ -207,7 +207,7 @@ def insert_movie():
 def update_movie(movie_id):
 
     return render_template("movie_update.html", genres=genres.find(),
-                           movie=movies.find_one({"_id": movie_id}))
+                           movie=movies.find_one({"_id": ObjectId(movie_id)}))
 
 
 @app.route("/user/<username>")

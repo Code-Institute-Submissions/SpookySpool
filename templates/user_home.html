@@ -13,7 +13,11 @@
 		<div class="card">
 			<div class="card-image waves-effect waves-block waves-light">
 				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					<img src="{{movie.img_url}}">
+					{% if movie.img_url == "" %}
+                        <img src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}" alt="{{movie.title}}">
+                    {% else %}
+                        <img src="{{movie.img_url}}" alt="{{movie.title}}">
+                    {% endif %}
                 </a>
 			</div>
 			<div class="card-content">
@@ -58,7 +62,11 @@
 		<div class="card">
 			<div class="card-image waves-effect waves-block waves-light">
 				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					<img src="{{movie.img_url}}">
+					{% if movie.img_url == "" %}
+                        <img src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}" alt="{{movie.title}}">
+                    {% else %}
+                        <img src="{{movie.img_url}}" alt="{{movie.title}}">
+                    {% endif %}
                 </a>
 			</div>
 			<div class="card-content">
@@ -103,7 +111,11 @@
 		<div class="card">
 			<div class="card-image waves-effect waves-block waves-light">
 				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					<img src="{{movie.img_url}}">
+					{% if movie.img_url == "" %}
+                        <img src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}" alt="{{movie.title}}">
+                    {% else %}
+                        <img src="{{movie.img_url}}" alt="{{movie.title}}">
+                    {% endif %}
                 </a>
 			</div>
 			<div class="card-content">

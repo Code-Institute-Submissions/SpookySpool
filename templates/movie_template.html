@@ -7,7 +7,11 @@
             <h2 class="col s6 med">Rated: {{movie.rating}}</h2><h2 class="col s6 right med">Metascore: {{movie.metascore}}/100</h2>
         </div>
         <div class="row">
-            <img class="materialboxed col s12" data-caption="{{movie.tagline}}" width="250" src="{{movie.img_url}}">
+        {% if movie.img_url == "" %}
+                        <img class="materialboxed col s12" data-caption="{{movie.tagline}}" width="250" src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}">
+                    {% else %}
+                        <img class="materialboxed col s12" data-caption="{{movie.tagline}}" width="250" src="{{movie.img_url}}">
+                    {% endif %}
         </div>
 		<div class="row">
 			<ul class="collapsible" data-collapsible="accordion">
@@ -80,7 +84,7 @@
                 </div>
                     {% if movie.user_submitted %}
                     <div class="col s4">
-                        <a href="{{url_for('update_movie', movie_id=movie._id}}">Update Movie</a>
+                        <a href="{{url_for('update_movie', movie_id=movie._id)}}">Update Movie</a>
                     </div>
                     {% endif %}
                 {% else %}
