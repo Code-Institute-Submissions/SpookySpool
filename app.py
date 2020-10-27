@@ -89,11 +89,11 @@ def logout():
 def browse_movies(page):
 
     movie_list = mongo.db.movies
-    movies = movie_list.find().sort("year", -1).limit(10)
-    moviess = movie_list.find().sort("year", -1)
-    pages = int(moviess.count()/40)+1
+    movies = movie_list.find().sort("year", -1)
+    pages = int(movies.count()/40)+1
 
-    movies_to_show = moviess[(page-1)*40:page*40-1]
+    index_start = (int(page)-1)*36
+    index_end = int(page)*36
 
     if session["username"]:
         user = users.find_one({"username": session["username"]})
@@ -101,7 +101,7 @@ def browse_movies(page):
         flash("Sign in to create watchlists & more!")
         user=""
 
-    return render_template("browse.html", movies=movies, user=user)
+    return render_template("browse.html", movies=movies[index_start:index_end], user=user)
 
 
 @app.route("/movie/<movie_id>")
