@@ -14,40 +14,38 @@
 	<div class="carousel left-align-slick">
 		{% for movie in watchlist %}
 		<div class="card">
-			<div class="card-image waves-effect waves-block waves-light">
-				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					{% if movie.img_url == "" %}
+            <div class="card-image waves-effect waves-block waves-light">
+                <a class="card-link" href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    {% if movie.img_url == "" %}
                         <img src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}" alt="{{movie.title}}">
                     {% else %}
                         <img src="{{movie.img_url}}" alt="{{movie.title}}">
                     {% endif %}
                 </a>
-			</div>
-			<div class="card-content">
-				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					<p class="card-info heading-text med">{{movie.title}}</p>
-				</a>
-				<i class="activator right fas fa-ellipsis-v"></i>
-			</div>
-			<div class="card-content icon">
-				<span>
+            </div>
+            <div class="card-content">
+                <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    <p class="card-info heading-text med center-align">{{movie.title}}</p>
+                </a>
+            </div>
+            <div class="card-content center-align icon">
                     {% if movie._id in user.watchlist %}
                         <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
                     {% else %}
                         <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
                     {% endif %}
+                        <i class="activator sml fas fa-info"></i>
                     {% if movie._id in user.favourites %}
                         <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
                     {% else %}
                         <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
                     {% endif %}
-                </span>
-			</div>
-			<div class="card-reveal">
-				<span class="card-title"><i class=" med right fas fa-times"></i></span>
-				<p class="body-text med">{{movie.description}}</p>
-			</div>
-		</div>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title"><i class=" med right fas fa-times"></i></span>
+                <p class="body-text med">{{movie.description}}</p>
+            </div>
+        </div>
 		{% endfor %}
 	</div>
     {% endif %}
@@ -63,40 +61,38 @@
 	<div class="carousel left-align-slick">
 		{% for movie in favourites %}
 		<div class="card">
-			<div class="card-image waves-effect waves-block waves-light">
-				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					{% if movie.img_url == "" %}
+            <div class="card-image waves-effect waves-block waves-light">
+                <a class="card-link" href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    {% if movie.img_url == "" %}
                         <img src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}" alt="{{movie.title}}">
                     {% else %}
                         <img src="{{movie.img_url}}" alt="{{movie.title}}">
                     {% endif %}
                 </a>
-			</div>
-			<div class="card-content">
-				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					<p class="card-info heading-text med">{{movie.title}}</p>
-				</a>
-				<i class="activator right fas fa-ellipsis-v"></i>
-			</div>
-			<div class="card-content icon">
-				<span>
+            </div>
+            <div class="card-content">
+                <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    <p class="card-info heading-text med center-align">{{movie.title}}</p>
+                </a>
+            </div>
+            <div class="card-content center-align icon">
                     {% if movie._id in user.watchlist %}
                         <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
                     {% else %}
                         <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
                     {% endif %}
+                        <i class="activator sml fas fa-info"></i>
                     {% if movie._id in user.favourites %}
                         <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
                     {% else %}
                         <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
                     {% endif %}
-                </span>
-			</div>
-			<div class="card-reveal">
-				<span class="card-title"><i class=" med right fas fa-times"></i></span>
-				<p class="body-text med">{{movie.description}}</p>
-			</div>
-		</div>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title"><i class=" med right fas fa-times"></i></span>
+                <p class="body-text med">{{movie.description}}</p>
+            </div>
+        </div>
 		{% endfor %}
 	</div>
     {% endif %}

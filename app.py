@@ -85,11 +85,15 @@ def logout():
 
 # Browse & Movie pages
 
-@app.route("/browse")
-def browse_movies():
+@app.route("/browse/<page>")
+def browse_movies(page):
 
     movie_list = mongo.db.movies
     movies = movie_list.find().sort("year", -1).limit(10)
+    moviess = movie_list.find().sort("year", -1)
+    pages = int(moviess.count()/40)+1
+
+    movies_to_show = moviess[(page-1)*40:page*40-1]
 
     if session["username"]:
         user = users.find_one({"username": session["username"]})
