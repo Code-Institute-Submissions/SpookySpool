@@ -32,6 +32,14 @@ body {
 
 /*----- Colors -----*/
 
+.wrapper {
+    background-color: #2C4B82;
+}
+
+.container {
+    background-color: #FFC9AD;
+}
+
 .btn {
     background-color: #D24625;
 }
@@ -46,6 +54,19 @@ body {
 
 nav {
     background-color: #0B1023;
+}
+
+/*----- Base -----*/
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+    padding: 1em 0;
+}
+
+.container.body-content {
+    border-radius: 2px;
+    padding: 0.5em;
 }
 
 
@@ -65,40 +86,44 @@ nav div a img {
     vertical-align: top;
 }
 
-nav li>a {
+#mobile-menu,
+nav li>a,
+.side-nav li>a,
+.dropdown-content li>a {
     font-size: 1.2em;
+    color: #ffffff;
+    background-color: #0B1023;
+    transition: color 250ms;
 }
 
-/**/
+nav li>a:hover, 
+.dropdown-content li>a:hover{
+    background-color: #0B1023;
+    color: #D24625;
+}
+
+/*----- Browse Page -----*/
+
+#movie-container {
+    width: 100%;
+    margin: 0;
+    padding: 0.25em;
+}
 
 .card {
     margin: 0.25em;
 }
 
 .card .card-content {
-    padding: 1em 0.5em;
+    padding: 0.5em 0;
 }
 
-.card-info {
-    max-width: 85%;
-    height: 1.5em;
+.card .card-content p {
+    height: 30px;
     overflow: hidden;
-    display: inline-block;
-    margin: 0em;
-    font-weight: bold;
-}
-
-.card-content .fa-ellipsis-v {
-    color: purple;
-    padding: 0.5em 0.5em;
-    margin: 0;
-    cursor: pointer;
-}
-
-.icon {
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;  
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: bottom;
 }
 
 .card .card-content.icon{
@@ -108,4 +133,30 @@ nav li>a {
 
 .left-align-slick > .slick-list > .slick-track {    
     margin-left:0;
+}
+
+
+
+@media(min-width: 300px) {
+    .card-image img {
+        height: 45vw;
+    }
+}
+
+@media(min-width: 610px) {
+    .card-image img {
+        height: 25vw;
+    }
+}
+
+@media(min-width: 1000px) {
+    .card-image img {
+        height: 20vw;
+    }
+}
+
+@media(min-width: 1300px) {
+    .card{
+        max-width: 1040px;
+    }
 }
