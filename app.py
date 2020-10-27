@@ -101,7 +101,7 @@ def browse_movies(page):
         flash("Sign in to create watchlists & more!")
         user=""
 
-    return render_template("browse.html", movies=movies[index_start:index_end], user=user)
+    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages)
 
 
 @app.route("/movie/<movie_id>")
