@@ -45,7 +45,7 @@ def attempt_login():
         elif user_data["username"] and password == user_data["password"]:
             print("login succesful")
             session["username"] = username
-            return redirect(url_for("browse_movies"))
+            return redirect(url_for("browse_movies", page=1))
         return redirect(url_for("login"))
 
 
@@ -85,7 +85,7 @@ def logout():
 
 # Browse & Movie pages
 
-@app.route("/browse/<page>")
+@app.route("/browse/page=<page>")
 def browse_movies(page):
 
     movie_list = mongo.db.movies
@@ -101,7 +101,7 @@ def browse_movies(page):
         flash("Sign in to create watchlists & more!")
         user=""
 
-    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages)
+    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page))
 
 
 @app.route("/movie/<movie_id>")
@@ -113,15 +113,16 @@ def movie_page(movie_id):
 
 # Add to watchlist/favourites and Remove from watchlist/favourites
 
-@app.route("/watchlist/<movie_id>/redirect_from<page>")
-def add_watchlist(movie_id, page):
-
+@app.route("/watchlist/<movie_id>/redirect_from<page>/<page_arg>/<value>")
+def add_watchlist(movie_id, page, page_arg, value):
+    print(page_arg)
     user = users.find_one({"username": session["username"]})
     user["watchlist"].append(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"watchlist": user["watchlist"]}})
 
-    return redirect(url_for(f"{page}"))
+    return redirect(url_for(f"{page}", page_arg=value))
+
 
 @app.route("/remove_watchlist/<movie_id>/redirect_from<page>")
 def remove_watchlist(movie_id, page):
@@ -197,7 +198,7 @@ def insert_movie():
     users.update_one({"username": user["username"]},
                      {"$set": {"submitted_movies": user["submitted_movies"]}})
 
-    return redirect(url_for("browse_movies"))
+    return redirect(url_for("browse_movies", page=1))
 
 
 # Update form for movies already in the database

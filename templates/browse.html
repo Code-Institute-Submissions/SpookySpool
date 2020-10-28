@@ -25,7 +25,7 @@
                     {% if movie._id in user.watchlist %}
                         <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
                     {% else %}
-                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
+                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies', page_arg='page', value=current_page)}}"><i class="fas fa-plus-circle"></i></a>
                     {% endif %}
                         <i class="activator sml fas fa-info"></i>
                     {% if movie._id in user.favourites %}
@@ -78,17 +78,14 @@
     {% endif %}
 		<div class="row">
 			<div class="col s12">
-		
 				<ul class="pagination">
-		
-					<li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+					<li class="disabled"><a href="#!"><i class="fas fa-chevron-left"></i></a></li>
 					<li class="active"><a href="#!">1</a></li>
 					<li class="waves-effect"><a href="#!">2</a></li>
 					<li class="waves-effect"><a href="#!">3</a></li>
 					<li class="waves-effect"><a href="#!">4</a></li>
 					<li class="waves-effect"><a href="#!">5</a></li>
-					<li class="waves-effect"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-		
+					<li class="waves-effect"><a href="#!"><i class="fas fa-chevron-right"></i></a></li>
 				</ul>
 			</div>
 		</div>
