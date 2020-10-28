@@ -30,15 +30,15 @@
             </div>
             <div class="card-content center-align icon">
                     {% if movie._id in user.watchlist %}
-                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
+                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-check"></i></a>
                     {% else %}
-                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
+                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-plus-circle"></i></a>
                     {% endif %}
                         <i class="activator sml fas fa-info"></i>
                     {% if movie._id in user.favourites %}
-                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
+                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-star"></i></a>
                     {% else %}
-                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
+                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="far fa-star"></i></a>
                     {% endif %}
             </div>
             <div class="card-reveal">
@@ -77,15 +77,15 @@
             </div>
             <div class="card-content center-align icon">
                     {% if movie._id in user.watchlist %}
-                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
+                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-check"></i></a>
                     {% else %}
-                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
+                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-plus-circle"></i></a>
                     {% endif %}
                         <i class="activator sml fas fa-info"></i>
                     {% if movie._id in user.favourites %}
-                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
+                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-star"></i></a>
                     {% else %}
-                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
+                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="far fa-star"></i></a>
                     {% endif %}
             </div>
             <div class="card-reveal">
@@ -126,14 +126,15 @@
 			<div class="card-content icon">
 				<span>
                     {% if movie._id in user.watchlist %}
-                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
+                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-check"></i></a>
                     {% else %}
-                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-plus-circle"></i></a>
+                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-plus-circle"></i></a>
                     {% endif %}
+                        <i class="activator sml fas fa-info"></i>
                     {% if movie._id in user.favourites %}
-                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
+                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-star"></i></a>
                     {% else %}
-                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
+                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="far fa-star"></i></a>
                     {% endif %}
                 </span>
 			</div>

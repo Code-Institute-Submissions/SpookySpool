@@ -121,47 +121,58 @@ def movie_page(movie_id):
 
 # This is the app route I am working with that links to the anchor tag seen in hmtl
 
-@app.route("/watchlist/<movie_id>/redirect=<page>/<page_argument>/<value>")
-def add_watchlist(movie_id, page, page_argument, value):
+@app.route("/watchlist/<movie_id>/redirect=<page>/<value>")
+def add_watchlist(movie_id, page, value):
     user = users.find_one({"username": session["username"]})
     user["watchlist"].append(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"watchlist": user["watchlist"]}})
+    if page == "browse_movies":
+        return redirect(url_for(f"{page}", page_num=value))
+    elif page == "user_home":
+        return redirect(url_for(f"{page}", username=value))
 
-    return redirect(url_for(f"{page}", page_argument=value))
 
-
-@app.route("/remove_watchlist/<movie_id>/redirect_from<page>")
-def remove_watchlist(movie_id, page):
+@app.route("/remove_watchlist/<movie_id>/redirect=<page>/<value>")
+def remove_watchlist(movie_id, page, value):
 
     user = users.find_one({"username": session["username"]})
     user["watchlist"].remove(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"watchlist": user["watchlist"]}})
 
-    return redirect(url_for(f"{page}"))
+    if page == "browse_movies":
+        return redirect(url_for(f"{page}", page_num=value))
+    elif page == "user_home":
+        return redirect(url_for(f"{page}", username=value))
 
 
-@app.route("/favourites/<movie_id>/redirect_from<page>")
-def add_favourites(movie_id, page):
+@app.route("/favourites/<movie_id>/redirect=<page>/<value>")
+def add_favourites(movie_id, page, value):
 
     user = users.find_one({"username": session["username"]})
     user["favourites"].append(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"favourites": user["favourites"]}})
 
-    return redirect(url_for(f"{page}"))
+    if page == "browse_movies":
+        return redirect(url_for(f"{page}", page_num=value))
+    elif page == "user_home":
+        return redirect(url_for(f"{page}", username=value))
 
 
-@app.route("/remove_favourite/<movie_id>/redirect_from<page>")
-def remove_favourite(movie_id, page):
+@app.route("/remove_favourite/<movie_id>/redirect=<page>/<value>")
+def remove_favourite(movie_id, page, value):
 
     user = users.find_one({"username": session["username"]})
     user["favourites"].remove(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"favourites": user["favourites"]}})
 
-    return redirect(url_for(f"{page}"))
+    if page == "browse_movies":
+        return redirect(url_for(f"{page}", page_num=value))
+    elif page == "user_home":
+        return redirect(url_for(f"{page}", username=value))
 
 
 @app.route("/user_submit")

@@ -31,16 +31,16 @@
             </div>
             <div class="card-content center-align icon">
                     {% if movie._id in user.watchlist %}
-                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-check"></i></a>
+                        <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='browse_movies', value=current_page)}}"><i class="fas fa-check"></i></a>
                     {% else %}
                         <!-- current link I'm trying to work this with-->
-                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies', page_argument='page_num', value=current_page)}}"><i class="fas fa-plus-circle"></i></a>
+                        <a class="left" href="{{url_for('add_watchlist', movie_id=movie._id, page='browse_movies', value=current_page)}}"><i class="fas fa-plus-circle"></i></a>
                     {% endif %}
                         <i class="activator sml fas fa-info"></i>
                     {% if movie._id in user.favourites %}
-                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies')}}"><i class="fas fa-star"></i></a>
+                        <a class="right" href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies', value=current_page)}}"><i class="fas fa-star"></i></a>
                     {% else %}
-                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies')}}"><i class="far fa-star"></i></a>
+                        <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies', value=current_page)}}"><i class="far fa-star"></i></a>
                     {% endif %}
             </div>
             <div class="card-reveal">
