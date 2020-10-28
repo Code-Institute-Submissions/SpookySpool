@@ -45,7 +45,7 @@ def attempt_login():
         elif user_data["username"] and password == user_data["password"]:
             print("login succesful")
             session["username"] = username
-            return redirect(url_for("browse_movies", page=1))
+            return redirect(url_for("browse_movies", page_num=1))
         return redirect(url_for("login"))
 
 
@@ -67,7 +67,7 @@ def sign_up():
                 "submitted_movies": []
             })
             print("user added")
-            return redirect(url_for("browse_movies"))
+            return redirect(url_for("browse_movies", page_num=1))
         elif (username_check is not None):
             print("username is taken")
         elif (email_check is not None):
@@ -84,16 +84,16 @@ def logout():
 
 
 # Browse & Movie pages
-
-@app.route("/browse/page=<page>")
-def browse_movies(page):
+# This it the route the redirects towards
+@app.route("/browse/page=<page_num>")
+def browse_movies(page_num): # <-- page argument is required for this link
 
     movie_list = mongo.db.movies
     movies = movie_list.find().sort("year", -1)
     pages = int(movies.count()/40)+1
 
-    index_start = (int(page)-1)*36
-    index_end = int(page)*36
+    index_start = (int(page_num)-1)*36
+    index_end = int(page_num)*36
 
     if session["username"]:
         user = users.find_one({"username": session["username"]})
@@ -101,7 +101,7 @@ def browse_movies(page):
         flash("Sign in to create watchlists & more!")
         user=""
 
-    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page))
+    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
 
 
 @app.route("/movie/<movie_id>")
@@ -113,15 +113,16 @@ def movie_page(movie_id):
 
 # Add to watchlist/favourites and Remove from watchlist/favourites
 
-@app.route("/watchlist/<movie_id>/redirect_from<page>/<page_arg>/<value>")
-def add_watchlist(movie_id, page, page_arg, value):
-    print(page_arg)
+# This is the app route I am working with that links to the anchor tag seen in hmtl
+
+@app.route("/watchlist/<movie_id>/redirect=<page>/<page_argument>/<value>")
+def add_watchlist(movie_id, page, page_argument, value):
     user = users.find_one({"username": session["username"]})
     user["watchlist"].append(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"watchlist": user["watchlist"]}})
 
-    return redirect(url_for(f"{page}", page_arg=value))
+    return redirect(url_for(f"{page}", page_argument=value))
 
 
 @app.route("/remove_watchlist/<movie_id>/redirect_from<page>")
@@ -155,6 +156,7 @@ def remove_favourite(movie_id, page):
                      {"$set": {"favourites": user["favourites"]}})
 
     return redirect(url_for(f"{page}"))
+
 
 @app.route("/user_submit")
 def submit_movie():
@@ -191,14 +193,14 @@ def insert_movie():
 
     mongo.db.movies.insert_one(query)
 
-    #Adds the inserted movie id into the user's submitted movie array
+    # Adds the inserted movie id into the user's submitted movie array
 
     inserted_movie = movies.find({"user_id": ObjectId(user["_id"])}).sort("_id", -1)
     user["submitted_movies"].append(ObjectId(inserted_movie[0]["_id"]))
     users.update_one({"username": user["username"]},
                      {"$set": {"submitted_movies": user["submitted_movies"]}})
 
-    return redirect(url_for("browse_movies", page=1))
+    return redirect(url_for("browse_movies", page_num=1))
 
 
 # Update form for movies already in the database
@@ -237,6 +239,7 @@ def insert_update(movie_id):
                                {"$set": updated_movie})
 
     return redirect(url_for("movie_page", movie_id=movie_id))
+
 
 @app.route("/user/<username>")
 def user_home(username):
