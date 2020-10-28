@@ -21,7 +21,13 @@ genres = mongo.db.genres
 @app.route("/")
 def index():
 
-    return render_template("home.html")
+    movie_list = movies.find()
+    movie_sorted = movie_list.sort("year", -1)
+    for movie in movie_sorted[14000:]:
+        title = movie["title"].lower()
+        movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"title": title}})
+    
+    return (render_template("home.html"))
 
 
 # Login page and accociated functions
@@ -99,7 +105,7 @@ def browse_movies(page_num): # <-- page argument is required for this link
         user = users.find_one({"username": session["username"]})
     else:
         flash("Sign in to create watchlists & more!")
-        user=""
+        user = ""
 
     return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
 
@@ -174,7 +180,7 @@ def insert_movie():
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
 
-    query = {"title": request.form.get("title"),
+    query = {"title": request.form.get("title").lower(),
              "rating": request.form.get("rating"),
              "year": request.form.get("year"),
              "metascore": request.form.get("metascore"),
@@ -220,7 +226,7 @@ def insert_update(movie_id):
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
 
-    updated_movie = {"title": request.form.get("title"),
+    updated_movie = {"title": request.form.get("title").lower(),
                      "rating": request.form.get("rating"),
                      "year": request.form.get("year"),
                      "metascore": request.form.get("metascore"),
