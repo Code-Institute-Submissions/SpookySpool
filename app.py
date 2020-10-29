@@ -1,4 +1,5 @@
 import os
+import ast
 from flask import Flask, flash, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -105,14 +106,21 @@ def browse_movies(page_num=1):
     return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
 
 # Search function
-@app.route("/search-results/page=<page_num>/", methods=["POST"])
-def search(page_num, results=False):
+@app.route("/search-results/page=<page_num>/new-search=<query>", methods=["GET", "POST"])
+def search(page_num, query):
 
-    if not results:
+    if request.method == "POST":
         title = request.form.get("search-title")
-        results = movies.find({"title": {"$regex": title.lower()}})
-        flash(f"Matchs: {results.count()}")
+        name = {"title": {"$regex": title.lower()}}
+        query = name
+        results = movies.find(query)
+        sorted_results = results.sort("year", -1)
+    else:
+        query = ast.literal_eval(query)
+        results = movies.find(query)
+        sorted_results = results.sort("year", -1)
 
+    flash(f"Matchs: {results.count()}")
     pages = int(results.count()/40)+1
     index_start = (int(page_num)-1)*36
     index_end = int(page_num)*36
@@ -124,7 +132,7 @@ def search(page_num, results=False):
         user = ""
 
 
-    return render_template("results.html", movies=results[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
+    return render_template("results.html", movies=sorted_results[index_start:index_end], user=user, pages=pages, current_page=int(page_num), query=query)
 
 
 @app.route("/movie/<movie_id>")

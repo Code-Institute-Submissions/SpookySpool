@@ -2,7 +2,7 @@
 content %}
 <div class="row">
   <div class="col s12">
-    <form action="{{url_for('search', page_num=1)}}" method="POST">
+    <form action="{{url_for('search', page_num=1, query=false)}}" method="POST">
       <input
         type="text"
         id="search"
@@ -51,17 +51,17 @@ content %}
       </div>
       <div class="card-content center-align icon">
         {% if movie._id in user.watchlist %}
-        <a
+        <!--<a
           class="left"
           href="{{url_for('remove_watchlist', movie_id=movie._id, page='search', value=current_page)}}"
           ><i class="fas fa-check"></i
-        ></a>
+        ></a>-->
         {% else %}
-        <a
+        <!--<a
           class="left"
           href="{{url_for('add_watchlist', movie_id=movie._id, page='search', value=current_page)}}"
           ><i class="fas fa-plus-circle"></i
-        ></a>
+        ></a>-->
         {% endif %}
         <i class="activator sml fas fa-info"></i>
         {% if movie._id in user.favourites %}
@@ -128,10 +128,10 @@ content %}
       <ul class="pagination">
             {% if current_page == 1 %}
                 <li class="disabled"><a href="#!"><i class="fas fa-chevron-left"></i></a></li>
-                <li class="active"><a href="{{url_for('search', page_num=current_page)}}">{{current_page}}</a></li>
+                <li class="active"><a href="{{url_for('search', page_num=current_page, query=query)}}">{{current_page}}</a></li>
             {% else %}
-                <li class="waves-effect"><a href="{{url_for('search', page_num=current_page-1)}}"><i class="fas fa-chevron-left"></i></a></li>
-                <li class="waves-effect"><a href="{{url_for('search', page_num=1)}}">1</a></li>
+                <li class="waves-effect"><a href="{{url_for('search', page_num=current_page-1, query=query)}}"><i class="fas fa-chevron-left"></i></a></li>
+                <li class="waves-effect"><a href="{{url_for('search', page_num=1, query=query)}}">1</a></li>
             {% endif %}
 
             {% if current_page >= 5 %}
@@ -142,9 +142,9 @@ content %}
                 {% if page <= 1 or page >= pages %}
                     {{continue}}
                 {% elif page == current_page %}
-                    <li class="active"><a href="{{url_for('search', page_num=page)}}">{{current_page}}</a></li>
+                    <li class="active"><a href="{{url_for('search', page_num=page, query=query)}}">{{current_page}}</a></li>
                 {% else %}
-                    <li class="waves-effect"><a href="{{url_for('search', page_num=page)}}">{{page}}</a></li>
+                    <li class="waves-effect"><a href="{{url_for('search', page_num=page, query=query)}}">{{page}}</a></li>
                 {% endif %}
             {% endfor %}
 
@@ -156,8 +156,8 @@ content %}
             <li class="active"><a href="#">{{current_page}}</a></li>
             <li class="disabled"><a href="#"><i class="fas fa-chevron-right"></i></a></li>
             {% else %}
-            <li class="waves-effect"><a href="{{url_for('search', page_num=pages)}}">{{pages}}</a></li>
-            <li class="waves-effect"><a href="{{url_for('search', page_num=current_page+1)}}"><i class="fas fa-chevron-right"></i></a></li>
+            <li class="waves-effect"><a href="{{url_for('search', page_num=pages, query=query)}}">{{pages}}</a></li>
+            <li class="waves-effect"><a href="{{url_for('search', page_num=current_page+1, query=query)}}"><i class="fas fa-chevron-right"></i></a></li>
             {% endif %}
       </ul> 
     </div>
