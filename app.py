@@ -18,20 +18,15 @@ movies = mongo.db.movies
 users = mongo.db.users
 genres = mongo.db.genres
 
+#Homepage
+@app.route("/home")
 @app.route("/")
 def index():
 
-    movie_list = movies.find()
-    movie_sorted = movie_list.sort("year", -1)
-    for movie in movie_sorted[14000:]:
-        title = movie["title"].lower()
-        movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"title": title}})
-    
     return (render_template("home.html"))
 
 
-# Login page and accociated functions
-
+# Login page and sign-in/logout functions
 @app.route("/login")
 def login():
     return render_template("login.html")
@@ -90,9 +85,8 @@ def logout():
 
 
 # Browse & Movie pages
-# This it the route the redirects towards
 @app.route("/browse/page=<page_num>")
-def browse_movies(page_num): # <-- page argument is required for this link
+def browse_movies(page_num):
 
     movie_list = mongo.db.movies
     movies = movie_list.find().sort("year", -1)
@@ -110,6 +104,8 @@ def browse_movies(page_num): # <-- page argument is required for this link
     return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
 
 
+@app.route("/search", methods=["GET"])
+
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
     movie_data = movies.find_one({"_id": ObjectId(movie_id)})
@@ -118,9 +114,6 @@ def movie_page(movie_id):
 
 
 # Add to watchlist/favourites and Remove from watchlist/favourites
-
-# This is the app route I am working with that links to the anchor tag seen in hmtl
-
 @app.route("/watchlist/<movie_id>/redirect=<page>/<value>")
 def add_watchlist(movie_id, page, value):
     user = users.find_one({"username": session["username"]})
@@ -180,8 +173,19 @@ def submit_movie():
     return render_template("movie_form.html", genres=genres.find())
 
 
-# Inserts movies from the submit form into the database
+# User home page
+@app.route("/user/<username>")
+def user_home(username):
+    user = users.find_one({"username": username})
+    watchlist = movies.find({"_id": {"$in": user["watchlist"]}})
+    favourites = movies.find({"_id": {"$in": user["favourites"]}})
+    submitted = movies.find({"_id": {"$in": user["submitted_movies"]}})
 
+    return render_template("user_home.html", user=user, favourites=favourites,
+                           watchlist=watchlist, submitted=submitted)
+
+
+# Inserts movies from the submit form into the database
 @app.route("/insert_movie", methods=["POST"])
 def insert_movie():
 
@@ -206,13 +210,14 @@ def insert_movie():
              "imdb_url": request.form.get("imdb_url"),
              "user_submitted": True,
              "user_id": ObjectId(user["_id"])
-            }
+             }
 
     mongo.db.movies.insert_one(query)
 
     # Adds the inserted movie id into the user's submitted movie array
 
-    inserted_movie = movies.find({"user_id": ObjectId(user["_id"])}).sort("_id", -1)
+    inserted_movie = movies.find(
+        {"user_id": ObjectId(user["_id"])}).sort("_id", -1)
     user["submitted_movies"].append(ObjectId(inserted_movie[0]["_id"]))
     users.update_one({"username": user["username"]},
                      {"$set": {"submitted_movies": user["submitted_movies"]}})
@@ -258,15 +263,7 @@ def insert_update(movie_id):
     return redirect(url_for("movie_page", movie_id=movie_id))
 
 
-@app.route("/user/<username>")
-def user_home(username):
-    user = users.find_one({"username": username})
-    watchlist = movies.find({"_id": {"$in": user["watchlist"]}})
-    favourites = movies.find({"_id": {"$in": user["favourites"]}})
-    submitted = movies.find({"_id": {"$in": user["submitted_movies"]}})
 
-    return render_template("user_home.html", user=user, favourites=favourites,
-                           watchlist=watchlist, submitted=submitted)
 
 
 if __name__ == "__main__":
