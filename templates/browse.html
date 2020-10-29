@@ -2,7 +2,7 @@
 content %}
 <div class="row">
   <div class="col s12">
-    <form>
+    <form action="{{url_for('search', page_num=1)}}" method="POST">
       <input
         type="text"
         id="search"
@@ -122,132 +122,40 @@ content %}
   <div class="row">
     <div class="col s12">
       <ul class="pagination">
-        {% if current_page == 1 %}
-        <li class="disabled">
-          <a href="#!"><i class="fas fa-chevron-left"></i></a>
-        </li>
-        <li class="active">
-          <a href="{{url_for('browse_movies', page_num=current_page)}}"
-            >{{current_page}}</a
-          >
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page+1)}}"
-            >{{current_page+1}}</a
-          >
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page+2)}}"
-            >{{current_page+2}}</a
-          >
-        </li>
-        {% else %}
-        <li>
-          <a
-            class="waves-effect"
-            href="{{url_for('browse_movies', page_num=current_page-1)}}"
-            ><i class="fas fa-chevron-left"></i
-          ></a>
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=1)}}">1</a>
-        </li>
-        {% endif %} {% if current_page == 2 %}
-        <li class="active">
-          <a href="{{url_for('browse_movies', page_num=current_page)}}"
-            >{{current_page}}</a
-          >
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page+1)}}"
-            >{{current_page+1}}</a
-          >
-        </li>
-        <li class="disabled"><i class="fas fa-ellipsis-h"></i></li>
-        {% elif current_page ==3 %}
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page-1)}}"
-            >{{current_page-1}}</a
-          >
-        </li>
-        <li class="active">
-          <a href="{{url_for('browse_movies', page_num=current_page)}}"
-            >{{current_page}}</a
-          >
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page+1)}}"
-            >{{current_page+1}}</a
-          >
-        </li>
-        <li class="disabled"><i class="fas fa-ellipsis-h"></i></li>
-        {% elif current_page == pages-1 %}
-        <li class="disabled"><i class="fas fa-ellipsis-h"></i></li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page-1)}}"
-            >{{current_page-1}}</a
-          >
-        </li>
-        <li class="active">
-          <a href="{{url_for('browse_movies', page_num=current_page)}}"
-            >{{current_page}}</a
-          >
-        </li>
-        {% elif current_page == pages-2 %}
-        <li class="disabled"><i class="fas fa-ellipsis-h"></i></li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page-1)}}"
-            >{{current_page-1}}</a
-          >
-        </li>
-        <li class="active">
-          <a href="{{url_for('browse_movies', page_num=current_page)}}"
-            >{{current_page}}</a
-          >
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page+1)}}"
-            >{{current_page+1}}</a
-          >
-        </li>
-        {% else %}
-        <li class="disabled"><i class="fas fa-ellipsis-h"></i></li>
-        {% for page in range(current_page-1, current_page+2) %} {% if
-        (current_page <= 3) or (current_page >= pages-2) %} {{break}} {% elif
-        page == current_page %}
-        <li class="active"><a href="#">{{current_page}}</a></li>
-        {% else %}
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=page)}}">{{page}}</a>
-        </li>
-        {% endif %} {% endfor %}
-        <li class="disabled"><i class="fas fa-ellipsis-h"></i></li>
-        {% endif %} {% if current_page == pages %}
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page-2)}}"
-            >{{current_page-2}}</a
-          >
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page-1)}}"
-            >{{current_page-1}}</a
-          >
-        </li>
-        <li class="active"><a href="#">{{current_page}}</a></li>
-        <li class="disabled">
-          <a href="#"><i class="fas fa-chevron-right"></i></a>
-        </li>
-        {% else %}
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=pages)}}">{{pages}}</a>
-        </li>
-        <li class="waves-effect">
-          <a href="{{url_for('browse_movies', page_num=current_page+1)}}"
-            ><i class="fas fa-chevron-right"></i
-          ></a>
-        </li>
-        {% endif %}
-      </ul>
+            {% if current_page == 1 %}
+                <li class="disabled"><a href="#!"><i class="fas fa-chevron-left"></i></a></li>
+                <li class="active"><a href="{{url_for('browse_movies', page_num=pages)}}">{{current_page}}</a></li>
+            {% else %}
+                <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=current_page-1)}}"><i class="fas fa-chevron-left"></i></a></li>
+                <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=1)}}">1</a></li>
+            {% endif %}
+
+            {% if current_page >= 5 %}
+                <li class="disabled">...</i></li>
+            {% endif %}
+            
+            {% for page in range(current_page-2, current_page+3) %}
+                {% if page <= 1 or page >= pages %}
+                    {{continue}}
+                {% elif page == current_page %}
+                    <li class="active"><a href="{{url_for('browse_movies', page_num=page)}}">{{current_page}}</a></li>
+                {% else %}
+                    <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=page)}}">{{page}}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page <= pages-4 %}
+                <li class="disabled">...</i></li>
+            {% endif %}
+
+            {% if current_page == pages %}
+            <li class="active"><a href="#">{{current_page}}</a></li>
+            <li class="disabled"><a href="#"><i class="fas fa-chevron-right"></i></a></li>
+            {% else %}
+            <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=pages)}}">{{pages}}</a></li>
+            <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=current_page+1)}}"><i class="fas fa-chevron-right"></i></a></li>
+            {% endif %}
+      </ul> 
     </div>
   </div>
 </div>

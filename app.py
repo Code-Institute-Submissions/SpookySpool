@@ -85,8 +85,9 @@ def logout():
 
 
 # Browse & Movie pages
+@app.route("/browse")
 @app.route("/browse/page=<page_num>")
-def browse_movies(page_num):
+def browse_movies(page_num=1):
 
     movie_list = mongo.db.movies
     movies = movie_list.find().sort("year", -1)
@@ -104,7 +105,25 @@ def browse_movies(page_num):
     return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
 
 
-@app.route("/search", methods=["GET"])
+@app.route("/search-results/page=<page_num>/", methods=["POST"])
+def search(page_num):
+
+    title = request.form.get("search-title")
+    results = movies.find({"title": {"$regex": title}})
+
+    pages = int(results.count()/40)+1
+    index_start = (int(page_num)-1)*36
+    index_end = int(page_num)*36
+
+    if session["username"]:
+        user = users.find_one({"username": session["username"]})
+    else:
+        flash("Sign in to create watchlists & more!")
+        user = ""
+
+
+    return render_template("results.html", movies=results[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
+
 
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
@@ -234,7 +253,6 @@ def update_movie(movie_id):
 
 
 # Inserts updated movies from the update form into the database
-
 @app.route("/insert_update/<movie_id>", methods=["POST"])
 def insert_update(movie_id):
     print(movie_id)

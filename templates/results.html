@@ -1,0 +1,164 @@
+{% extends "base.html" %} {% block title %} Results {% endblock %} {% block
+content %}
+<div class="row">
+  <div class="col s12">
+    <form action="{{url_for('search', page_num=1)}}" method="POST">
+      <input
+        type="text"
+        id="search"
+        placeholder="Start typing..."
+        name="search-title"
+        class="validate"
+        required
+      />
+      <button type="submit">Search</button>
+    </form>
+  </div>
+</div>
+<div id="movie-container" class="row">
+  {% if session["username"] %} {% for movie in movies %}
+  <div class="col s6 m3 l3">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <a
+          class="card-link"
+          href="{{url_for('movie_page', movie_id=movie._id)}}"
+        >
+          {% if movie.img_url == "" %}
+          <img
+            src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}"
+            alt="{{movie.title}}"
+          />
+          {% else %}
+          <img src="{{movie.img_url}}" alt="{{movie.title}}" />
+          {% endif %}
+        </a>
+      </div>
+      <div class="card-content">
+        <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+          <p class="card-info heading-text med center-align">
+            {{movie.title.title()}}
+          </p>
+        </a>
+      </div>
+      <div class="card-content center-align icon">
+        {% if movie._id in user.watchlist %}
+        <a
+          class="left"
+          href="{{url_for('remove_watchlist', movie_id=movie._id, page='search', value=current_page)}}"
+          ><i class="fas fa-check"></i
+        ></a>
+        {% else %}
+        <a
+          class="left"
+          href="{{url_for('add_watchlist', movie_id=movie._id, page='search', value=current_page)}}"
+          ><i class="fas fa-plus-circle"></i
+        ></a>
+        {% endif %}
+        <i class="activator sml fas fa-info"></i>
+        {% if movie._id in user.favourites %}
+        <a
+          class="right"
+          href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies', value=current_page)}}"
+          ><i class="fas fa-star"></i
+        ></a>
+        {% else %}
+        <a
+          class="right"
+          href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies', value=current_page)}}"
+          ><i class="far fa-star"></i
+        ></a>
+        {% endif %}
+      </div>
+      <div class="card-reveal">
+        <span class="card-title"><i class="med right fas fa-times"></i></span>
+        <p class="body-text med">{{movie.description}}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% else %} {% with messages = get_flashed_messages() %} {% if
+  messages %}
+  <ul class="flashes">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %} {% for movie in movies %}
+  <div class="col s6 m3 l3">
+    <div class="card">
+      <div class="card-image waves-effect waves-block waves-light">
+        <a
+          class="card-link"
+          href="{{url_for('movie_page', movie_id=movie._id)}}"
+        >
+          {% if movie.img_url == "" %}
+          <img
+            src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}"
+            alt="{{movie.title}}"
+          />
+          {% else %}
+          <img src="{{movie.img_url}}" alt="{{movie.title}}" />
+          {% endif %}
+        </a>
+      </div>
+      <div class="card-content">
+        <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+          <p class="card-info heading-text med center-align">
+            {{movie.title.title()}}
+          </p>
+        </a>
+      </div>
+      <div class="card-content center-align icon">
+        <i class="activator sml fas fa-info"></i>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title"><i class="med right fas fa-times"></i></span>
+        <p class="body-text med">{{movie.description}}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %} {% endif %}
+  <!-- Pagination container -->
+  {% if pages > 1%}
+  <div class="row">
+    <div class="col s12">
+      <ul class="pagination">
+            {% if current_page == 1 %}
+                <li class="disabled"><a href="#!"><i class="fas fa-chevron-left"></i></a></li>
+                <li class="active"><a href="{{url_for('search', page_num=current_page)}}">{{current_page}}</a></li>
+            {% else %}
+                <li class="waves-effect"><a href="{{url_for('search', page_num=current_page-1)}}"><i class="fas fa-chevron-left"></i></a></li>
+                <li class="waves-effect"><a href="{{url_for('search', page_num=1)}}">1</a></li>
+            {% endif %}
+
+            {% if current_page >= 5 %}
+                <li class="disabled">...</i></li>
+            {% endif %}
+            
+            {% for page in range(current_page-2, current_page+3) %}
+                {% if page <= 1 or page >= pages %}
+                    {{continue}}
+                {% elif page == current_page %}
+                    <li class="active"><a href="{{url_for('search', page_num=page)}}">{{current_page}}</a></li>
+                {% else %}
+                    <li class="waves-effect"><a href="{{url_for('search', page_num=page)}}">{{page}}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if current_page <= pages-4 %}
+                <li class="disabled">...</i></li>
+            {% endif %}
+
+            {% if current_page == pages %}
+            <li class="active"><a href="#">{{current_page}}</a></li>
+            <li class="disabled"><a href="#"><i class="fas fa-chevron-right"></i></a></li>
+            {% else %}
+            <li class="waves-effect"><a href="{{url_for('search', page_num=pages)}}">{{pages}}</a></li>
+            <li class="waves-effect"><a href="{{url_for('search', page_num=current_page+1)}}"><i class="fas fa-chevron-right"></i></a></li>
+            {% endif %}
+      </ul> 
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
