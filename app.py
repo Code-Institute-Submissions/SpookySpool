@@ -104,12 +104,14 @@ def browse_movies(page_num=1):
 
     return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
 
-
+# Search function
 @app.route("/search-results/page=<page_num>/", methods=["POST"])
-def search(page_num):
+def search(page_num, results=False):
 
-    title = request.form.get("search-title")
-    results = movies.find({"title": {"$regex": title}})
+    if not results:
+        title = request.form.get("search-title")
+        results = movies.find({"title": {"$regex": title.lower()}})
+        flash(f"Matchs: {results.count()}")
 
     pages = int(results.count()/40)+1
     index_start = (int(page_num)-1)*36

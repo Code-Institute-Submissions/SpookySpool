@@ -15,6 +15,14 @@ content %}
     </form>
   </div>
 </div>
+{% with messages = get_flashed_messages() %} {% if
+  messages %}
+  <div class="flashes">
+    {% for message in messages %}
+    <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %} {% endwith %}
 <div id="movie-container" class="row">
   {% if session["username"] %} {% for movie in movies %}
   <div class="col s6 m3 l3">
@@ -76,14 +84,9 @@ content %}
       </div>
     </div>
   </div>
-  {% endfor %} {% else %} {% with messages = get_flashed_messages() %} {% if
-  messages %}
-  <ul class="flashes">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} {% endwith %} {% for movie in movies %}
+  {% endfor %} 
+  {% else %}  
+  {% for movie in movies %}
   <div class="col s6 m3 l3">
     <div class="card">
       <div class="card-image waves-effect waves-block waves-light">
