@@ -2,16 +2,56 @@
 content %}
 <div class="row">
   <div class="col s12">
-    <form action="{{url_for('search', page_num=1, query=false)}}" method="POST">
-      <input
-        type="text"
-        id="search"
-        placeholder="Start typing..."
-        name="search-title"
-        class="validate"
-        required
-      />
-      <button type="submit">Search</button>
+    <form class="col s12" action="{{url_for('search', page_num=1, query=false)}}" method="POST">
+        <div class="row">
+            <input
+                type="text"
+                id="search"
+                placeholder="Start typing..."
+                name="search-title"
+                class="validate col s6"
+            />
+            <button type="submit">Search</button>
+            <span id="show_options"><i class="fas fa-angle-down"></i></span>
+        </div>
+        <div id="form_options" class="row" style="display: none;">
+                <div class="col s12">
+                    <h3>Release Year</h3>
+                </div>
+                <div class="col s6 input-field">
+                    <input id="from" name="from" type="number" min="1900" max="2021" class="validate">
+                    <label for="from">From:</label>
+                </div>
+                <div class="col s6 input-field">
+                <input id="to" name="to" type="number" min="1900" max="2021" class="validate">
+                    <label for="to">To:</label>
+                </div>
+                <div class="col s12">
+                    <h3>Movie Rating</h3>
+                </div>
+                <div class="col s12 input-field">
+                    <select id="movie_rating" name="rating" multiple>
+                        <option value="" selected disabled>Select</option>
+                        <option value="G">G</option>
+                        <option value="PG">PG</option>
+                        <option value="PG-13">PG-13</option>
+                        <option value="R">R</option>
+                        <option value="NC-17">NC-17</option>
+                        <option value="Unrated">Unrated</option>
+					</select>
+                </div>
+                <div class="col s12">
+                    <h3>Genres</h3>
+                </div>
+                <div class="input-field col s12">
+					<select id="movie_genres" name="genre" multiple>
+                        <option value="" disabled selected>Pick relevant genres</option>
+				      {% for genre in genres %}
+                        <option value="{{genre._id}}">{{genre.genre_name}}</option>
+                      {% endfor %}
+					</select>
+				</div>
+        </div>
     </form>
   </div>
 </div>

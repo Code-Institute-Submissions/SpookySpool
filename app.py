@@ -102,19 +102,44 @@ def browse_movies(page_num=1):
     else:
         flash("Sign in to create watchlists & more!")
         user = ""
+    
+    movie_genres = genres.find()
 
-    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num))
+    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num), genres=movie_genres)
 
 # Search function
 @app.route("/search-results/page=<page_num>/new-search=<query>", methods=["GET", "POST"])
 def search(page_num, query):
 
     if request.method == "POST":
+        query = {}
         title = request.form.get("search-title")
-        name = {"title": {"$regex": title.lower()}}
-        query = name
+        rating = request.form.getlist("rating")
+        genre = request.form.getlist("genre")
+        released_from = request.form.get("from")
+        released_to = request.form.get("to")
+
+        query["title"] = {"$regex": title.lower()}
+
+        if rating:
+            query["rating"] = {"$in": rating}
+
+        if genre:
+            genre_list = []
+            for genre in request.form.getlist("genre"):
+                genre_list.append(ObjectId(genre))
+            query["genre"] = {"$in": genre_list}
+        
+        if released_from and released_to:
+            query["year"] = {"$gte": released_from, "$lte": released_to}
+        elif released_from and not released_to:
+            query["year"] = {"$gte": released_from}
+        elif not released_from and released_to:
+            query["year"] = {"$lte": released_to}
+        
         results = movies.find(query)
         sorted_results = results.sort("year", -1)
+
     else:
         query = ast.literal_eval(query)
         results = movies.find(query)
@@ -131,8 +156,8 @@ def search(page_num, query):
         flash("Sign in to create watchlists & more!")
         user = ""
 
-
-    return render_template("results.html", movies=sorted_results[index_start:index_end], user=user, pages=pages, current_page=int(page_num), query=query)
+    movie_genres = genres.find()
+    return render_template("results.html", movies=sorted_results[index_start:index_end], user=user, pages=pages, current_page=int(page_num), query=query, genres=movie_genres)
 
 
 @app.route("/movie/<movie_id>")

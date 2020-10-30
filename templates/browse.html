@@ -9,7 +9,6 @@ content %}
                 placeholder="Start typing..."
                 name="search-title"
                 class="validate col s6"
-                required
             />
             <button type="submit">Search</button>
             <span id="show_options"><i class="fas fa-angle-down"></i></span>
@@ -19,11 +18,11 @@ content %}
                     <h3>Release Year</h3>
                 </div>
                 <div class="col s6 input-field">
-                    <input placeholder="2009" id="from" name="from" type="number" min="1900" max="2021" class="validate">
+                    <input id="from" name="from" type="number" min="1900" max="2021" class="validate">
                     <label for="from">From:</label>
                 </div>
                 <div class="col s6 input-field">
-                <input placeholder="2009" id="to" name="to" type="number" min="1900" max="2021" class="validate">
+                <input id="to" name="to" type="number" min="1900" max="2021" class="validate">
                     <label for="to">To:</label>
                 </div>
                 <div class="col s12">
