@@ -114,6 +114,8 @@ def browse_movies(page_num=1):
 def search(page_num, query):
 
     if request.method == "POST":
+
+        # This searches the database for matches and filters out unused fields
         query = {}
         title = request.form.get("search-title")
         rating = request.form.getlist("rating")
@@ -121,29 +123,35 @@ def search(page_num, query):
         released_from = request.form.get("from")
         released_to = request.form.get("to")
 
-        query["title"] = {"$regex": title, "$options": "i"}
-
+        if title:
+            query["title"] = {"$regex": title, "$options": "i"}
         if rating:
             query["rating"] = {"$in": rating}
-
         if genre:
             genre_list = []
             for genre in request.form.getlist("genre"):
                 genre_list.append(ObjectId(genre))
             query["genre"] = {"$in": genre_list}
-        
         if released_from and released_to:
             query["year"] = {"$gte": released_from, "$lte": released_to}
         elif released_from and not released_to:
             query["year"] = {"$gte": released_from}
         elif not released_from and released_to:
             query["year"] = {"$lte": released_to}
-        
         results = movies.find(query)
         sorted_results = results.sort("year", -1)
 
     else:
+        # This converts the query string into a dictionary
+        query = query.replace("ObjectId('", "'").replace("')", "'").replace("\n", ",")
         query = ast.literal_eval(query)
+
+        # This added the ObjectId() back onto genres if in the query
+        if query["genre"]["$in"]:
+            for x in query["genre"]["$in"]:
+                position = query["genre"]["$in"].index(x)
+                query["genre"]["$in"][position] = ObjectId(x)
+
         results = movies.find(query)
         sorted_results = results.sort("year", -1)
 
@@ -159,8 +167,10 @@ def search(page_num, query):
         user = ""
 
     movie_genres = genres.find()
-    return render_template("results.html", movies=sorted_results[index_start:index_end], user=user, pages=pages, current_page=int(page_num), query=query, genres=movie_genres)
-
+    return render_template("results.html", current_page=int(page_num),
+                           movies=sorted_results[index_start:index_end],
+                           genres=movie_genres, user=user, pages=pages,
+                           query=query)
 
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
