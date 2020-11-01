@@ -1,5 +1,6 @@
 import os
 import ast
+import json
 from flask import Flask, flash, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -24,7 +25,8 @@ genres = mongo.db.genres
 @app.route("/")
 def index():
 
-    return (render_template("home.html"))
+
+    return render_template("home.html")
 
 
 # Login page and sign-in/logout functions
@@ -119,7 +121,7 @@ def search(page_num, query):
         released_from = request.form.get("from")
         released_to = request.form.get("to")
 
-        query["title"] = {"$regex": title.lower()}
+        query["title"] = {"$regex": title, "$options": "i"}
 
         if rating:
             query["rating"] = {"$in": rating}
@@ -246,10 +248,9 @@ def insert_movie():
     user = users.find_one({"username": session["username"]})
 
     genre_list = []
-    for genre in request.form.getlist("genre"):
-        genre_list.append(ObjectId(genre))
+    for genre in request.form.getlist("genre"):        genre_list.append(ObjectId(genre))
 
-    query = {"title": request.form.get("title").lower(),
+    query = {"title": request.form.get("title"),
              "rating": request.form.get("rating"),
              "year": request.form.get("year"),
              "metascore": request.form.get("metascore"),
@@ -295,7 +296,7 @@ def insert_update(movie_id):
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
 
-    updated_movie = {"title": request.form.get("title").lower(),
+    updated_movie = {"title": request.form.get("title"),
                      "rating": request.form.get("rating"),
                      "year": request.form.get("year"),
                      "metascore": request.form.get("metascore"),
