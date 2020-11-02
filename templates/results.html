@@ -91,36 +91,36 @@ content %}
       </div>
       <div class="card-content center-align icon">
         {% if movie._id in user.watchlist %}
-        <!--<a
+        <a
           class="left"
-          href="{{url_for('remove_watchlist', movie_id=movie._id, page='search', value=current_page)}}"
+          href="{{url_for('remove_watchlist', movie_id=movie._id, page='search', value=query)}}"
           ><i class="fas fa-check"></i
-        ></a>-->
+        ></a>
         {% else %}
-        <!--<a
+        <a
           class="left"
-          href="{{url_for('add_watchlist', movie_id=movie._id, page='search', value=current_page)}}"
+          href="{{url_for('add_watchlist', movie_id=movie._id, page='search', value=query)}}"
           ><i class="fas fa-plus-circle"></i
-        ></a>-->
+        ></a>
         {% endif %}
         <i class="activator sml fas fa-info"></i>
         {% if movie._id in user.favourites %}
         <a
           class="right"
-          href="{{url_for('remove_favourite', movie_id=movie._id, page='browse_movies', value=current_page)}}"
+          href="{{url_for('remove_favourite', movie_id=movie._id, page='search', value=query)}}"
           ><i class="fas fa-star"></i
         ></a>
         {% else %}
         <a
           class="right"
-          href="{{url_for('add_favourites', movie_id=movie._id, page='browse_movies', value=current_page)}}"
+          href="{{url_for('add_favourites', movie_id=movie._id, page='search', value=query)}}"
           ><i class="far fa-star"></i
         ></a>
         {% endif %}
       </div>
       <div class="card-reveal">
-        <span class="card-title"><i class="med right fas fa-times"></i></span>
-        <p class="body-text med">{{movie.description}}</p>
+        <div class="card-title"><i class="sml fas fa-times"></i></div>
+        <p class="body-text small">{{movie.description}}</p>
       </div>
     </div>
   </div>
@@ -155,8 +155,8 @@ content %}
         <i class="activator sml fas fa-info"></i>
       </div>
       <div class="card-reveal">
-        <span class="card-title"><i class="med right fas fa-times"></i></span>
-        <p class="body-text med">{{movie.description}}</p>
+        <div class="card-title"><i class="sml fas fa-times"></i></div>
+        <p class="body-text small">{{movie.description}}</p>
       </div>
     </div>
   </div>

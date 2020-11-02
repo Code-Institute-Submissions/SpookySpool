@@ -1,6 +1,5 @@
 import os
 import ast
-import json
 from flask import Flask, flash, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -147,7 +146,7 @@ def search(page_num, query):
         query = ast.literal_eval(query)
 
         # This added the ObjectId() back onto genres if in the query
-        if query["genre"]["$in"]:
+        if "genre" in query.keys():
             for x in query["genre"]["$in"]:
                 position = query["genre"]["$in"].index(x)
                 query["genre"]["$in"][position] = ObjectId(x)
@@ -190,6 +189,9 @@ def add_watchlist(movie_id, page, value):
         return redirect(url_for(f"{page}", page_num=value))
     elif page == "user_home":
         return redirect(url_for(f"{page}", username=value))
+    elif page == "search":
+        return redirect(url_for(f"{page}", page_num=1, query=value))
+
 
 
 @app.route("/remove_watchlist/<movie_id>/redirect=<page>/<value>")
@@ -204,6 +206,8 @@ def remove_watchlist(movie_id, page, value):
         return redirect(url_for(f"{page}", page_num=value))
     elif page == "user_home":
         return redirect(url_for(f"{page}", username=value))
+    elif page == "search":
+        return redirect(url_for(f"{page}", page_num=1, query=value))
 
 
 @app.route("/favourites/<movie_id>/redirect=<page>/<value>")
@@ -218,6 +222,8 @@ def add_favourites(movie_id, page, value):
         return redirect(url_for(f"{page}", page_num=value))
     elif page == "user_home":
         return redirect(url_for(f"{page}", username=value))
+    elif page == "search":
+        return redirect(url_for(f"{page}", page_num=1, query=value))
 
 
 @app.route("/remove_favourite/<movie_id>/redirect=<page>/<value>")
@@ -232,6 +238,8 @@ def remove_favourite(movie_id, page, value):
         return redirect(url_for(f"{page}", page_num=value))
     elif page == "user_home":
         return redirect(url_for(f"{page}", username=value))
+    elif page == "search":
+        return redirect(url_for(f"{page}", page_num=1, query=value))
 
 
 @app.route("/user_submit")
@@ -258,7 +266,8 @@ def insert_movie():
     user = users.find_one({"username": session["username"]})
 
     genre_list = []
-    for genre in request.form.getlist("genre"):        genre_list.append(ObjectId(genre))
+    for genre in request.form.getlist("genre"):
+        genre_list.append(ObjectId(genre))
 
     query = {"title": request.form.get("title"),
              "rating": request.form.get("rating"),
@@ -325,10 +334,6 @@ def insert_update(movie_id):
                                {"$set": updated_movie})
 
     return redirect(url_for("movie_page", movie_id=movie_id))
-
-
-
-
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

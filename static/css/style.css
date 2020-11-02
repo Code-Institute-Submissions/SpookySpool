@@ -56,6 +56,43 @@ nav {
     background-color: #0B1023;
 }
 
+.card .card-content p {
+    color: #0B1023;
+    transition: color 250ms;
+}
+
+.card .card-content p:hover {
+    color: #D24625;
+}
+
+.fa-plus-circle,
+.fa-check {
+    color: #518E51;
+    transition: color 250ms
+}
+
+.fa-plus-circle:hover,
+.fa-check:hover {
+    color: #386138;
+}
+
+.fa-star{
+    color: #FFC300;
+    transition: color 250ms
+}
+
+.fa-star:hover {
+    color: #cc9c00;
+}
+
+.fa-info:hover {
+    color: #D24625;
+}
+
+.card .card-reveal i:hover {
+    color: #ff3333;
+}
+
 /*----- Base -----*/
 
 .wrapper {
@@ -120,6 +157,11 @@ nav li>a:hover,
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: bottom;
+    font-weight: 600;
+}
+
+.card-content {
+    margin: 0 10px;
 }
 
 .card .card-content.icon{
@@ -127,11 +169,63 @@ nav li>a:hover,
     padding-top: 0em;
 }
 
+.fa-info {
+    cursor: pointer;
+    transition: color 250ms;
+}
+
+.card-reveal {
+    text-align: left;
+}
+
+.card .card-reveal i{
+    display: block;
+    text-align: center;
+    transition: color 250ms;
+}
+
 .left-align-slick > .slick-list > .slick-track {    
     margin-left:0;
 }
 
+/*----- Form Fields -----*/
 
+ /* label focus color */
+.input-field label:not(.label-icon).active {
+    color: black;
+}
+/* label underline focus color */
+input[type=number]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]) {
+        border-bottom: 1px solid #D24625;
+        box-shadow: 0 1px 0 0 #D24625;
+}
+
+input[type=range]+.thumb {
+    background-color: #D24625;
+}
+.dropdown-content li>span,
+input[type=number]:not(.browser-default):focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label,
+input[type=text]:not(.browser-default):focus:not([readonly])+label {
+    color: #D24625;
+}
+
+
+input[type=range] {
+    border: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background-color: #0B1023;
+  }
+  input[type=range]::-moz-range-thumb {
+    background-color: #0B1023;
+  }
+  input[type=range]::-ms-thumb {
+    background-color: #0B1023;
+  }
 
 @media(min-width: 300px) {
     .card-image img {
