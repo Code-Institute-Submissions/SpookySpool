@@ -130,6 +130,11 @@ nav {
     color: #ff3333;
 }
 
+.empty_carousel h4 a:hover {
+    color: rgb(150, 60, 40);
+    font-weight: 600;
+}
+
 /*----- Base -----*/
 
 .wrapper {
@@ -274,12 +279,13 @@ div>h4 {
     margin-bottom: 0;
 }
 
-
-
 #form_options input {
     margin: 1em 0;
 }
 
+#form_options .input-field label {
+    top: 1em;
+}
 #form_options .input-field{
     margin: 0;
 }
@@ -342,12 +348,69 @@ div>h4 {
     margin-left:0;
 }
 
+/*----- User Home -----*/
+
+.section {
+    padding: 0em 0.5em;
+}
+.empty_carousel,
+.carousel{
+    padding: 1em;
+    background: #ffeee6;
+    border: 1px #D24625 solid;
+    border-radius: 2px;
+    box-shadow: 0 5px 6px -6px #777;
+    height: 100%
+}
+
+blockquote {
+    font-style: italic;
+    font-weight: 600;
+    border: none;
+    margin: auto;
+    padding: 0;
+}
+
+a.btn,
+.empty_carousel a.btn {
+    display: block;
+    width: fit-content;
+    margin: 1em auto;
+}
+
+.empty_carousel h4,
+.empty_carousel h4 a {
+        color: #D24625;
+        margin: 1em auto;
+        transition: color 250ms;
+}
+.carousel .card{
+    margin: 0 0.5em;
+}
+
+.prev::before,
+.next::before {
+    font-size: 2em;
+}
+
+.prev{
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    right: 1px;
+    color: #BFAFB2;
+    height: 100%;
+}
+.next{
+    position: absolute;
+    z-index: 1000;
+    top: 50%;
+    left: 1px;
+    color: #BFAFB2;
+}
+
 /*----- Form Fields -----*/
 
- /* label focus color */
-.input-field label:not(.label-icon).active {
-    color: black;
-}
 /* label underline focus color */
 input[type=password]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),

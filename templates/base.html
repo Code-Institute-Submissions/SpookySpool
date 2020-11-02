@@ -11,17 +11,14 @@
       href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Raleway&family=Special+Elite&display=swap"
       rel="stylesheet"
     />
-    <!-- Slick slider CDN-->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
-    />
+    
     <!-- Materialize CDN link -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
     />
+    <!-- Slick slider CDN-->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <!-- Spooky Spool stylesheet -->
     <link
       rel="stylesheet"
@@ -122,29 +119,39 @@
       src="{{url_for('static', filename='js/password_validator.js')}}"
     ></script>
     <!-- -->
-    <script>
-
-      $(document).ready(function () {
-        // Materialize Triggers
-        // Sidebar trigger
-        $(".button-collapse").sideNav();
-        // Modal trigger
-        $(".modal").modal();
-        // Form select trigger
-        $('select').material_select();
-        $("#show_options").click(function(){
-            $("#form_options").slideToggle(250)
-        });
-        //slick carousel trigger
-        $(".carousel").each(function (i) {
-          $(this).slick({
-            infinite: true,
-            slidesToShow: 6,
-            slidesToScroll: 3,
-            centerPadding: "60px",
-          });
-        });
-      });
-    </script>
+	<script>
+		$(document).ready(function () {
+	        // Materialize Triggers
+	        // Sidebar trigger
+	        $(".button-collapse").sideNav();
+	        // Modal trigger
+	        $(".modal").modal();
+	        // Form select trigger
+	        $('select').material_select();
+	        $("#show_options").click(function(){
+	            $("#form_options").slideToggle(250)
+	        });
+	        //slick carousel trigger
+	        $(".carousel").each(function (i) {
+	          $(this).slick({
+	            infinite: true,
+	            slidesToShow: 4,
+	            slidesToScroll: 3,
+	            centerPadding: "60px",
+	            prevArrow:"<i class='a-right control-c next slick-next fas fa-caret-left'</i>",
+	            nextArrow:"<i class='a-left control-c prev slick-prev fas fa-caret-right'></i>",
+	              responsive: [
+	                {
+	      breakpoint: 650,
+	      settings: {
+	        slidesToShow: 2,
+	        slidesToScroll: 3,
+	        infinite: true,
+	      }
+	    }]
+	          });
+	        });
+	      });
+	</script>
   </body>
 </html>

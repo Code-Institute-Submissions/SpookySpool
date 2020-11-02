@@ -4,11 +4,11 @@
 {% endblock %}
 {% block content %}
 <div class="section">
-    <h3>Watchlist</h3>
+    <h3 class="heading-text xlrg">Watchlist:</h3>
     {% if watchlist.count() == 0 %}
-        <div class="empty_carousel">
+        <div class="empty_carousel body-text">
             <blockquote cite="https://allthetropes.fandom.com/wiki/Move_Along,_Nothing_to_See_Here">"Ok folks, show's over, nothing to see here..."</blockquote>
-            <h4><a href="{{url_for('browse_movies')}}">Browse our collection to add movies!</a></h4>
+            <h4 class="med"><a href="{{url_for('browse_movies')}}">Browse our collection to add movies!</a></h4>
         </div>
     {% else %}
 	<div class="carousel left-align-slick">
@@ -51,11 +51,11 @@
     {% endif %}
 </div>
 <div class="section">
-    <h3>Favourite Movies</h3>
+    <h3 class="heading-text xlrg">Favourite Movies:</h3>
     {% if favourites.count() == 0 %}
-        <div class="empty_carousel">
+        <div class="empty_carousel body-text">
             <blockquote cite="https://www.quotes.net/mquote/1071796">"They're gone! THEY'RE ALL GONE!"</blockquote>
-            <h4><a href="{{url_for('browse_movies')}}">Find your favourite movies in our collection</a></h4>
+            <h4 class="med"><a href="{{url_for('browse_movies')}}">Find your favourite movies in our collection</a></h4>
         </div>
     {% else %}
 	<div class="carousel left-align-slick">
@@ -98,11 +98,12 @@
     {% endif %}
 </div>
 <div class="section">
-    <h3>Your Submitted Movies</h3>
+    <h3 class="heading-text xlrg">Your Submitted Movies:</h3>
     {% if submitted.count() == 0 %}
-        <div class="empty_carousel">
+        <div class="empty_carousel body-text">
             <blockquote cite="https://www.quotes.net/serp.php?st=you%27re+new+here&qtype=2">"Since you're new here, I'm gonna cut you a break... today."</blockquote>
-            <h4>Looks like you have't submitted any movies yet! <a class="btn" href="{{url_for('submit_movie')}}">Add Movie</a></h4>
+            <h4 class="med">Looks like you have't submitted any movies yet!</h4>
+            <a class="btn" href="{{url_for('submit_movie')}}">Add Movie</a>
         </div>
     {% else %}
 	<div class="carousel left-align-slick">
@@ -152,6 +153,5 @@
     </div>
     {% endif %}
 </div>
-	<h4>Logout</h4>
-	<a href="{{url_for('logout')}}">logout</a>
+<a class="btn" href="{{url_for('logout')}}">Logout</a>
 	{% endblock %}
