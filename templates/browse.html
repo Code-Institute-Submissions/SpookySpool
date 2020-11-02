@@ -1,34 +1,35 @@
 {% extends "base.html" %} {% block title %} Browse {% endblock %} {% block
 content %}
+<!--Seach Bar-->
 <div class="row">
     <form class="col s12" action="{{url_for('search', page_num=1, query=false)}}" method="POST">
-        <div class="row">
+        <div class="row search-wrapper">
             <input
                 type="text"
                 id="search"
-                placeholder="Start typing..."
+                placeholder="Start Search..."
                 name="search-title"
-                class="validate col s6"
+                class="body-text col s6"
             />
-            <button type="submit">Search</button>
+            <button type="submit col"><i class="fas fa-search"></i></button>
             <span id="show_options"><i class="fas fa-angle-down"></i></span>
         </div>
         <div id="form_options" class="row" style="display: none;">
                 <div class="col s12">
-                    <h3>Release Year</h3>
+                    <h3 class="heading-text lrg">Released:</h3>
                 </div>
                 <div class="col s6 input-field">
-                    <input id="from" name="from" type="number" min="1900" max="2021" class="validate">
+                    <input id="from" name="from" type="number" min="1900" max="2021" class="body-text">
                     <label for="from">From:</label>
                 </div>
                 <div class="col s6 input-field">
-                <input id="to" name="to" type="number" min="1900" max="2021" class="validate">
+                <input id="to" name="to" type="number" min="1900" max="2021" class="body-text">
                     <label for="to">To:</label>
                 </div>
                 <div class="col s12">
-                    <h3>Movie Rating</h3>
+                    <h3 class="heading-text lrg">Age Rating:</h3>
                 </div>
-                <div class="col s12 input-field">
+                <div class="col s12 input-field body-text">
                     <select id="movie_rating" name="rating" multiple>
                         <option value="" selected disabled>Select</option>
                         <option value="G">G</option>
@@ -40,9 +41,9 @@ content %}
 					</select>
                 </div>
                 <div class="col s12">
-                    <h3>Genres</h3>
+                    <h3 class="heading-text lrg">Genre(s):</h3>
                 </div>
-                <div class="input-field col s12">
+                <div class="input-field col s12 body-text">
 					<select id="movie_genres" name="genre" multiple>
                         <option value="" disabled selected>Pick relevant genres</option>
 				      {% for genre in genres %}
@@ -53,6 +54,7 @@ content %}
         </div>
     </form>
 </div>
+<!--Movie card container for users-->
 <div id="movie-container" class="row">
   {% if session["username"] %} {% for movie in movies %}
   <div class="col s6 m3 l3">
@@ -114,14 +116,14 @@ content %}
       </div>
     </div>
   </div>
-  {% endfor %} {% else %} {% with messages = get_flashed_messages() %} {% if
-  messages %}
-  <ul class="flashes">
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} {% endwith %} {% for movie in movies %}
+  <!--Movie card container for guests-->
+  {% endfor %} {% else %}
+  <div class="row">
+    <div class="col s12">
+        <p id="call-to-signin" class="heading-text med"><a href="{{url_for('login')}}">Login/Sign up</a> to create watchlists, add movies and more!</p>
+    </div>
+  </div>
+  {% for movie in movies %}
   <div class="col s6 m3 l3">
     <div class="card">
       <div class="card-image waves-effect waves-block waves-light">

@@ -4,6 +4,10 @@ body {
     padding: 0;
 }
 
+.container .row {
+    margin: 0;
+}
+
 /*----- Text and Headings -----*/
 
 .brand-heading {
@@ -18,8 +22,12 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-.lrg {
+.xlrg {
     font-size: 2em;
+}
+
+.lrg {
+    font-size: 1.5em;
 }
 
 .med {
@@ -54,6 +62,26 @@ body {
 
 nav {
     background-color: #0B1023;
+}
+
+.search-wrapper button {
+    background-color: #D24625;
+    color: #ffffff;
+    transition: color 250ms;
+}
+
+.search-wrapper button:hover {
+    color: #0B1023;
+}
+
+#call-to-signin a{
+    font-weight: 600;
+    color: #D24625;
+    transition: color 250ms;
+}
+
+#call-to-signin a:hover{
+    color: #E06C52;
 }
 
 .card .card-content p {
@@ -146,6 +174,77 @@ nav li>a:hover,
     margin: 0;
     padding: 0.25em;
 }
+.row .search-wrapper {
+    height: 2.5em;
+    margin: 1.5em 0 1.5em;
+}
+
+#search {
+    border: 2px solid #D24625;
+    border-right: 0;
+    box-sizing: border-box;
+    padding-left: 0.5em;
+    border-radius: 3px 0 0 3px;
+    height: 100%;
+    margin: 0;
+    background-color: #ffeee6;
+    box-shadow: 1px 5px 5px -6px #777;;
+}
+
+.search-wrapper input[type=text]:not(.browser-default):focus:not([readonly]) {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.search-wrapper button{
+    border: 2px solid #D24625;
+    border-radius: 0 3px 3px 0;
+    line-height: sub;
+    height: 100%;
+    margin: 0;
+    padding: 0 0.5em;
+    box-shadow: 0 5px 6px -6px #777;
+}
+
+#form_options {
+    border: 2px dashed #0B1023;
+    border-radius: 3px;
+    margin: 0.25em 0 1.5em;
+    background-color: #ffeee6;
+    padding-bottom: 0.75em;
+    box-shadow: 0 5px 6px -6px #777;
+}
+
+#form_options h3 {
+    margin-top: 0.75em;
+    margin-bottom: 0;
+}
+
+
+
+#form_options input {
+    margin: 1em 0;
+}
+
+#form_options .input-field{
+    margin: 0;
+}
+
+.flashes p {
+    font-size: 1.5em;
+    margin: 0 0 1em;
+}
+
+#call-to-signin {
+    padding: 0.5em;
+    background-color: #ffeee6;
+    border: 1px #D24625 solid;
+    text-align: center;
+    border-radius: 2px;
+    margin: 0 0 1.5em;
+    box-shadow: 0 5px 6px -6px #777;
+}
+
 
 .card .card-content {
     padding: 0.5em 0;
@@ -174,8 +273,9 @@ nav li>a:hover,
     transition: color 250ms;
 }
 
-.card-reveal {
+.card .card-reveal {
     text-align: left;
+    padding: 10px
 }
 
 .card .card-reveal i{

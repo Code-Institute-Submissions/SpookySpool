@@ -101,7 +101,6 @@ def browse_movies(page_num=1):
     if session["username"]:
         user = users.find_one({"username": session["username"]})
     else:
-        flash("Sign in to create watchlists & more!")
         user = ""
     
     movie_genres = genres.find()
@@ -154,7 +153,7 @@ def search(page_num, query):
         results = movies.find(query)
         sorted_results = results.sort("year", -1)
 
-    flash(f"Matchs: {results.count()}")
+    flash(f"{results.count()}")
     pages = int(results.count()/40)+1
     index_start = (int(page_num)-1)*36
     index_end = int(page_num)*36
@@ -162,7 +161,6 @@ def search(page_num, query):
     if session["username"]:
         user = users.find_one({"username": session["username"]})
     else:
-        flash("Sign in to create watchlists & more!")
         user = ""
 
     movie_genres = genres.find()
