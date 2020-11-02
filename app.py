@@ -42,11 +42,10 @@ def attempt_login():
         user_data = users.find_one({"username": username})
 
         if user_data is None:
-            print("user doesn't exist")
+            flash("User doesn't exist")
         elif user_data["username"] and password != user_data["password"]:
-            print("password incorrect")
+            flash("Password incorrect")
         elif user_data["username"] and password == user_data["password"]:
-            print("login succesful")
             session["username"] = username
             return redirect(url_for("browse_movies", page_num=1))
         return redirect(url_for("login"))
@@ -69,12 +68,11 @@ def sign_up():
                 "favourites": [],
                 "submitted_movies": []
             })
-            print("user added")
             return redirect(url_for("browse_movies", page_num=1))
         elif (username_check is not None):
-            print("username is taken")
+            flash("Username is taken")
         elif (email_check is not None):
-            print("email is taken")
+            flash("Email already exists")
         return redirect(url_for("login"))
 
 

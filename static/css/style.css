@@ -64,6 +64,11 @@ nav {
     background-color: #0B1023;
 }
 
+.container.login-modal,
+#modal-wrapper {
+    background-color: #ffeee6;
+}
+
 .search-wrapper button {
     background-color: #D24625;
     color: #ffffff;
@@ -117,7 +122,11 @@ nav {
     color: #D24625;
 }
 
-.card .card-reveal i:hover {
+.fas.fa-times {
+    color: #0B1023;
+    transition: color 250ms;
+}
+.fas.fa-times:hover {
     color: #ff3333;
 }
 
@@ -167,6 +176,51 @@ nav li>a:hover,
     color: #D24625;
 }
 
+/*----- Login Page -----*/
+
+#login-box {
+    border: 2px #D24625 solid;
+    border-radius: 2px;
+    box-shadow: 1px 5px 5px -6px #777;
+    background-color: #ffeee6;
+    padding: 1.5em 0;
+    margin-top: 1em;
+}
+
+#signup-box {
+    margin-bottom: 1.5em;
+}
+
+#modal-wrapper {
+    padding: 1.5em;
+}
+
+.input-field .prefix {
+    width: 0;
+    font-size: 1.5em;
+    line-height: 2.5em;
+}
+
+#login-error p{
+    display: inline-block;
+    padding: 0.5em;
+    border: 2px #cc9c00 dotted;
+    background-color: #ffff99;
+    border-radius: 2px;
+}
+
+div>h4 {
+    display: inline-block;
+}
+#modal-wrapper .input-field .password-correct {
+    border-bottom: 1px solid #518E51;
+}
+
+#modal-wrapper .input-field .password-incorrect {
+    border-bottom: 1px solid #ff3333;
+}
+
+
 /*----- Browse Page -----*/
 
 #movie-container {
@@ -188,7 +242,7 @@ nav li>a:hover,
     height: 100%;
     margin: 0;
     background-color: #ffeee6;
-    box-shadow: 1px 5px 5px -6px #777;;
+    box-shadow: 1px 5px 5px -6px #777;
 }
 
 .search-wrapper input[type=text]:not(.browser-default):focus:not([readonly]) {
@@ -295,17 +349,22 @@ nav li>a:hover,
     color: black;
 }
 /* label underline focus color */
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly]) {
         border-bottom: 1px solid #D24625;
-        box-shadow: 0 1px 0 0 #D24625;
+        box-shadow: none;
 }
 
 input[type=range]+.thumb {
     background-color: #D24625;
 }
 .dropdown-content li>span,
+.input-field .prefix.active,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
 input[type=number]:not(.browser-default):focus:not([readonly])+label,
 textarea.materialize-textarea:focus:not([readonly])+label,
 input[type=text]:not(.browser-default):focus:not([readonly])+label {

@@ -117,6 +117,10 @@
       type="text/javascript"
       src="{{url_for('static', filename='js/form_fields.js')}}"
     ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='js/password_validator.js')}}"
+    ></script>
     <!-- -->
     <script>
 
@@ -128,9 +132,6 @@
         $(".modal").modal();
         // Form select trigger
         $('select').material_select();
-
-
-
         $("#show_options").click(function(){
             $("#form_options").slideToggle(250)
         });
