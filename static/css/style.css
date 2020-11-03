@@ -427,8 +427,10 @@ img.materialboxed {
 /*----- User Home -----*/
 
 .section {
-    padding: 0em 0.5em;
+    padding: 0 0.5em;
 }
+
+#user-greeting,
 .empty_carousel,
 .carousel{
     padding: 1em;
@@ -436,7 +438,15 @@ img.materialboxed {
     border: 1px #D24625 solid;
     border-radius: 2px;
     box-shadow: 0 5px 6px -6px #777;
-    height: 100%
+    height: 100%;
+    margin: 1em 0 1.5em;
+}
+
+#user-greeting {
+    width: fit-content;
+    text-align: center;
+    float: none;
+    margin: 1em auto;
 }
 
 blockquote {

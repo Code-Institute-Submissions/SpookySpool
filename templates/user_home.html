@@ -3,6 +3,13 @@
     User Home
 {% endblock %}
 {% block content %}
+
+<div class="row">
+    <div id="user-greeting" class="col s12">
+        <h3 class="heading-text xlrg">Hi {{user.username}}!</h3>
+        <h3 class="heading-text lrg">Park your broom and sit for a spell...</h3>
+    </div>
+</div>
 <div class="section">
     <h3 class="heading-text xlrg">Watchlist:</h3>
     {% if watchlist.count() == 0 %}
@@ -109,23 +116,21 @@
 	<div class="carousel left-align-slick">
 		{% for movie in submitted %}
 		<div class="card">
-			<div class="card-image waves-effect waves-block waves-light">
-				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					{% if movie.img_url == "" %}
+            <div class="card-image waves-effect waves-block waves-light">
+                <a class="card-link" href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    {% if movie.img_url == "" %}
                         <img src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}" alt="{{movie.title}}">
                     {% else %}
                         <img src="{{movie.img_url}}" alt="{{movie.title}}">
                     {% endif %}
                 </a>
-			</div>
-			<div class="card-content">
-				<a href="{{url_for('movie_page', movie_id=movie._id)}}">
-					<p class="card-info heading-text med">{{movie.title}}</p>
-				</a>
-				<i class="activator right fas fa-ellipsis-v"></i>
-			</div>
-			<div class="card-content icon">
-				<span>
+            </div>
+            <div class="card-content">
+                <a href="{{url_for('movie_page', movie_id=movie._id)}}">
+                    <p class="card-info heading-text med center-align">{{movie.title}}</p>
+                </a>
+            </div>
+            <div class="card-content center-align icon">
                     {% if movie._id in user.watchlist %}
                         <a class="left" href="{{url_for('remove_watchlist', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="fas fa-check"></i></a>
                     {% else %}
@@ -137,14 +142,14 @@
                     {% else %}
                         <a class="right" href="{{url_for('add_favourites', movie_id=movie._id, page='user_home', value=session['username'])}}"><i class="far fa-star"></i></a>
                     {% endif %}
-                </span>
-			</div>
-			<div class="card-reveal">
-				<span class="card-title"><i class=" med right fas fa-times"></i></span>
-				<p class="body-text med">{{movie.description}}</p>
-			</div>
-		</div>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title"><i class=" med right fas fa-times"></i></span>
+                <p class="body-text med">{{movie.description}}</p>
+            </div>
+        </div>
 		{% endfor %}
+	</div>
     {% endif %}
 </div>
 <a class="btn logout cancel" href="{{url_for('logout')}}">Logout</a>
