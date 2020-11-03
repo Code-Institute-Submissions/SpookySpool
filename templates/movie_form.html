@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 <div class="row">
-		<form id="movie_form" action="{{url_for('insert_movie')}}" method="POST" class="col s12">
+		<form id="movie_form" action="{{url_for('insert_movie')}}" method="POST" class="col s12 heading-text">
 			<div class="row">
 				<div class="input-field col s12">
 					<input id="movie_title" placeholder="(i.e.) Alien" name="title" type="text" required>
@@ -50,7 +50,7 @@
 				</div>
 			</div>
             <div class="row">
-                <h2 class="heading col s12 sml">Runtime (minutes)</h2>
+                <h2 class="col s12 med">Runtime (minutes)</h2>
 				<div class="input-field col s12">
 					<input type="range" id="runtime" name="runtime" min="1" max="250" required>
 				</div>
@@ -67,7 +67,7 @@
 				</div>
 			</div>
             <div class="row">
-				<div class="input-field col s12">
+				<div class="input-field col s12 user-add">
                     <div id="movie_actors" class="row">
                         <div class="col s6">
 					        <input name="actors[]" type="text" required>
@@ -75,13 +75,13 @@
                         </div>
                     </div>
 				</div>
-                <div class="col s12">
-                    <span id="actor_add" ><i class="fas fa-plus"></i></span>
-                    <span id="actor_remove" ><i class="fas fa-minus"></i></span>
+                <div class="col s12 center-align">
+                    <div class="col s6 input_add" id="actor_add" ><i class="fas fa-plus"></i></div>
+                    <div class="col s6 input_remove" id="actor_remove" ><i class="fas fa-minus"></i></div>
                 </div>
 			</div>
             <div class="row">
-				<div class="input-field col s12">
+				<div class="input-field col s12 user-add">
                     <div id="movie_directors" class="row">
                         <div class="col s6">
 					        <input name="directors[]" type="text" required>
@@ -89,11 +89,13 @@
                         </div>
                     </div>
 				</div>
-                <span id="director_add" >Add</span>
-                <span id="director_remove" >Remove</span>
+                <div class="col s12 center-align">
+                    <div class="col s6 input_add" id="director_add" ><i class="fas fa-plus"></i></div>
+                    <div class="col s6 input_remove" id="director_remove" ><i class="fas fa-minus"></i></div>
+                </div>
 			</div>
             <div class="row">
-				<div class="input-field col s12">
+				<div class="input-field col s12 user-add">
                     <div id="movie_languages" class="row">
                         <div class="col s6">
 					        <input name="languages[]" type="text" placeholder="English" required>
@@ -101,8 +103,10 @@
                         </div>
                     </div>
 				</div>
-                <span id="language_add" >Add</span>
-                <span id="language_remove" >Remove</span>
+                <div class="col s12 center-align">
+                    <div class="col s6 input_add" id="language_add" ><i class="fas fa-plus"></i></div>
+                    <div class="col s6 input_remove" id="language_remove" ><i class="fas fa-minus"></i></div>
+                </div>
 			</div>
             <div class="row">
 				<div class="input-field col s12">
@@ -119,7 +123,7 @@
 			<div class="row">
                 <div class="col s12">
 				    <button class="btn waves-effect waves-light left" type="submit">Add Movie</button>
-                    <a class="btn waves-effect waves-light right" href="{{url_for('browse_movies', page=1)}}">Cancel</a>
+                    <a class="btn waves-effect waves-light cancel right" href="{{url_for('browse_movies', page=1)}}">Cancel</a>
                 </div>
 			</div>
 		</form>

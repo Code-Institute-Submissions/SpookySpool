@@ -48,6 +48,7 @@ body {
     background-color: #FFC9AD;
 }
 
+.pagination li.active,
 .btn {
     background-color: #D24625;
 }
@@ -126,6 +127,8 @@ nav {
     color: #0B1023;
     transition: color 250ms;
 }
+
+.input_remove:hover,
 .fas.fa-times:hover {
     color: #ff3333;
 }
@@ -133,6 +136,16 @@ nav {
 .empty_carousel h4 a:hover {
     color: rgb(150, 60, 40);
     font-weight: 600;
+}
+.input_add:hover {
+    color:#386138;
+}
+.cancel {
+    background-color: #ff3333;
+    transition: background-color 250ms;
+}
+.cancel:hover {
+    background-color: red;
 }
 
 /*----- Base -----*/
@@ -283,7 +296,7 @@ div>h4 {
     margin: 1em 0;
 }
 
-#form_options .input-field label {
+#form_options>.input-field>label {
     top: 1em;
 }
 #form_options .input-field{
@@ -371,7 +384,7 @@ blockquote {
     padding: 0;
 }
 
-a.btn,
+a.btn.logout,
 .empty_carousel a.btn {
     display: block;
     width: fit-content;
@@ -434,9 +447,36 @@ input[type=text]:not(.browser-default):focus:not([readonly])+label {
     color: #D24625;
 }
 
+[type="checkbox"]:checked+label:before {
+    border-right: 2px solid #D24625;
+    border-bottom: 2px solid #D24625;
+}
+
+[type="checkbox"]+label {
+    margin-bottom: 11px;
+}
+
+#update_form div.row,
+#movie_form div.row {
+    margin-top: 1.5em;
+}
+
+#update_form h2,
+#movie_form h2{
+    margin-top: 0;
+}
 
 input[type=range] {
     border: none;
+}
+
+.col.s12.user-add {
+    padding:0;
+}
+
+::placeholder {
+    color: #D24625;
+    opacity: 0.5;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -448,6 +488,12 @@ input[type=range]::-webkit-slider-thumb {
   input[type=range]::-ms-thumb {
     background-color: #0B1023;
   }
+
+.input_add,
+.input_remove {
+    cursor: pointer;
+    transition: color 250ms
+}
 
 @media(min-width: 300px) {
     .card-image img {

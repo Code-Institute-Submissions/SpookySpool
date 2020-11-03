@@ -4,10 +4,10 @@
 {% endblock %}
 {% block content %}
         <div class="row heading-text">
-            <h1 class="col s12 lrg">{{(movie.title)}} <span class="med">({{movie.year}})</span></h1>
+            <h2 class="col s12 xlrg">{{(movie.title)}}: ({{movie.year}})</h2>
         </div>
         <div class="row heading-text">
-            <h2 class="col s6 med">Rated: {{movie.rating}}</h2><h2 class="col s6 right med">Metascore: {{movie.metascore}}/100</h2>
+            <h2 class="col s6 lrg">Rated: {{movie.rating}}</h2><h2 class="col s6 right lrg">Metascore: {{movie.metascore}}/100</h2>
         </div>
         <div class="row">
         {% if movie.img_url == "" %}
@@ -16,15 +16,15 @@
                         <img class="materialboxed col s12" data-caption="{{movie.tagline}}" width="250" src="{{movie.img_url}}">
                     {% endif %}
         </div>
-		<div class="row">
+		<div class="row heading-text">
 			<ul class="collapsible" data-collapsible="accordion">
 				<li>
 					<div class="collapsible-header">Plot Synopsis</div>
-					<div class="collapsible-body"><span>{{movie.description}}</span></div>
+					<div class="collapsible-body body-text"><span>{{movie.description}}</span></div>
 				</li>
 				<li>
 					<div class="collapsible-header">Cast & Crew</div>
-					<div class="collapsible-body">
+					<div class="collapsible-body body-text">
 						<div class="row">
 							<ul class="col s12">
 								<p>Featured Actors:</p>
@@ -43,7 +43,7 @@
 				</li>
                 <li>
 					<div class="collapsible-header">Other Details</div>
-					<div class="collapsible-body">
+					<div class="collapsible-body body-text">
                         <div class="row">
 							<div class="col s3">
 								<p>Runtime:</p>
