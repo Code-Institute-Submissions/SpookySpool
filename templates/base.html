@@ -118,6 +118,10 @@
       type="text/javascript"
       src="{{url_for('static', filename='js/password_validator.js')}}"
     ></script>
+    <script
+      type="text/javascript"
+      src="{{url_for('static', filename='js/searchbar_fields.js')}}"
+    ></script>
     <!-- -->
 	<script>
 		$(document).ready(function () {
@@ -128,9 +132,7 @@
 	        $(".modal").modal();
 	        // Form select trigger
 	        $('select').material_select();
-	        $("#show_options").click(function(){
-	            $("#form_options").slideToggle(250)
-	        });
+            
 	        //slick carousel trigger
 	        $(".carousel").each(function (i) {
 	          $(this).slick({
