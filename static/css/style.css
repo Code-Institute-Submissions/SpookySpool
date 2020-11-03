@@ -44,9 +44,6 @@ h3 {
 
 /*----- Colors -----*/
 
-.wrapper {
-    background-color: #2C4B82;
-}
 
 .container {
     background-color: #FFC9AD;
@@ -183,8 +180,19 @@ nav {
 .wrapper {
     min-height: 90vh;
     width: 100%;
-    padding: 1em;
+    background-image: url("../images/background.jpg");
+    background-origin: border-box;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.filter {
+    width: 100%;
+    min-height: 90vh;
+    background-color: rgba(11, 16, 25, 0.637);
     display: flex;
+    padding: 1em;
 }
 
 .container.body-content {
