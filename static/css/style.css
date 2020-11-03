@@ -8,6 +8,10 @@ body {
     margin: 0;
 }
 
+h3 {
+    margin: 0;
+}
+
 /*----- Text and Headings -----*/
 
 .brand-heading {
@@ -64,7 +68,7 @@ body {
 nav {
     background-color: #0B1023;
 }
-
+.collapsible-body,
 .container.login-modal,
 #modal-wrapper {
     background-color: #ffeee6;
@@ -95,6 +99,7 @@ nav {
     transition: color 250ms;
 }
 
+.movie-title,
 .card .card-content p:hover {
     color: #D24625;
 }
@@ -103,6 +108,15 @@ nav {
 .fa-check {
     color: #518E51;
     transition: color 250ms
+}
+
+.watchlist {
+    background-color: #518E51;
+    transition: background-color 250ms
+}
+
+.watchlist:hover {
+    background-color: #386138;
 }
 
 .fa-plus-circle:hover,
@@ -117,6 +131,15 @@ nav {
 
 .fa-star:hover {
     color: #cc9c00;
+}
+
+.favourite {
+    background-color: #FFC300;
+    transition: background-color 250ms
+}
+
+.favourite:hover {
+    background-color: #cc9c00;
 }
 
 .fa-info:hover {
@@ -359,6 +382,46 @@ div>h4 {
 
 .left-align-slick > .slick-list > .slick-track {    
     margin-left:0;
+}
+
+/*----- Movie Page -----*/
+
+.movie-title {
+    margin: 1em 0 0;
+}
+
+h3.movie-data {
+    margin-top: 1em;
+}
+
+img.materialboxed {
+    margin: 2em auto 1.5em;
+}
+
+.collapsible {
+    border: none;
+}
+.collapsible-header{
+    background-color: #D24625;
+    color: #ffffff;
+    border: 1px #E06C52 solid;
+}
+#movie-options .btn i,
+#movie-options a.btn{
+    font-size: 0.75em;
+}
+
+#movie-options>div>a.btn{
+    width: 75%;
+    padding: 0 1em;
+}
+
+#movie-options>.col{
+    margin-bottom: 1em;
+}
+
+#movie-page-login>div {
+    margin-bottom: 1em;
 }
 
 /*----- User Home -----*/

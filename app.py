@@ -169,9 +169,14 @@ def search(page_num, query):
 
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
+    print(movie_id)
     movie_data = movies.find_one({"_id": ObjectId(movie_id)})
     genre_data = genres.find()
-    return render_template('movie_template.html', movie=movie_data, genres=genre_data)
+    if session["username"]:
+        user = users.find_one({"username": session["username"]})
+    else:
+        user = ""
+    return render_template('movie_template.html', movie=movie_data, genres=genre_data, user=user)
 
 
 # Add to watchlist/favourites and Remove from watchlist/favourites
@@ -187,6 +192,8 @@ def add_watchlist(movie_id, page, value):
         return redirect(url_for(f"{page}", username=value))
     elif page == "search":
         return redirect(url_for(f"{page}", page_num=1, query=value))
+    else:
+        return redirect(url_for(f"{page}", movie_id=movie_id))
 
 
 
@@ -204,6 +211,8 @@ def remove_watchlist(movie_id, page, value):
         return redirect(url_for(f"{page}", username=value))
     elif page == "search":
         return redirect(url_for(f"{page}", page_num=1, query=value))
+    else:
+        return redirect(url_for(f"{page}", movie_id=movie_id))
 
 
 @app.route("/favourites/<movie_id>/redirect=<page>/<value>")
@@ -220,6 +229,8 @@ def add_favourites(movie_id, page, value):
         return redirect(url_for(f"{page}", username=value))
     elif page == "search":
         return redirect(url_for(f"{page}", page_num=1, query=value))
+    else:
+        return redirect(url_for(f"{page}", movie_id=movie_id))
 
 
 @app.route("/remove_favourite/<movie_id>/redirect=<page>/<value>")
@@ -236,6 +247,8 @@ def remove_favourite(movie_id, page, value):
         return redirect(url_for(f"{page}", username=value))
     elif page == "search":
         return redirect(url_for(f"{page}", page_num=1, query=value))
+    else:
+        return redirect(url_for(f"{page}", movie_id=movie_id))
 
 
 @app.route("/user_submit")

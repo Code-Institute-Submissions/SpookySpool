@@ -164,7 +164,7 @@ content %}
       <ul class="pagination heading-text center-align">
             {% if current_page == 1 %}
                 <li class="disabled"><a href="#!"><i class="fas fa-chevron-left"></i></a></li>
-                <li class="active"><a href="{{url_for('browse_movies', page_num=pages)}}">{{current_page}}</a></li>
+                <li class="active"><a href="{{url_for('browse_movies', page_num=1)}}">{{current_page}}</a></li>
             {% else %}
                 <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=current_page-1)}}"><i class="fas fa-chevron-left"></i></a></li>
                 <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=1)}}">1</a></li>
