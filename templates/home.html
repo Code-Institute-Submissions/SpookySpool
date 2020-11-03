@@ -30,7 +30,7 @@
                             <i class="fas fa-search lrg right"></i>
                         </div>
                         <div class="col s10">
-                            <p>Browse our library or search for something specific</p>
+                            <a href="{{url_for('browse_movies', page_num=1)}}"><p>Browse our library or search for something specific</p></a>
                         </div>
                     </div>
                     <div class="row feature">
@@ -38,7 +38,15 @@
                             <i class="fas fa-user-circle lrg right"></i>
                         </div>
                         <div class="col s10">
-                            <p>Create an account to add movies to your watchlist or favourites</p>
+                            <a 
+                            href="
+                            {% if session['username'] %}
+                                {{url_for('user_home', username=session['username'])}}
+                            {% else %}
+                                {{url_for('login')}}
+                            {% endif %}
+                            "
+                            ><p>Create an account to add movies to your watchlist or favourites</p></a>
                         </div>
                     </div>
                     <div class="row med feature">
@@ -46,7 +54,13 @@
                             <i class="fas fa-arrow-circle-up lrg right"></i>
                         </div>
                         <div class="col s10">
-                            <p>Users can add or remove their own movies to the collection</p>
+                            <a href="
+                            {% if session['username'] %}
+                                {{url_for('user_home', username=session['username'])}}
+                            {% else %}
+                                {{url_for('login')}}
+                            {% endif %}
+                            "><p>Users can add or remove their own movies to the collection</p></a>
                         </div>
                     </div>
                 </div>

@@ -84,6 +84,11 @@ nav {
     color: #0B1023;
 }
 
+#features a{
+    color:black;
+    transition: color 250ms;
+}
+
 #call-to-signin a{
     font-weight: 600;
     color: #D24625;
@@ -142,6 +147,7 @@ nav {
     background-color: #cc9c00;
 }
 
+#features a:hover,
 .feature i,
 .fa-info:hover {
     color: #D24625;
