@@ -96,7 +96,7 @@ def browse_movies(page_num=1):
     index_start = (int(page_num)-1)*36
     index_end = int(page_num)*36
 
-    if session["username"]:
+    if "username" in session.keys():
         user = users.find_one({"username": session["username"]})
     else:
         user = ""
@@ -343,6 +343,22 @@ def insert_update(movie_id):
                                {"$set": updated_movie})
 
     return redirect(url_for("movie_page", movie_id=movie_id))
+
+
+# Remove movie
+@app.route("/delete/<movie_id>")
+def delete_movie(movie_id):
+    username = session["username"]
+    user = users.find_one({"username": username})
+
+    movies.delete_one({"_id": ObjectId(movie_id)})
+
+    user["submitted_movies"].remove(ObjectId(movie_id))
+    users.update_one({"username": username},
+                     {"$set": {"submitted_movies": user["submitted_movies"]}})
+
+    return redirect(url_for("user_home", username=username))
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),

@@ -67,21 +67,6 @@
           </li>
           {% endif %}
         </ul>
-        <ul class="side-nav heading-text" id="mobile-menu">
-          <li><a href="{{url_for('index')}}">Home</a></li>
-          <li><a href="{{url_for('browse_movies', page_num=1)}}">Movies</a></li>
-          {% if session["username"] %}
-          <li>
-            <a href="{{url_for('user_home', username=session['username'])}}"
-              >My Movies</a
-            >
-          </li>
-          <li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
-          <li><a href="{{url_for('logout')}}">Logout</a></li>
-          {% else %}
-          <li><a href="{{url_for('login')}}">Login</a></li>
-          {% endif %}
-        </ul>
       </div>
     </nav>
   </div>
@@ -98,6 +83,23 @@
       <li><a href="{{url_for('logout')}}">Logout</a></li>
     </ul>
 
+    <!-- Mobile Navbar-->
+    <ul class="side-nav heading-text" id="mobile-menu">
+          <li><a href="{{url_for('index')}}">Home</a></li>
+          <li><a href="{{url_for('browse_movies', page_num=1)}}">Movies</a></li>
+          {% if session["username"] %}
+          <li>
+            <a href="{{url_for('user_home', username=session['username'])}}"
+              >My Movies</a
+            >
+          </li>
+          <li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
+          <li><a href="{{url_for('logout')}}">Logout</a></li>
+          {% else %}
+          <li><a href="{{url_for('login')}}">Login</a></li>
+          {% endif %}
+        </ul>
+
     <div class="wrapper">
         <div class="filter">
       <div class="container body-content z-depth-3">
@@ -106,6 +108,29 @@
         </div>
     </div>
 
+
+    <footer clss="page-footer">
+        <div class="row">
+            <div class="col s4">
+                <ul class="heading-text sml">
+                    <a href="{{url_for('index')}}"><li>Home</li></a>
+                    <a href="{{url_for('browse_movies', page_num=1)}}"><li>Movies</li></a>
+                    <a href="
+                    {% if session['username'] %}
+                                {{url_for('user_home', username=session['username'])}}
+                            {% else %}
+                                {{url_for('login')}}
+                    {% endif %}
+                    "><li>Login/User Home</li></a>
+                </ul>
+            </div>
+            <div class="col s4 center-align">
+                <a href="{{url_for('index')}}">
+                <img height="40px" width="40px" src="{{url_for('static', filename='/images/logo.png')}}" alt="footer-logo">
+                </a>
+            </div>
+        </div>
+    </footer>
     <!-- Materialize & jquery javascript CDNs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
@@ -131,7 +156,7 @@
 		$(document).ready(function () {
 	        // Materialize Triggers
 	        // Sidebar trigger
-	        $(".button-collapse").sideNav();
+            $(".button-collapse").sideNav();
 	        // Modal trigger
 	        $(".modal").modal();
 	        // Form select trigger

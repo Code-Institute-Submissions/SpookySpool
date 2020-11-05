@@ -49,6 +49,18 @@ h3 {
     background-color: #FFC9AD;
 }
 
+footer{
+    background-color: rgb(37, 37, 37)
+}
+
+footer li{
+    color: white;
+    transition: color 250ms;
+}
+footer li:hover{
+    color: #D24625;
+}
+
 .pagination li.active,
 .btn {
     background-color: #D24625;
@@ -201,6 +213,13 @@ nav {
     margin: auto;
 }
 
+footer .row{
+    margin: 0;
+}
+
+footer img{
+    margin-top: 13px;
+}
 
 /*----- NavBar -----*/
 
@@ -287,6 +306,10 @@ div>h4 {
 
 #jumbotron p{
     margin: 0;
+}
+
+#jumbotron{
+    padding-bottom: 1em;
 }
 
 .row #about_heading {
@@ -433,6 +456,10 @@ div>h4 {
 
 .left-align-slick > .slick-list > .slick-track {    
     margin-left:0;
+}
+
+.pagination li a{
+    padding: 0 5px;
 }
 
 /*----- Movie Page -----*/

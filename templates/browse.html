@@ -179,6 +179,8 @@ content %}
                     {{continue}}
                 {% elif page == current_page %}
                     <li class="active"><a href="{{url_for('browse_movies', page_num=page)}}">{{current_page}}</a></li>
+                {% elif page == current_page -2 or page == current_page +2 %}
+                    <li class="waves-effect hide-on-small-only"><a href="{{url_for('browse_movies', page_num=page)}}">{{page}}</a></li>
                 {% else %}
                     <li class="waves-effect"><a href="{{url_for('browse_movies', page_num=page)}}">{{page}}</a></li>
                 {% endif %}
