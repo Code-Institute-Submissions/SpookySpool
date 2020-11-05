@@ -40,7 +40,7 @@ As this site wants to make learning as easy as possible it also includes a dark 
 
 ### Target Demographic
 The target demographic for Spooky Spool is scary movie fans across all ages.
-This is a broad demographic but scews younger (the average viewer is under 25) with a roughly even split between the sexes [(source)](https://cmpalexgilbey.weebly.com/uploads/3/8/8/7/38878453/horror_film_research.pdf).
+This is a broad demographic but scews towards younger (the average viewer is under 25) with a roughly even split between the sexes [(source)](https://cmpalexgilbey.weebly.com/uploads/3/8/8/7/38878453/horror_film_research.pdf).
 As the audience is younger the website must have a mobile first design (which is more often used over traditional desktops by this demographic).
 A gender neutral design has also be used as users are expecting more of a scary feel compared to anything gendered.
 
@@ -138,8 +138,22 @@ Wireframes for the desktop and mobile versions can be found [here](https://githu
 * [Autoprefixer](https://autoprefixer.github.io/) - Used to prefix the css file so that transitions would work across different browsers
 
 ## Testing
-As Total Tarot has quite a few interactive elements, I wanted to test these on multiple devices to make sure they worked correctly.
-To ensure this was the case these features were checked to ensure the following interactions happened:
+Spooky Spool's testing can be split into three catagories: 
+* Database CRUD operations.
+* User validation.
+* Resposive Design.
+
+### Database CRUD Operations:
+
+* #### Read Operations:
+    * On the browse page, a card is loaded for every movie in the database.
+    * On the results page, movies are pulled from the database that match the search options.
+    * If clicked on, the movie card redirects a page for that film which loads the data.
+
+* #### Create Operations:
+    * When a user signs up, a new user is created in the user collection with empty arrays for their watchlist, favourite list and submitted movies list.
+
+
 
 * #### Navigation Bar
     * When hovered over, the list anchors all underline.

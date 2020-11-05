@@ -68,6 +68,7 @@ def sign_up():
                 "favourites": [],
                 "submitted_movies": []
             })
+            session["username"] = username
             return redirect(url_for("browse_movies", page_num=1))
         elif (username_check is not None):
             flash("Username is taken")
