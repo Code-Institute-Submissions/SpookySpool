@@ -11,14 +11,18 @@
       href="https://fonts.googleapis.com/css2?family=Didact+Gothic&family=Raleway&family=Special+Elite&display=swap"
       rel="stylesheet"
     />
-    
+
     <!-- Materialize CDN link -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
     />
     <!-- Slick slider CDN-->
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
     <!-- Spooky Spool stylesheet -->
     <link
       rel="stylesheet"
@@ -26,50 +30,58 @@
       type="text/css"
     />
 
-    <link 
-    rel="shortcut icon" 
-    type="image/png" 
-    href="{{url_for('static', filename='images/favicon.png')}}"
+    <link
+      rel="shortcut icon"
+      type="image/png"
+      href="{{url_for('static', filename='images/favicon.png')}}"
     />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-    {% block title %}{% endblock %}
+      {% block title %}{% endblock %}
     </title>
   </head>
   <body>
-  <div class="navbar-fixed">
-    <nav>
-      <div class="nav-wrapper">
-        <li class="seperator left hide-on-med-and-down"></li>
-        <a href="{{url_for('index')}}" class="brand-logo brand-heading">
-          <img
-            src="{{url_for('static', filename='images/logo-transparent.png')}}"
-            alt="spookyspool-logo"
-          />
-          <span class="hide-on-small-only">Spooky Spool</span>
-        </a>
-        <a href="#" data-activates="mobile-menu" class="button-collapse"
-          ><i class="fas fa-bars"></i
-        ></a>
-        <ul id="nav-mobile" class="right heading-text med hide-on-med-and-down">
-          <li><a href="{{url_for('index')}}">Home</a></li>
-          <li><a href="{{url_for('browse_movies', page_num=1)}}">Movies</a></li>
-          {% if "username" in session.keys() %}
-          <li>
-            <a class="dropdown-button" href="#!" data-activates="user_menu"
-              >Account</a
-            >
-          </li>
-          {% else %}
-          <li>
-            <a href="{{url_for('login')}}" class="waves-effect btn">Login</a>
-          </li>
-          {% endif %}
-        </ul>
-      </div>
-    </nav>
-  </div>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <span
+            id="seperator"
+            class="seperator left hide-on-med-and-down"
+          ></span>
+          <a href="{{url_for('index')}}" class="brand-logo brand-heading">
+            <img
+              src="{{url_for('static', filename='images/logo-transparent.png')}}"
+              alt="spookyspool-logo"
+            />
+            <span class="hide-on-small-only">Spooky Spool</span>
+          </a>
+          <a href="#" data-activates="mobile-menu" class="button-collapse"
+            ><i class="fas fa-bars"></i
+          ></a>
+          <ul
+            id="nav-mobile"
+            class="right heading-text med hide-on-med-and-down"
+          >
+            <li><a href="{{url_for('index')}}">Home</a></li>
+            <li>
+              <a href="{{url_for('browse_movies', page_num=1)}}">Movies</a>
+            </li>
+            {% if "username" in session.keys() %}
+            <li>
+              <a class="dropdown-button" href="#!" data-activates="user_menu"
+                >Account</a
+              >
+            </li>
+            {% else %}
+            <li>
+              <a href="{{url_for('login')}}" class="waves-effect btn">Login</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    </div>
     <!-- User Dropdown -->
     <ul id="user_menu" class="dropdown-content">
       <li>
@@ -85,51 +97,62 @@
 
     <!-- Mobile Navbar-->
     <ul class="side-nav heading-text" id="mobile-menu">
-          <li><a href="{{url_for('index')}}">Home</a></li>
-          <li><a href="{{url_for('browse_movies', page_num=1)}}">Movies</a></li>
-          {% if "username" in session.keys() %}
-          <li>
-            <a href="{{url_for('user_home', username=session['username'])}}"
-              >My Movies</a
-            >
-          </li>
-          <li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
-          <li><a href="{{url_for('logout')}}">Logout</a></li>
-          {% else %}
-          <li><a href="{{url_for('login')}}">Login</a></li>
-          {% endif %}
-        </ul>
+      <li><a href="{{url_for('index')}}">Home</a></li>
+      <li><a href="{{url_for('browse_movies', page_num=1)}}">Movies</a></li>
+      {% if "username" in session.keys() %}
+      <li>
+        <a href="{{url_for('user_home', username=session['username'])}}"
+          >My Movies</a
+        >
+      </li>
+      <li><a href="{{url_for('submit_movie')}}">Add a Movie</a></li>
+      <li><a href="{{url_for('logout')}}">Logout</a></li>
+      {% else %}
+      <li><a href="{{url_for('login')}}">Login</a></li>
+      {% endif %}
+    </ul>
 
     <div class="wrapper">
-        <div class="filter">
-      <div class="container body-content z-depth-3">
-        {% block content %} {% endblock %}
-      </div>
+      <div class="filter">
+        <div class="container body-content z-depth-3">
+          {% block content %} {% endblock %}
         </div>
+      </div>
     </div>
 
-
-    <footer clss="page-footer">
-        <div class="row">
-            <div class="col s4">
-                <ul class="heading-text sml">
-                    <a href="{{url_for('index')}}"><li>Home</li></a>
-                    <a href="{{url_for('browse_movies', page_num=1)}}"><li>Movies</li></a>
-                    <a href="
+    <footer>
+      <div class="row">
+        <div class="col s4">
+          <ul class="heading-text sml">
+            <li><a href="{{url_for('index')}}">Home</a></li>
+            <li>
+              <a href="{{url_for('browse_movies', page_num=1)}}">Movies</a>
+            </li>
+            <li>
+              <a
+                href="
                     {% if 'username' in session.keys() %}
                                 {{url_for('user_home', username=session['username'])}}
                             {% else %}
                                 {{url_for('login')}}
                     {% endif %}
-                    "><li>Login/User Home</li></a>
-                </ul>
-            </div>
-            <div class="col s4 center-align">
-                <a href="{{url_for('index')}}">
-                <img height="40px" width="40px" src="{{url_for('static', filename='/images/logo.png')}}" alt="footer-logo">
-                </a>
-            </div>
+                    "
+                >Login/User Home</a
+              >
+            </li>
+          </ul>
         </div>
+        <div class="col s4 center-align">
+          <a href="{{url_for('index')}}">
+            <img
+              height="40"
+              width="40"
+              src="{{url_for('static', filename='/images/logo.png')}}"
+              alt="footer-logo"
+            />
+          </a>
+        </div>
+      </div>
     </footer>
     <!-- Materialize & jquery javascript CDNs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -152,37 +175,40 @@
       src="{{url_for('static', filename='js/searchbar_fields.js')}}"
     ></script>
     <!-- -->
-	<script>
-		$(document).ready(function () {
-	        // Materialize Triggers
-	        // Sidebar trigger
-            $(".button-collapse").sideNav();
-	        // Modal trigger
-	        $(".modal").modal();
-	        // Form select trigger
-	        $('select').material_select();
-            
-	        //slick carousel trigger
-	        $(".carousel").each(function (i) {
-	          $(this).slick({
-	            infinite: true,
-	            slidesToShow: 4,
-	            slidesToScroll: 3,
-	            centerPadding: "60px",
-	            prevArrow:"<i class='a-right control-c next slick-next fas fa-caret-left'</i>",
-	            nextArrow:"<i class='a-left control-c prev slick-prev fas fa-caret-right'></i>",
-	              responsive: [
-	                {
-	      breakpoint: 600,
-	      settings: {
-	        slidesToShow: 2,
-	        slidesToScroll: 3,
-	        infinite: true,
-	      }
-	    }]
-	          });
-	        });
-	      });
-	</script>
+    <script>
+      $(document).ready(function () {
+        // Materialize Triggers
+        // Sidebar trigger
+        $(".button-collapse").sideNav();
+        // Modal trigger
+        $(".modal").modal();
+        // Form select trigger
+        $("select").material_select();
+
+        //slick carousel trigger
+        $(".carousel").each(function (i) {
+          $(this).slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 3,
+            centerPadding: "60px",
+            prevArrow:
+              "<i class='a-right control-c next slick-next fas fa-caret-left'</i>",
+            nextArrow:
+              "<i class='a-left control-c prev slick-prev fas fa-caret-right'></i>",
+            responsive: [
+              {
+                breakpoint: 600,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll: 3,
+                  infinite: true,
+                },
+              },
+            ],
+          });
+        });
+      });
+    </script>
   </body>
 </html>

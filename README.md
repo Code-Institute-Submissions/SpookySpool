@@ -210,12 +210,6 @@ Chrome DevTools was also used to test the design on the following devices:
 * iPad 
 * iPad Pro
 
-[Responsinator](http://www.responsinator.com) was also used to check the resposive design:
-* [Home page](http://www.responsinator.com/?url=sdgreen.github.io%2FTotalTarot%2F)
-* [Find Classes page](http://www.responsinator.com/?url=sdgreen.github.io%2FTotalTarot%2Fclasses)
-* [Online Card Library page](http://www.responsinator.com/?url=https%3A%2F%2Fsdgreen.github.io%2FTotalTarot%2Fdeck.html)
-* [Learn to Interpret page](http://www.responsinator.com/?url=sdgreen.github.io%2FTotalTarot%2Fhow-to)
-
 ### Browser testing
 Total Tarot's website was physically tested on the following browsers:
 * Microsoft Edge Version 83.0.478.58 

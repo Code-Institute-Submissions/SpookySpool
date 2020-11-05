@@ -223,9 +223,8 @@ footer img{
 
 /*----- NavBar -----*/
 
-.seperator {
+#seperator {
     padding: 0.5em;
-    list-style-type: none;
 }
 .brand-logo {
     max-height: 100%;
@@ -470,6 +469,10 @@ div>h4 {
 
 h3.movie-data {
     margin-top: 1em;
+}
+
+.movie-rating {
+    display: inline;
 }
 
 img.materialboxed {

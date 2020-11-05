@@ -41,6 +41,7 @@
 				</div>
 				<div class="input-field col s4">
 					<select id="movie_year" name="year" required>
+                    <option value="" disabled>Select</option>
 				      {% for year in range(2021, 1909, -1) %}
                         {% if year == movie.year|int %}
                         <option value="{{year}}" selected>{{year}}</option>
@@ -59,7 +60,7 @@
             <div class="row">
                 <h2 class="col s12 med">Runtime (minutes)</h2>
 				<div class="input-field col s12">
-					<input type="range" id="runtime" name="runtime" min="1" max="250" value="{{runtime[0]}}" required>
+					<input type="range" id="runtime" name="runtime" min="1" max="250" value="{{runtime[0]}}">
 				</div>
 			</div>
 			<div class="row">
@@ -81,7 +82,7 @@
 				<div class="input-field col s12 user-add">
                     <div id="movie_actors" class="row">
                         <div class="col s6">
-					        <input name="actors[]" type="text" value="{{movie.actors[0]}}" required>
+					        <input id="actors[]" name="actors[]" type="text" value="{{movie.actors[0]}}" required>
 					        <label for="actors[]">Actor(s)</label>
                         </div>
                         {% if movie.actors|length > 1 %}
@@ -102,7 +103,7 @@
 				<div class="input-field col s12 user-add">
                     <div id="movie_directors" class="row">
                         <div class="col s6">
-					        <input name="directors[]" type="text" value="{{movie.directors[0]}}" required>
+					        <input id="directors[]" name="directors[]" type="text" value="{{movie.directors[0]}}" required>
 					        <label for="directors[]">Director(s)</label>
                         </div>
                         {% if movie.directors|length > 1 %}
@@ -123,7 +124,7 @@
 				<div class="input-field col s12 user-add">
                     <div id="movie_languages" class="row">
                         <div class="col s6">
-					        <input name="languages[]" type="text" placeholder="English" value="{{movie.languages[0]}}" required>
+					        <input id="languages[]" name="languages[]" type="text" placeholder="English" value="{{movie.languages[0]}}" required>
 					        <label for="languages[]">Languages(s)</label>
                         </div>
                         {% if movie.languages|length > 1 %}

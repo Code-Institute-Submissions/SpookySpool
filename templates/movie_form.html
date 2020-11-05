@@ -38,6 +38,7 @@
 				</div>
 				<div class="input-field col s4">
 					<select id="movie_year" name="year" required>
+                        <option value="" selected disabled>Select</option>
 				      {% for year in range(2021, 1909, -1) %}
                         <option value="{{year}}">{{year}}</option>
                       {% endfor %}
@@ -52,7 +53,7 @@
             <div class="row">
                 <h2 class="col s12 med">Runtime (minutes)</h2>
 				<div class="input-field col s12">
-					<input type="range" id="runtime" name="runtime" min="1" max="250" required>
+					<input type="range" id="runtime" name="runtime" min="1" max="250">
 				</div>
 			</div>
 			<div class="row">
@@ -70,7 +71,7 @@
 				<div class="input-field col s12 user-add">
                     <div id="movie_actors" class="row">
                         <div class="col s6">
-					        <input name="actors[]" type="text" required>
+					        <input id="actors[]" name="actors[]" type="text" required>
 					        <label for="actors[]">Actor(s)</label>
                         </div>
                     </div>
@@ -84,7 +85,7 @@
 				<div class="input-field col s12 user-add">
                     <div id="movie_directors" class="row">
                         <div class="col s6">
-					        <input name="directors[]" type="text" required>
+					        <input id="directors[]" name="directors[]" type="text" required>
 					        <label for="directors[]">Director(s)</label>
                         </div>
                     </div>
@@ -98,7 +99,7 @@
 				<div class="input-field col s12 user-add">
                     <div id="movie_languages" class="row">
                         <div class="col s6">
-					        <input name="languages[]" type="text" placeholder="English" required>
+					        <input id="languages[]" name="languages[]" type="text" placeholder="English" required>
 					        <label for="languages[]">Languages(s)</label>
                         </div>
                     </div>
