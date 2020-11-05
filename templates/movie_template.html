@@ -3,6 +3,7 @@
 {{movie.title}}
 {% endblock %}
 {% block content %}
+<div id="movie_wrapper">
 <div class="row heading-text">
 	<div class="col s12 l6">
 		<div class="row">
@@ -23,7 +24,7 @@
 						<span class="hide-on-small-only"> {{movie.metascore}}/100</span></h3>
 					<h3 class="lrg col s6 hide-on-med-and-up movie-data">{{movie.metascore}}/100</h3>
 					{% else %}
-					<span class="hide-on-small-only"> No Rating</span></h3>
+					<span class="hide-on-small-only"> No Rating</span>
 					<h3 class="lrg col s6 hide-on-med-and-up movie-data">No rating</h3>
 					{% endif %}
 				</div>
@@ -32,17 +33,17 @@
 	</div>
 	<div class="col s12 l6">
 		<div class="row">
-			<div class="col s12">
+			<div class="col s12 center-align">
 				{% if movie.img_url == "" %}
-				<img class="materialboxed" data-caption="{{movie.tagline}}" width="250" src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}">
+				<img class="materialboxed" alt="Poster for {{movie.title}}" data-caption="{{movie.tagline}}" width="250" src="{{url_for('static', filename='images/movie-clapperboard.jpg')}}">
                     {% else %}
-				<img class="materialboxed" data-caption="{{movie.tagline}}" width="250" src="{{movie.img_url}}">
+				<img class="materialboxed" alt="Poster for {{movie.title}}" data-caption="{{movie.tagline}}" width="250" src="{{movie.img_url}}">
                     {% endif %}
-            </div>
 			</div>
 		</div>
 	</div>
-	<div class="row heading-text">
+</div>
+	<div id="accordion" class="row center-align heading-text">
 		<ul class="collapsible" data-collapsible="accordion">
 			<li>
 				<div class="collapsible-header">Plot Synopsis</div>
@@ -106,45 +107,45 @@
 			</li>
 		</ul>
 	</div>
-	<div class="col s12">
-		<div id="movie-options" class="row heading-text">
-			{% if user %}
-			<div class="col s6 m3">
-				{% if movie._id in user.watchlist %}
-				<a href="{{url_for('remove_watchlist', movie_id=movie._id, page='movie_page', value=movie._id)}}"
-					class="waves-effect cancel btn"><i class="fas fa-minus sml"></i> Watchlist</a>
-				{% else %}
-				<a href="{{url_for('add_watchlist', movie_id=movie._id, page='movie_page', value=movie._id)}}" class="
+
+	<div id="movie-options" class="row heading-text">
+		{% if user %}
+		<div class="col center-align s6 l3">
+			{% if movie._id in user.watchlist %}
+			<a href="{{url_for('remove_watchlist', movie_id=movie._id, page='movie_page', value=movie._id)}}"
+				class="waves-effect cancel btn"><i class="fas fa-minus sml"></i> Watchlist</a>
+			{% else %}
+			<a href="{{url_for('add_watchlist', movie_id=movie._id, page='movie_page', value=movie._id)}}" class="
 					waves-effect watchlist btn"><i class="fas fa-plus sml"></i> Watchlist</a>
-				{% endif %}
-			</div>
-			<div class="col s6 m3">
-				{% if movie._id in user.favourites %}
-				<a href="{{url_for('remove_favourite', movie_id=movie._id, page='movie_page', value=movie._id)}}"
-					class="waves-effect cancel btn"><i class="fas fa-minus"></i> Favourites</a>
-				{% else %}
-				<a href="{{url_for('add_favourites', movie_id=movie._id, page='movie_page', value=movie._id)}}"
-					class="waves-effect favourite btn"><i class="fas fa-plus"></i> Favourites</a>
-				{% endif %}
-			</div>
-			{% if movie._id in user.submitted_movies %}
-			<div class="col s6 m3">
-				<a class="waves-effect btn" href="{{url_for('update_movie', movie_id=movie._id)}}">Update</a>
-			</div>
-			<div class="col s6 m3">
-				<a class="waves-effect cancel btn" href="{{url_for('delete_movie', movie_id=movie._id)}}">Delete</a>
-			</div>
+			{% endif %}
 		</div>
-		{% endif %}
-		{% else %}
-		<div id="movie-page-login" class="row center-align">
-			<div class="col s12">
-				<h3 class="heading-text med">To add this movie to a watchlist or favourites:</h3>
-			</div>
-			<div class="col s12">
-				<a href="{{url_for('login')}}" class="waves-effect btn">Login/Signup</a>
-			</div>
+		<div class="col center-align s6 l3">
+			{% if movie._id in user.favourites %}
+			<a href="{{url_for('remove_favourite', movie_id=movie._id, page='movie_page', value=movie._id)}}"
+				class="waves-effect cancel btn"><i class="fas fa-minus"></i> Favourites</a>
+			{% else %}
+			<a href="{{url_for('add_favourites', movie_id=movie._id, page='movie_page', value=movie._id)}}"
+				class="waves-effect favourite btn"><i class="fas fa-plus"></i> Favourites</a>
+			{% endif %}
 		</div>
-		{% endif %}
+		{% if movie._id in user.submitted_movies %}
+		<div class="col center-align s6 l3">
+			<a class="waves-effect btn" href="{{url_for('update_movie', movie_id=movie._id)}}">Update</a>
+		</div>
+		<div class="col center-align s6 l3">
+			<a class="waves-effect cancel btn" href="{{url_for('delete_movie', movie_id=movie._id)}}">Delete</a>
+		</div>
 	</div>
+	{% endif %}
+	{% else %}
+	<div id="movie-page-login" class="row center-align">
+		<div class="col s12">
+			<h3 class="heading-text med">To add this movie to a watchlist or favourites:</h3>
+		</div>
+		<div class="col s12">
+			<a href="{{url_for('login')}}" class="waves-effect btn">Login/Signup</a>
+		</div>
+	</div>
+	{% endif %}
+</div>
 	{% endblock %}

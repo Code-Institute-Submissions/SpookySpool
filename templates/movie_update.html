@@ -28,7 +28,7 @@
             <div class="row">
 				<div class="input-field col s4">
 					<select id="movie_rating" name="rating" required>
-                        <option value="" disabled>Select rating</option>
+                        <option value="" disabled>Select</option>
                         {% for rating in ratings %}
                             {% if movie.rating == rating %}
                                 <option value="{{rating}}" selected>{{rating}}</option>

@@ -40,7 +40,7 @@
                         <div class="col s10">
                             <a 
                             href="
-                            {% if session['username'] %}
+                            {% if 'username' in session.keys() %}
                                 {{url_for('user_home', username=session['username'])}}
                             {% else %}
                                 {{url_for('login')}}
@@ -55,7 +55,7 @@
                         </div>
                         <div class="col s10">
                             <a href="
-                            {% if session['username'] %}
+                            {% if 'username' in session.keys() %}
                                 {{url_for('user_home', username=session['username'])}}
                             {% else %}
                                 {{url_for('login')}}

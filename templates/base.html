@@ -55,7 +55,7 @@
         <ul id="nav-mobile" class="right heading-text med hide-on-med-and-down">
           <li><a href="{{url_for('index')}}">Home</a></li>
           <li><a href="{{url_for('browse_movies', page_num=1)}}">Movies</a></li>
-          {% if session["username"]%}
+          {% if "username" in session.keys() %}
           <li>
             <a class="dropdown-button" href="#!" data-activates="user_menu"
               >Account</a
@@ -87,7 +87,7 @@
     <ul class="side-nav heading-text" id="mobile-menu">
           <li><a href="{{url_for('index')}}">Home</a></li>
           <li><a href="{{url_for('browse_movies', page_num=1)}}">Movies</a></li>
-          {% if session["username"] %}
+          {% if "username" in session.keys() %}
           <li>
             <a href="{{url_for('user_home', username=session['username'])}}"
               >My Movies</a
@@ -116,7 +116,7 @@
                     <a href="{{url_for('index')}}"><li>Home</li></a>
                     <a href="{{url_for('browse_movies', page_num=1)}}"><li>Movies</li></a>
                     <a href="
-                    {% if session['username'] %}
+                    {% if 'username' in session.keys() %}
                                 {{url_for('user_home', username=session['username'])}}
                             {% else %}
                                 {{url_for('login')}}
@@ -173,7 +173,7 @@
 	            nextArrow:"<i class='a-left control-c prev slick-prev fas fa-caret-right'></i>",
 	              responsive: [
 	                {
-	      breakpoint: 650,
+	      breakpoint: 600,
 	      settings: {
 	        slidesToShow: 2,
 	        slidesToScroll: 3,

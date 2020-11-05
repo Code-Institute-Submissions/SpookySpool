@@ -79,7 +79,7 @@ def sign_up():
 @app.route("/logout")
 def logout():
 
-    session["username"] = ""
+    session.pop('username', None)
 
     return redirect(url_for('login'))
 
@@ -156,7 +156,7 @@ def search(page_num, query):
     index_start = (int(page_num)-1)*36
     index_end = int(page_num)*36
 
-    if session["username"]:
+    if "username" in session.keys():
         user = users.find_one({"username": session["username"]})
     else:
         user = ""
@@ -172,7 +172,7 @@ def movie_page(movie_id):
     print(movie_id)
     movie_data = movies.find_one({"_id": ObjectId(movie_id)})
     genre_data = genres.find()
-    if session["username"]:
+    if "username" in session.keys():
         user = users.find_one({"username": session["username"]})
     else:
         user = ""

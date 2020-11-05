@@ -484,13 +484,18 @@ img.materialboxed {
     color: #ffffff;
     border: 1px #E06C52 solid;
 }
+
+#accordion>ul {
+    text-align: left;
+}
+
 #movie-options .btn i,
 #movie-options a.btn{
     font-size: 0.75em;
 }
 
 #movie-options>div>a.btn{
-    width: 75%;
+    width: 110px;
     padding: 0 1em;
 }
 
@@ -659,11 +664,18 @@ input[type=range]::-webkit-slider-thumb {
     #about {
     border-right: black 1px solid
     }
+    .pagination li a{
+    padding: 0 10px;
+}
 }
 
 @media(min-width: 1000px) {
     .card-image img {
         height: 20vw;
+    }
+    #movie_wrapper {
+        width: 75%;
+        margin: auto;
     }
 }
 
@@ -672,3 +684,4 @@ input[type=range]::-webkit-slider-thumb {
         max-width: 1040px;
     }
 }
+
