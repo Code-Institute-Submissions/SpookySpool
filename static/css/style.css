@@ -1,3 +1,10 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v7.0.29,
+* Autoprefixer: v9.7.6
+* Browsers: last 4 version
+*/
+
 /*----- baseline margins -----*/
 body {
     margin: 0;
@@ -53,8 +60,10 @@ footer{
     background-color: rgb(37, 37, 37)
 }
 
-footer li{
+footer li>a{
     color: white;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 footer li:hover{
@@ -86,6 +95,8 @@ nav {
 .search-wrapper button {
     background-color: #D24625;
     color: #ffffff;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
@@ -95,12 +106,16 @@ nav {
 
 #features a{
     color:black;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
 #call-to-signin a{
     font-weight: 600;
     color: #D24625;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
@@ -110,6 +125,8 @@ nav {
 
 .card .card-content p {
     color: #0B1023;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
@@ -121,11 +138,15 @@ nav {
 .fa-plus-circle,
 .fa-check {
     color: #518E51;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms
 }
 
 .watchlist {
     background-color: #518E51;
+    -webkit-transition: background-color 250ms;
+    -o-transition: background-color 250ms;
     transition: background-color 250ms
 }
 
@@ -140,6 +161,8 @@ nav {
 
 .fa-star{
     color: #FFC300;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms
 }
 
@@ -149,6 +172,8 @@ nav {
 
 .favourite {
     background-color: #FFC300;
+    -webkit-transition: background-color 250ms;
+    -o-transition: background-color 250ms;
     transition: background-color 250ms
 }
 
@@ -164,6 +189,8 @@ nav {
 
 .fas.fa-times {
     color: #0B1023;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
@@ -181,6 +208,8 @@ nav {
 }
 .cancel {
     background-color: #ff3333;
+    -webkit-transition: background-color 250ms;
+    -o-transition: background-color 250ms;
     transition: background-color 250ms;
 }
 .cancel:hover {
@@ -203,6 +232,8 @@ nav {
     width: 100%;
     min-height: 90vh;
     background-color: rgba(11, 16, 25, 0.637);
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     padding: 1em;
 }
@@ -243,10 +274,12 @@ nav li>a,
     font-size: 1.2em;
     color: #ffffff;
     background-color: #0B1023;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
-nav li>a:hover, 
+nav li>a:not(.btn):hover, 
 .dropdown-content li>a:hover{
     background-color: #0B1023;
     color: #D24625;
@@ -257,7 +290,8 @@ nav li>a:hover,
 #login-box {
     border: 2px #D24625 solid;
     border-radius: 2px;
-    box-shadow: 1px 5px 5px -6px #777;
+    -webkit-box-shadow: 1px 5px 5px -6px #777;
+            box-shadow: 1px 5px 5px -6px #777;
     background-color: #ffeee6;
     padding: 1.5em 0;
     margin-top: 1em;
@@ -312,7 +346,8 @@ div>h4 {
 }
 
 .row #about_heading {
-    text-decoration-line: underline;
+    -webkit-text-decoration-line: underline;
+            text-decoration-line: underline;
     font-size: 1.25em;
     margin-bottom: 0.5em;
 }
@@ -345,13 +380,15 @@ div>h4 {
 #search {
     border: 2px solid #D24625;
     border-right: 0;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     padding-left: 0.5em;
     border-radius: 3px 0 0 3px;
     height: 100%;
     margin: 0;
     background-color: #ffeee6;
-    box-shadow: 1px 5px 5px -6px #777;
+    -webkit-box-shadow: 1px 5px 5px -6px #777;
+            box-shadow: 1px 5px 5px -6px #777;
 }
 
 .search-wrapper input[type=text]:not(.browser-default):focus:not([readonly]) {
@@ -362,11 +399,11 @@ div>h4 {
 .search-wrapper button{
     border: 2px solid #D24625;
     border-radius: 0 3px 3px 0;
-    line-height: sub;
     height: 100%;
     margin: 0;
     padding: 0 0.5em;
-    box-shadow: 0 5px 6px -6px #777;
+    -webkit-box-shadow: 0 5px 6px -6px #777;
+            box-shadow: 0 5px 6px -6px #777;
 }
 
 #show_options {
@@ -380,7 +417,8 @@ div>h4 {
     margin: 0.25em 0 1.5em;
     background-color: #ffeee6;
     padding-bottom: 0.75em;
-    box-shadow: 0 5px 6px -6px #777;
+    -webkit-box-shadow: 0 5px 6px -6px #777;
+            box-shadow: 0 5px 6px -6px #777;
 }
 
 #form_options h3 {
@@ -411,7 +449,8 @@ div>h4 {
     text-align: center;
     border-radius: 2px;
     margin: 0 0 1.5em;
-    box-shadow: 0 5px 6px -6px #777;
+    -webkit-box-shadow: 0 5px 6px -6px #777;
+            box-shadow: 0 5px 6px -6px #777;
 }
 
 
@@ -422,7 +461,8 @@ div>h4 {
 .card .card-content p {
     height: 30px;
     overflow: hidden;
-    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+       text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: bottom;
     font-weight: 600;
@@ -439,6 +479,8 @@ div>h4 {
 
 .fa-info {
     cursor: pointer;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
@@ -450,6 +492,8 @@ div>h4 {
 .card .card-reveal i{
     display: block;
     text-align: center;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms;
 }
 
@@ -523,12 +567,15 @@ img.materialboxed {
     background: #ffeee6;
     border: 1px #D24625 solid;
     border-radius: 2px;
-    box-shadow: 0 5px 6px -6px #777;
+    -webkit-box-shadow: 0 5px 6px -6px #777;
+            box-shadow: 0 5px 6px -6px #777;
     height: 100%;
     margin: 1em 0 1.5em;
 }
 
 #user-greeting {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     text-align: center;
     float: none;
@@ -546,6 +593,8 @@ blockquote {
 a.btn.logout,
 .empty_carousel a.btn {
     display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
     margin: 1em auto;
 }
@@ -554,6 +603,8 @@ a.btn.logout,
 .empty_carousel h4 a {
         color: #D24625;
         margin: 1em auto;
+        -webkit-transition: color 250ms;
+        -o-transition: color 250ms;
         transition: color 250ms;
 }
 .carousel .card{
@@ -590,7 +641,8 @@ input[type=number]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly]) {
         border-bottom: 1px solid #D24625;
-        box-shadow: none;
+        -webkit-box-shadow: none;
+                box-shadow: none;
 }
 
 input[type=range]+.thumb {
@@ -633,6 +685,26 @@ input[type=range] {
     padding:0;
 }
 
+::-webkit-input-placeholder {
+    color: #D24625;
+    opacity: 0.5;
+}
+
+::-moz-placeholder {
+    color: #D24625;
+    opacity: 0.5;
+}
+
+:-ms-input-placeholder {
+    color: #D24625;
+    opacity: 0.5;
+}
+
+::-ms-input-placeholder {
+    color: #D24625;
+    opacity: 0.5;
+}
+
 ::placeholder {
     color: #D24625;
     opacity: 0.5;
@@ -651,6 +723,8 @@ input[type=range]::-webkit-slider-thumb {
 .input_add,
 .input_remove {
     cursor: pointer;
+    -webkit-transition: color 250ms;
+    -o-transition: color 250ms;
     transition: color 250ms
 }
 
@@ -687,4 +761,3 @@ input[type=range]::-webkit-slider-thumb {
         max-width: 1040px;
     }
 }
-

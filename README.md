@@ -309,8 +309,7 @@ Logos created using [FreeLogoDesign](https://www.freelogodesign.org/):
 Favicon created using [Favicon.io](https://favicon.io/favicon-converter/) from edited logo:
 * [Favicon](https://github.com/SDGreen/SpookySpool/tree/master/static/images/favicon.png) (file name: favicon.png)
 
-## Code 
-* Responsive landscape breakpoints taken from [Responsivedesign.is](https://responsivedesign.is/develop/browser-feature-support/media-queries-for-common-device-breakpoints/)
+## Code
 * Carousels used on user homepage created using [Slick Carousel](https://kenwheeler.github.io/slick/)
 * CSS prefixer used: [https://autoprefixer.github.io/](https://autoprefixer.github.io/)
 * Original movie information from [Gorochu's data on Kragge](https://www.kaggle.com/gorochu/complete-imdb-movies-dataset)
