@@ -314,9 +314,9 @@ To push the code to the remote repository you follow these steps.
 4. Push these changes to the remote repository using the ```git push``` command.
 
 To publish a live version of the site I used Heroku, here are the steps I took:
-1. Go to the remote repository at [https://github.com/SDGreen/TotalTarot](https://github.com/SDGreen/TotalTarot)
-2. Click "Settings"
-3. Scroll to "GitHub Pages", select a publishing source (master branch in the drop-down menu)
+1. Create a new app in Heroku
+2. Create a Procfile & requirments.txt (with the dependancies listed using `pip3 freeze`) so Heroku can run the app.
+3. 
 4. The site is now published at [https://sdgreen.github.io/TotalTarot/](https://sdgreen.github.io/TotalTarot/)
 
 ### How to run Spooky Spool's website code locally:
@@ -351,6 +351,15 @@ To publish a live version of the site I used Heroku, here are the steps I took:
     * img_url: string
     * imdb_url: string
     * genre: array (of ObjectIds relating to the relevant genre_name in the genres collection)
+#### Adding enviroment varibales:
+1. Create an env.py file in the apps root directory.
+2. Add the env.py file to your .gitignore (type eny.py in the file)
+3. Go to MongoDB and copy the srv link to your database (go to "Command Line Tools", "Connect Instruction", "Connect your application" and copy the link).
+4. To your env.py, add your secret key & MongoDB URI:
+    >`os.environ["MONGODB_URI"] = "mongodb+srv://`username`:`password`@`username`.k0s1i.mongodb.net/`database_name`?retryWrites=true&w=majority"`    
+    >`os.environ["SECRET_KEY"] = "`secret key`"`
+#### Running the app
+* Simply type `python3 app.py` into your CLI or pressed the green play button if using GitPod.
 
 
 ## Credits
