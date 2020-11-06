@@ -24,10 +24,10 @@ genres = mongo.db.genres
 @app.route("/home")
 @app.route("/")
 def index():
-    
+    """
     all_movies = movies.find()
-    
-    for movie in all_movies.sort("year", -1)[3400:3500]:
+
+    for movie in all_movies.sort("year", -1)[4100:4200]:
         if movie["img_url"] == "":
             continue
         else:
@@ -35,7 +35,7 @@ def index():
                 urllib.request.urlopen(movie["img_url"]).getcode()
             except urllib.error.HTTPError:
                 movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"img_url": ""}})
-    
+    """
     return render_template("home.html")
 
 
@@ -139,7 +139,7 @@ def search(page_num, query):
             genre_list = []
             for genre in request.form.getlist("genre"):
                 genre_list.append(ObjectId(genre))
-            query["genre"] = {"$in": genre_list}
+            query["genre"] = {"$all": genre_list}
         if released_from and released_to:
             query["year"] = {"$gte": released_from, "$lte": released_to}
         elif released_from and not released_to:
@@ -156,9 +156,9 @@ def search(page_num, query):
 
         # This added the ObjectId() back onto genres if in the query
         if "genre" in query.keys():
-            for x in query["genre"]["$in"]:
-                position = query["genre"]["$in"].index(x)
-                query["genre"]["$in"][position] = ObjectId(x)
+            for x in query["genre"]["$all"]:
+                position = query["genre"]["$all"].index(x)
+                query["genre"]["$all"][position] = ObjectId(x)
 
         results = movies.find(query)
         sorted_results = results.sort("year", -1)

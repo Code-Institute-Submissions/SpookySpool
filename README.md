@@ -161,7 +161,7 @@ To keep the spooky theme running through the website, [Special Elite](https://fo
 * [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) - Templating language used for the website pages.
 * [MongoDB](https://docs.mongodb.com/) - Used to host the database along with retrieve data, save edits, deletions and inserts.
 * [Git](https://git-scm.com/) - Used for version control and tracking changes to the code whilst in development.
-* [Google Fonts](https://fonts.google.com/) - Used for website fonts [Cinzel](https://fonts.google.com/specimen/cinzel) for headings and [Montserrat](https://fonts.google.com/specimen/Montserrat) for content text.
+* [Google Fonts](https://fonts.google.com/) - Used for website fonts [Didact Gothic](https://fonts.google.com/specimen/Didact+Gothic) for headings, [Raleway](https://fonts.google.com/specimen/Raleway) for content text and [Special Elite](https://fonts.google.com/specimen/Special+Elite) for logo text.
 * [Font Awesome](https://fontawesome.com/) - This library provided the Icons used across the site.
 * [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) - Key for finding bugs and testing responsive design.
 * [Autoprefixer](https://autoprefixer.github.io/) - Used to prefix the css, allowing it to work across different browsers.
@@ -195,12 +195,12 @@ Spooky Spool's testing can be split into four categories:
 ### User Validation:
 
 * #### Login Validation:
-    * Users can't login in they have the incorrect password. The correct error message appears.
+    * Users can't login with an incorrect password. The correct error message appears.
     * Users can't login with the incorrect username. The correct error message appears.
 
 * #### Sign Up Validation:
-    * Users can't create an account with the same username as another. The correct error message appears.
-    * Users can't creat an account with the same email as another. The correct error message appears.
+    * Users can't create an account with a username currently in the database. The correct error message appears.
+    * Users can't creat an account with an email currently in the databas . The correct error message appears.
     * If the password and retype password fields don't match, the login button is disabled.
     * Users can't create passwords under 5 or over 20 characters long.
     * Users can't create usernames under 3 or over 10 characters long.
@@ -313,19 +313,45 @@ To push the code to the remote repository you follow these steps.
 3. Commit the changes using the ```git commit -m "changes made"``` command.
 4. Push these changes to the remote repository using the ```git push``` command.
 
-To publish a live version of the side I used GitHub Pages, here are the steps I took:
+To publish a live version of the site I used Heroku, here are the steps I took:
 1. Go to the remote repository at [https://github.com/SDGreen/TotalTarot](https://github.com/SDGreen/TotalTarot)
 2. Click "Settings"
 3. Scroll to "GitHub Pages", select a publishing source (master branch in the drop-down menu)
 4. The site is now published at [https://sdgreen.github.io/TotalTarot/](https://sdgreen.github.io/TotalTarot/)
 
 ### How to run Spooky Spool's website code locally:
+#### Setting up the code:
 1. Go to: [https://github.com/SDGreen/SpookySpool](https://github.com/SDGreen/SpookySpool)
 2. Click the "Code" button next to the "Gitpod" button which will have a dropdown including "Clone with HTTPS", "Open with GitHub Desktop" & "Download ZIP"
 3. To clone the repository using HTTPS, under "Clone with HTTPS", click the copy to clipboard icon. To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click the copy to clipboard icon.
 4. Open Git Bash.
 5. Change the current working directory to the location where you want the cloned directory to be made.
 6. Type `git clone`, and then paste the URL you copied in Step 2 (https://github.com/SDGreen/SpookySpool.git).
+7. Install the requirments by typing `pip3 install -r requirements.txt` in your CLI
+#### Creating a database:
+1. Create or login to a [MongoDB](https://www.mongodb.com/) account.
+2. Add a new cluster.
+3. create a new database which will have these three collections:
+    * users
+    * genres
+    * movies
+4. Populate your genres collection with genre objects, making sure they have the following key value pairs:
+    * genre_name: string
+5. Populate your movie collection with movie objects, making sure they have the following key value pairs:
+    * title: string
+    * tagline: string
+    * description: string
+    * runtime: string
+    * rating: string
+    * metascore: string
+    * year: string
+    * actors: array (of strings)
+    * languages: array (of strings)
+    * directors: array (of strings)
+    * img_url: string
+    * imdb_url: string
+    * genre: array (of ObjectIds relating to the relevant genre_name in the genres collection)
+
 
 ## Credits
 ### Media
