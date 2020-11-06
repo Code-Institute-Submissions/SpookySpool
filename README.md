@@ -17,26 +17,6 @@ Spooky Spool is a place for horror fans to find movies, create accounts and shar
 Currently designed as an informational store on the movies, once the userbase is large enough the website would transition to include links to streaming platforms. This way users can find films, share films but also be directed to where they are avaliable, revenue being generate from the referal.
 
 ## UX
-Total Tarot's design is aimed to look sleek and simple to make navigation as easy as possible.
-Competitor websites tend fall into two categories: 
-1. Course advertisements that look good but provide little information
-2. Free websites with good information that looked terrible & were hard to navigate
-As Total Tarot will straddle between these two worlds, I want to combine the refined and easy handling of a paid for course website with the good information of a free website.
-This way it can stand out in the free market and draw a large crowd which can be directed to affiliated websites for users who want to continue their learning.
-
-As Total Tarot will be catering to a niche market with varying levels of IT skills it needs to be easy to navigate and understand. This means it follows a very standard website layout with a Navbar across the top with easily accessible links to each page, a simple hub and spoke model. Each page (other than the card library) is designed to be as small and easy to read as possible, only providing as much information as necessary to learn whilst keeping everything nice and clear. Large pictures are included to keep the users engaged without overcrowding the page as was seen on other free websites.
-
-User research on what and how they would like to learn from a website about Tarot cards came up with three clear goals:
-1. An almost "Amazon" like view of all the Tarot cards where you could click each one to find their meaning.
-2. Information about where they could find/attend workshops displayed on a map for easy use.
-3. Information about how to place the cards to do readings. Many people know the cards have meanings but don't know where to go from there.
-
-This research led most of the design for the web pages. The classes page has a clickable map displaying all the Total Tarot approved classes in the UK. Clicking on your closest mentor brings up more information about how to book a class, keeping the information hidden until needed, maintaining a clean website.
-The page dedicated to learning about the cards is a visual library where you can scroll through all 78 cards and click each one to find more information. To keep this easily digestible, the information is concise and easy to view. Once the user wants to learn about a new card, the site hides the previous card's information. There is also a search function to easily find a card and a back-to-top button to keep the page simple to navigate.
-The final page again has a lot of information about how to interpret cards without becoming messy. Key information about how to interpret the cards appears first, all other information is signposted but collapsed. When a viewer wants to learn more about layouts they can bring up that information but it will hide itself once the user clicks on a new one. This helps maintain a clean and sleek look whilst having a lot information on the page.
-
-To help the business goal of growing a large following, each page has links to social accounts. No matter where you are on the site, it's easy to follow Total Tarot's social media streams.
-As this site wants to make learning as easy as possible it also includes a dark mode feature. This is so users don't strain their eyes whilst using the site.
 
 ### Target Demographic
 The target demographic for Spooky Spool is scary movie fans across all ages.
@@ -46,7 +26,6 @@ A gender neutral design has also be used as users are expecting more of a scary 
 
 
 ### User Stories
-To help focus the design of Total Tarot's website, user stories were created which point to key features or layouts.
 * As a user, I want to know what I can actually do with this website, so I know if I want to create an account.
 * As a user, I want search the database based on my prefrences, so I can find movies I want.
 * As a user, I want to be able to find out more information on a movie, so I can tell if I want to watch it.
@@ -54,11 +33,12 @@ To help focus the design of Total Tarot's website, user stories were created whi
 * As a user, I want to add movies that aren't on the database, so I can share them with other users.
 * As a user, I want to be able to edit information on my movies, so it can be correct if I make mistakes.
 * As a user, I want to know if I already added a movie to a watchlist or favourites, so I don't have mutliples in my saved lists.
-* As the owner, I want links to social accounts, so I can grow our followers.
-* As the owner, I want a clean website so users aren't put off and go elsewhere.
-* As the owner, I want the information to be interactive so users are hooked and stay on the site.
-* As the owner, I want users to be easily directed to affiliated sites, so we can get a commission from them.
-* As the owner, I don't want too much information available so viewers want to get classes.
+* As the owner, I want many movies, so users have lot's of options to browse through.
+* As the owner, I want guests to create accounts, so I can increase my userbase.
+* As the owner, I want it to be simple to create an account, to stop users from leaving with creating an account.
+* As the owner, I want users to add their own movies, so my database increases.
+* As the owner, I want the website to be information to be easily digestable, to stop users leaving due to information overload.
+
 ### Wireframes
 Wireframes for the desktop and mobile versions can be found [here](https://github.com/SDGreen/SpookySpool/tree/master/wireframes)
 
@@ -131,16 +111,16 @@ Wireframes for the desktop and mobile versions can be found [here](https://githu
 * [Jinja](https://jinja.palletsprojects.com/en/2.11.x/) - Templating language used for the website pages.
 * [MongoDB](https://docs.mongodb.com/) - Used to host the database along with retrieve data, save edits, deletions and inserts.
 * [Git](https://git-scm.com/) - Used for version control and tracking changes to the code whilst in development.
-* [GitHub Pages](https://pages.github.com/) - Used to deploy the website.
 * [Google Fonts](https://fonts.google.com/) - Used for website fonts [Cinzel](https://fonts.google.com/specimen/cinzel) for headings and [Montserrat](https://fonts.google.com/specimen/Montserrat) for content text.
 * [Font Awesome](https://fo*ntawesome.com/) - This library provided the Icons used across the site.
-* [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) - Key for testing responsive design.
-* [Autoprefixer](https://autoprefixer.github.io/) - Used to prefix the css file so that transitions would work across different browsers
+* [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) - Key for finding bugs and testing resposive design.
+* [Autoprefixer](https://autoprefixer.github.io/) - Used to prefix the css, allowing it to work across different browsers.
 
 ## Testing
-Spooky Spool's testing can be split into three catagories: 
+Spooky Spool's testing can be split into four catagories: 
 * Database CRUD operations.
 * User validation.
+* DOM Manipulation.
 * Resposive Design.
 
 ### Database CRUD Operations:
@@ -152,58 +132,45 @@ Spooky Spool's testing can be split into three catagories:
 
 * #### Create Operations:
     * When a user signs up, a new user is created in the user collection with empty arrays for their watchlist, favourite list and submitted movies list.
+    * When a user adds a new movie, that movie enters the movies collection with relevant fields, the movie's ID is also added to the user's submitted movies list
 
+* #### Update Operations:
+    * When a user tries to update one of their films, a form is generated with all the existing data already filled in.
+    * Once updated, the new data now is in the database instead.
+    * If a user adds a movie to their watchlist or favourites, that movie's ID appears in the users relevant list.
 
+* #### Delete Operations:
+    * When a user deletes their movie, it is removed from the database and their submitted movies list.
 
-* #### Navigation Bar
-    * When hovered over, the list anchors all underline.
-    * When hovered over, the dark/light mode button transitions to it's opposite picture.
-    * The active page is highlighted by a different colour.
-    * The Navbar collapses once small enough so the page links and mode button is hidden in the dropdown menu.
+### User Validation:
 
-* #### Dark/Light Mode functionality
-    * When clicked, all relevant coloured elements dynamically change to the correct colour.
-    * The collapsed Navbar button and text in the footer swap to the opposite mode once clicked.
-    * When a new page or the site is reloaded, the same mode is active from your previous visit.
-    * Elements generated from JavaScript (i.e. the card info boxes in the online deck) also load with the correct colouring.
+* #### Login Validation:
+    * Users can't login in they have the incorrect password. The correct error message appears.
+    * Users can't login with the incorrect username. The correct error message appears.
 
-* #### Home Page
-    * The images in each summary section change to icons once the small breakpoint is highlighted.
-    * The copy reduces once the small breakpoint is hit.
+* #### Sign Up Validation:
+    * Users can't create an account with the same username as another. The correct error message appears.
+    * Users can't creat an account with the same email as another. The correct error message appears.
+    * If the password and retype password fields don't match, the login button is disabled.
+    * Users can't create passwords under 5 or over 20 characters long.
+    * Users can't create usernames under 3 or over 10 characters long.
 
-* #### Map functionality
-    * The map loads over the UK.
-    * The map generates markers for all mentor locations.
-    * The markers are Total Tarots icons.
-    * Once clicked the relevant information appears beneath the map.
-    * Once clicked the map zooms in on the marker's location.
-    * When a new marker is clicked, any other information is cleared.
-    * The map size changes depending on the device viewport.
+* #### User is Logged On Validation:
+    * If a user is logged in, the navbar "Login" button turns into an account dropdown menu.
+    * If the user is logged in, links to the login page on the homepage and footer redirect to the user's homepage.
+    * If the user is logged in, the movie cards display "add to watchlist" and "add to favourites" options.
+    * If the user is logged in, the movie pages display "add to watchlist" and "add to favourites" options at the bottom of the page.
+    * If the user is logged in and on a movie page they created, the update and delete buttons appear.
+    * If a user isn't logged in, calls to login appear on the browse, search and movie pages.
+    * Movie cards and movie pages will display remove from watchlist/favourites option if that movie is already in the list in question.
 
-* #### Online Card Library
-    * All 78 cards load.
-    * If the API returns an error response, an error message is displayed and the issue is logged to the console.
-    * The card flips once clicked, a box loads beneath showing the user the card information.
-    * When a card flips, the relevant image is called from the API.
-    * If a new card is clicked, any open cards flip back and their information is hidden.
+### DOM Manipulation:
 
-* #### Card Search function
-    * All 78 card names are populated by the API.
-    * Once a card is selected and the button clicked, the page smooth scrolls to the relevant card.
-    * The selected card opens to reveal it's image and information.
+* If the options arrow is clicked on the search bar, a larger form will appear below with more search fields. If clicked again this form is collapsed.
+* If a user clicks on the plus icon on the update/insert movie forms, a new input field will appear.
+* If the minus icon is click on the update/insert movie forms, new inputs will be deleted but the original cannot go.
 
-* #### Back-To-Top Button
-    * The button appears after the user scrolls 30px down.
-    * The button, once clicked, instantly takes you back to the top of the page.
-    * When in a hover state, the button turns gold.
-
-* #### Learn to Interpret Page
-    * The card dealing image changes size to fit different devices.
-    * The accordion opens to reveal information about each layout.
-    * The current accordion page closes once a new layout page is clicked.
-    * The accordion content layout changes depending on the size of the device.
-
-### Responsive Design Testing
+#### Responsive Design Testing
 The responsive design was tested using multiple physical devices:
 * Galaxy S8 (Chrome)
 * iPhone 6 plus (Safari)
@@ -225,68 +192,71 @@ Chrome DevTools was also used to test the design on the following devices:
 * iPad Pro
 
 ### Browser testing
-Total Tarot's website was physically tested on the following browsers:
-* Microsoft Edge Version 83.0.478.58 
-* Chrome Version 83.0.4103.116 
-* Firefox version 74.0.1 
-* Safari version 13.0.5 (15608.5.11)
 
-One note is that on FireFox the font Cinzel loads slightly differently (more elongated) but this was not considered a bug.
+Spooky Spool was physically tested on the following browsers:
+* Microsoft Edge Version 86.0.622.63
+* Chrome Version 86.0.4240.111 
+* Firefox version 81.0
+* Safari version 13.0.5 (15608.5.11)
 
 ### Code Validation
 * HTML5 code validated using [https://validator.w3.org/](https://validator.w3.org/)
 * CSS3 code validated using [https://jigsaw.w3.org/css-validator/](https://jigsaw.w3.org/css-validator/)
 * JS code validated using [https://jshint.com/](https://jshint.com/)
+* Python code validated using [Extend Class Python Validator](https://extendsclass.com/python-tester.html)
 ### User Stories tested
-#### As a user, I want to find out more about tarot cards, so I can start using my own deck.
-* The card library is easy to navigate to and provides clear information on each card.
-
-#### As a user, I want an online deck, so I don't have to buy my own to view the cards.
-* There is an online deck which is one click away from the homepage and clearly signposted.
-
-#### As a user, I want to learn how to place my cards, so I can start doing my own readings.
-* There is a page dedicated to spreads with three starter layouts clearly explained.
-
-#### As a user, I want to easily find out where my closest classes are, so I can book a class and learn more.
-* The map page has a UK-wide map showing 14 approved mentors across the UK and Ireland.
-
-#### As a user, I want to view the cards easily, so I can browse through the cards.
-* The cards are displayed so that they are all viewable and can easily be searched.
-
-#### As the owner, I want links to social accounts, so I can grow our followers.
-* Every page has links to social streams.
-
-#### As the owner, I want a clean website, so users aren't put off and go elsewhere.
-* Every page only shows the amount of information neccessary, which can be expanded upon. Less useful information is removed on smaller devices to preserve a clean and simple website.
-
-#### As the owner, I want the information to be interactive, so users are hooked and stay on the site.
-* Pages have images or interactive maps. Many educational elements respond to user inputs or breakpoints to keep it engaging.
-
-#### As the owner, I want users to be easily directed to affilated sites, so we can get a commission of their revenue.
-* The relevant information for tutors is clearly signposted and is two clicks away from the homepage and pertinent to the user.
-
-#### As the owner, I don't want too much information available, so viewers want to get classes.
-* Most information is only viewable when clicked. Once a viewer moves on to new information previous pop-ups are closed.
-
+#### As a user, I want to know what I can actually do with this website, so I know if I want to create an account.
+* The home page quickly tells users the key features, how to use them and where to go.
+#### As a user, I want search the database based on my prefrences, so I can find movies I want.
+* The search bar allows users to search by title, year, genre and age rating to refine results.
+#### As a user, I want to be able to find out more information on a movie, so I can tell if I want to watch it.
+* On every movie card are clickable links to a page with the full movie details laid out in an easily digestible fashion.
+#### As a user, I want to movies I'm interested in to be easily avaliable, so I can refer to them quickly.
+* Movie cards and movie pages have buttons allowing users to add the movie to their watchlist/favourites. Not only does this change the cards so users will know if it is on one of their lists, the user homepage has carousels diplaying these movies too.
+#### As a user, I want to add movies that aren't on the database, so I can share them with other users.
+* The add movie option is in the navbar (once signed in) so users can easily access it. Once clicked a form appears where users can fill in their new movie data.
+#### As a user, I want to be able to edit information on my movies, so it can be correct if I make mistakes.
+* Users can go to their submitted movies by searching the database or going to their user homepage. An update option appears on movie pages if it is one the user inserted, this opens a form (with the current data as default values for easy submission) where they can edit the movie information. By only allowing the user who submitted the movie to edit it, this stops incorrect data being added by malicious users.
+#### As a user, I want to know if I already added a movie to a watchlist or favourites, so I don't have mutliples in my saved lists.
+* Movies already in a users lists have different icons so users can't add the same movie twice to a list.
+#### As the owner, I want many movies, so users have lot's of options to browse through.
+* The database has info on 16072 movies, each of which can be accessed.
+#### As the owner, I want guests to create accounts, so I can increase my userbase.
+* Users can sign up. There are also many calls to sign up across the website if users have not already.
+#### As the owner, I want it to be simple to create an account, to stop users from leaving without creating an account.
+* Sign-up follows the reddit model of using less barriers to sign up. All you need is a unique username and email.
+#### As the owner, I want users to add their own movies, so my database increases.
+* The add movies option is in the navbar so it is always easily reached. Once clicked users can add their own movies which only they can delete. This prevents malicous users from trying to reduce the database as they are limited to films they create.
+#### As the owner, I want the website to be information to be easily digestable, to stop users leaving due to information overload.
+* Movie cards, carousels and movie pages all change size to prevent the page getting overcrowded. The detailed movie infomation is stored in an accordian to prevent cluttering.
 ### Bugs
-With any project bugs will arise, below is a brief summary of the most site-breaking issues:
+Below is a brief summary of the most site-breaking issues and how they were solved:
 
-* #### Card images wouldn't load on devices using Safari
-    This bug was due to the CSS file not including the correct prefixes on transitions for browsers other than Chrome. To fix this the Autoprefixer was used to update the CSS stylesheet.
-* #### Card information boxes wouldn't load with the correct dark/light mode colours
-    Because the information boxes are created by JavaScript it was difficult coding the correct styling for dynamic colour changes. To fix this, code is added to the show-card-details.js at the beginning which checks the locally cached mode and adds the correct class to the divs displaying the information.
-* #### Map markers wouldn't load the custom Total Tarot markers
-    This bug is due to the file paths in the classes-map.js file. The relative paths were based on the JS file's location and not the page location. This was changed and now the icons load.
-* #### Map Markers would only load the last populated marker information regardless of which marker was clicked.
-    This bug arose because the code creating the onclick listeners, which rendered the information for each location for the markers, was outside the for loop creating them. This meant that regardless of the marker, the onclick event would only render the last marker's information because they all share the same variable name. To fix this, the function creating the listeners was moved inside the loop. Now when a marker is created the listener receives the correct location information.
-* #### The light mode version of the website would load when a new page was clicked
-    As the light-mode is the default version of the site, whenever a new page was clicked it would load in light mode. To solve this, the current mode was cached in the browser's local storage for the script to check before it loads a new page.
-* #### The Accordion content spilt out over it's container
-    Bootstrap's row class adds a negative margin to it's div elements, which was interfering with the accordion. This was fixed by changing the margin in CSS.
+#### Movies not part of the brief (non-horror) kept appearing in the database.
+* The original movie data came in a json file with over 600,000 entries. As Spooky Spool only deals with horror or spooky themed movies (Addams Family wouldn't be considered scary but does fit the brief for this website), a search was used to find just movies with "Thriller" or "Horror" in their genre array.
+When first testing the movie card feature, movies like Stuart Little appeared which are not horror. This issue was the database size. The original code used to wittle down the database looped through each movie and compared this to an array (in hindsight this was a convoluted way to reduce the database when a simple search with the correct filters would have work.).
+As a result, the page would time-out before the whole database was checked, leaving off-brand movies in the database. This was fixed by using a count to check if the amount of movies in the database. If this count matched a count of movies with the correct genres in their array, I knew all the movies were removed. If the counts didn't match, the code was run again to remove more movies before timeing-out.
+After deleting and reuploading all the movies due to a title bug (see below), simpler code was used to remove the movies which didn't time-out as much but the count was still used. 
+#### User IDs could not be stored in the session data.
+* Originally the user's _id was also going to be stored in the session data to act as a easy way to identify the user for database function (ie.e. adding a movie to their watchlist). As the _id is an ObjectID (a BSON data type) is proving hard to store in the session data without manipulation. Rather than write extra code, it happens that usernames are also unique so these were used as a primary key to store in session data instead (as a sting it is much simpler to use).
+#### KeyErrors would appear on pages that checked for signed in users.
+* Many pages used `if session["username"]:` as a check for if the user was a guest or not. As the logout function set `session["username"]` to an empty string. This didn't throw errors during development as `session["username"]` had always existed after testing the login functions earlier in development.
+When trying the website on new devices though, this would through a KeyError as the username key didn't exist. To fix this the logout function deleted the username key and the better: `if "username" in session.keys()` was used to check if the user was signed in.
+#### The SignUp form would call the login() function instead.
+* On the login page there are two forms, one to login in and one within a modal to sign up. To begin with, clicking the sign up button would just fire the login in button instead.
+This would through an error as the user didn't exist yet and wouldn't create the user either. To fix this, `form` attributes were added to each button so they only triggered the correct form. 
+#### Age ratings wouldn't render in order on update movie forms.
+* On the insert movie form, the age ratings are hard coded as options within a select element. On the update form these options needed to be rendered a) In order and b) The current value needed to be preselected.
+The idea of coverting the ratings to their own collections (like genres) was considered but a quicker solution was to create an array to store the age ratings on the page and just cycle throught this instead. This meant the age ratings were displayed in order and the orginal value was preselected.
+#### Fixed Navbar would break the mobile Navbar.
+* To make the navbar sticky, materialize has a wrapper div which has class (navbar-fixed) to easily achieve this. The div caused the mobile menu to be unclickable as it was inside the .nav-fixed wrapper. The fix was simple, the mobile navbar was moved outside the new div.
+#### Movie titles would capitalize after apostrophies (i.e. Spooky Spool'S Hompage)
+* Originally the movie titles were all lowercase to make searches easier then capitalized using .title() when rendered on the page.
+This caused a problem as .title() will capitalize after apostrophies. After looking for new string methods it was decided to reupload the movie data (as this has the correct capitalization) and just make the search case insensitive using the options provided by $regex
 
     
 ## Deployment
-Total Tarot's Website was coded using the GitPod IDE. The git repository is stored loacally before being pushed online to the remote repository online at GitHub.
+Spooky Spool's website was coded using the GitPod IDE. The git repository is stored loacally before being pushed online to the remote repository online at GitHub.
 To push the code to the remote repository you follow these steps.
 1. Save any local changes made in the GitPod IDE by pressing File -> Save All (or Ctrl+Shift+S).
 2. Add these changes to the git staging area by using the ```git add .``` command in a terminal.
