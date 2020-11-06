@@ -26,8 +26,8 @@ genres = mongo.db.genres
 def index():
     
     all_movies = movies.find()
-
-    for movie in all_movies.sort("year", -1)[1500:2000]:
+    
+    for movie in all_movies.sort("year", -1)[3400:3500]:
         if movie["img_url"] == "":
             continue
         else:
@@ -35,7 +35,7 @@ def index():
                 urllib.request.urlopen(movie["img_url"]).getcode()
             except urllib.error.HTTPError:
                 movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"img_url": ""}})
-
+    
     return render_template("home.html")
 
 
@@ -181,7 +181,6 @@ def search(page_num, query):
 
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
-    print(movie_id)
     movie_data = movies.find_one({"_id": ObjectId(movie_id)})
     genre_data = genres.find()
     if "username" in session.keys():
@@ -339,7 +338,6 @@ def update_movie(movie_id):
 # Inserts updated movies from the update form into the database
 @app.route("/insert_update/<movie_id>", methods=["POST"])
 def insert_update(movie_id):
-    print(movie_id)
     genre_list = []
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))

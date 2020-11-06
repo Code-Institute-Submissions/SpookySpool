@@ -19,15 +19,18 @@ This way users can find films, share films but also be directed to where they ar
 
 ## UX
 
-### Target Demographic
-The target demographic for Spooky Spool is scary movie fans across all ages.
-This is a broad demographic but skews towards younger (the average viewer is under 25)
-with a roughly even split between the sexes [(source)](https://cmpalexgilbey.weebly.com/uploads/3/8/8/7/38878453/horror_film_research.pdf).
-As the audience is younger the website must have a mobile first design (which is more often used over traditional desktops by this demographic).
-A gender neutral design has also be used as users are expecting more of a scary feel compared to anything gendered.
+Spooky Spool aims to function in the space between websites [Fandom](https://www.fandom.com/) wiki type websites and [Netflix](https://www.netflix.com/) which has helped shape
+the overall design. It will need to have all the information expeirence that fandom can offer with the easily navigatabe and personalisation that
+streaming sites have if it hopes to bridge the two.
 
+* Key Features to borrow:
+    * A personaliesd space for our users where they can save data they are interested in.
+    * Large amounts of data for users to browse through.
+    * Easily searchable data which can be refined for specific items.
+    * Mobile friendly data.
 
 ### User Stories
+To help refine the incorpoale aims above with real features, these user stories have been devised to structure the website.
 * As a user, I want to know what I can actually do with this website, so I know if I want to create an account.
 * As a user, I want search the database based on my preferences, so I can find movies I want.
 * As a user, I want to be able to find out more information on a movie, so I can tell if I want to watch it.
@@ -41,9 +44,41 @@ A gender neutral design has also be used as users are expecting more of a scary 
 * As the owner, I want users to add their own movies, so my database increases.
 * As the owner, I want the website to be information to be easily digestible, to stop users leaving due to information overload.
 
+### Information Architecture
+To marry the needs for large amounts of infomation with a good user expeirce, the website will have to initailly present
+small chunks of data from a large collections. This is why a card approach is best. Users can see the scope of the data
+but can get more detailed information only on topics they are interested in.
+
+To make this information easy to escape from, the choice of a fixed navbar makes sense. 
+That way no matter where the user is on the site they are always one click away from either a clean search page, their user home or the actually home page.
+
+User's will also want to save data they are interested in without having to search again for it. Again to prevent overcrowding which will turn off users, a netflix stlye carousel approach makes sense.
+Useless data can be made visible with other information getting "stored off" the page. Again a card approach makes sense so users can quickly see the scope of what they have
+saved but will only get detailed information on movies they are interested in.
+
 ### Wireframes
 Wireframes for the desktop and mobile versions can be found [here](https://github.com/SDGreen/SpookySpool/tree/master/wireframes)
 
+### Target Demographic
+The target demographic for Spooky Spool is scary movie fans across all ages.
+This is a broad demographic but skews towards younger (the average viewer is under 25)
+with a roughly even split between the sexes [(source)](https://cmpalexgilbey.weebly.com/uploads/3/8/8/7/38878453/horror_film_research.pdf).
+As the audience is younger the website must have a mobile first design (which is more often used over traditional desktops by this demographic).
+A gender neutral design has also be used as users are expecting more of a scary feel compared to anything gendered
+
+### Design Choices
+As this website has a clear theme, a palette reminicent of Haloween colours has been settled on.
+This is also gender neutral and will appeal to a larger audience then colours which are more gendered.
+To avoid appearing kitch, a more adult palette has been selected where jet blacks are replaced with dark blues to compliment the orange throughout the site.
+
+Other colours will be picked using user expectations so they can intuitivly learn to use the site.
+Green checks for watchlist which is common across websites to signify something have been added to a basket etc.
+Favourites will use yellow combined with star motifs which will also fit user expectations.
+Cancel or close buttons will also be red rather than halloween themed to fit user expectations about how they function.
+
+Finally the fonts picked are again a nod to Haloween without being too childish.
+Information will presented in an easily readable font [Raleway](https://fonts.google.com/specimen/Raleway), with [Didact Gothic](https://fonts.google.com/specimen/Didact+Gothic) used for titles.
+To keep the spooky theme running through the website, [Special Elite](https://fonts.google.com/specimen/Special+Elite) is used for the logo text but used sparely to keep the more mature feel of the website.
 ## Features
 ### Existing Features
 * #### User Login: 
