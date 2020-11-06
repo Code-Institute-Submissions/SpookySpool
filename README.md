@@ -1,5 +1,5 @@
 # Spooky Spool
-Deployed site: 
+Deployed site: [https://spooky-spool.herokuapp.com/](https://spooky-spool.herokuapp.com/)
 ## Table of Contents
 1. [Aim](#aim)
 2. [UX](#ux)
@@ -316,8 +316,14 @@ To push the code to the remote repository you follow these steps.
 To publish a live version of the site I used Heroku, here are the steps I took:
 1. Create a new app in Heroku
 2. Create a Procfile & requirments.txt (with the dependancies listed using `pip3 freeze`) so Heroku can run the app.
-3. 
-4. The site is now published at [https://sdgreen.github.io/TotalTarot/](https://sdgreen.github.io/TotalTarot/)
+3. Add a remote repository to heroku `git remote add heroku https://git.heroku.com/spooky-spool.git`
+4. Push the respository to heroku `git push -u master heroku`
+5. Add the enviroment varibables to the "config vars" settings on Heroku:
+    * IP : 0.0.0.0
+    * PORT : 5000
+    * MONGODB_URI : mongodb+srv://dbgreen:***password***.k0s1i.mongodb.net/spooky_spool?retryWrites=true&w=majority
+    * SECRET_KEY : ***secret key***
+4. The site is now published at [https://spooky-spool.herokuapp.com/](https://spooky-spool.herokuapp.com/)
 
 ### How to run Spooky Spool's website code locally:
 #### Setting up the code:
