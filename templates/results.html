@@ -54,7 +54,7 @@ content %}
         </div>
     </form>
 </div>
-{% with messages = get_flashed_messages() %} {% if
+{% with messages = get_flashed_messages(category_filter=["matches"]) %} {% if
   messages %}
   <div class="flashes row">
     {% for message in messages %}

@@ -177,6 +177,7 @@
     <!-- -->
     <script>
       $(document).ready(function () {
+        
         // Materialize Triggers
         // Sidebar trigger
         $(".button-collapse").sideNav();
@@ -184,6 +185,15 @@
         $(".modal").modal();
         // Form select trigger
         $("select").material_select();
+
+        {% with messages = get_flashed_messages(category_filter=["list_function"]) %}
+            {% if messages %}
+            var messages = {{ messages | safe }};
+            for (var i=0; i<messages.length; i++) {
+            alert(messages[i]);
+            }
+            {% endif %}
+        {% endwith %}
 
         //slick carousel trigger
         $(".carousel").each(function (i) {

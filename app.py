@@ -163,7 +163,7 @@ def search(page_num, query):
         results = movies.find(query)
         sorted_results = results.sort("year", -1)
 
-    flash(f"{results.count()}")
+    flash(f"{results.count()}", "matches")
     pages = int(results.count()/40)+1
     index_start = (int(page_num)-1)*36
     index_end = int(page_num)*36
@@ -197,6 +197,7 @@ def add_watchlist(movie_id, page, value):
     user["watchlist"].append(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"watchlist": user["watchlist"]}})
+    flash(u'Movie Added to Watchlist', 'list_function')
     if page == "browse_movies":
         return redirect(url_for(f"{page}", page_num=value))
     elif page == "user_home":
@@ -215,6 +216,7 @@ def remove_watchlist(movie_id, page, value):
     user["watchlist"].remove(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"watchlist": user["watchlist"]}})
+    flash(u'Movie Removed from Watchlist', 'list_function')
 
     if page == "browse_movies":
         return redirect(url_for(f"{page}", page_num=value))
@@ -233,6 +235,7 @@ def add_favourites(movie_id, page, value):
     user["favourites"].append(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"favourites": user["favourites"]}})
+    flash('Movie Added to Favourites', 'list_function')
 
     if page == "browse_movies":
         return redirect(url_for(f"{page}", page_num=value))
@@ -251,6 +254,7 @@ def remove_favourite(movie_id, page, value):
     user["favourites"].remove(ObjectId(movie_id))
     users.update_one({"username": session["username"]},
                      {"$set": {"favourites": user["favourites"]}})
+    flash(u'Movie Removed from Favourites', 'list_function')
 
     if page == "browse_movies":
         return redirect(url_for(f"{page}", page_num=value))
