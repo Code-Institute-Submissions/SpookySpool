@@ -1,4 +1,5 @@
 import os
+import urllib.request
 import ast
 from flask import Flask, flash, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
@@ -23,7 +24,17 @@ genres = mongo.db.genres
 @app.route("/home")
 @app.route("/")
 def index():
+    
+    all_movies = movies.find()
 
+    for movie in all_movies.sort("year", -1)[1500:2000]:
+        if movie["img_url"] == "":
+            continue
+        else:
+            try:
+                urllib.request.urlopen(movie["img_url"]).getcode()
+            except urllib.error.HTTPError:
+                movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"img_url": ""}})
 
     return render_template("home.html")
 
@@ -279,11 +290,19 @@ def insert_movie():
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
 
+    img_url = request.form.get("img_url")
+    try:
+        urllib.request.urlopen(img_url).getcode()
+    except urllib.error.HTTPError:
+        img_url = ""
+    except ValueError:
+        img_url = ""
+
     query = {"title": request.form.get("title"),
              "rating": request.form.get("rating"),
              "year": request.form.get("year"),
              "metascore": request.form.get("metascore"),
-             "img_url": request.form.get("img_url"),
+             "img_url": img_url,
              "languages": request.form.getlist("languages[]"),
              "actors": request.form.getlist("actors[]"),
              "genre": genre_list,
@@ -325,11 +344,19 @@ def insert_update(movie_id):
     for genre in request.form.getlist("genre"):
         genre_list.append(ObjectId(genre))
 
+    img_url = request.form.get("img_url")
+    try:
+        urllib.request.urlopen(img_url).getcode()
+    except urllib.error.HTTPError:
+        img_url = ""
+    except ValueError:
+        img_url = ""
+
     updated_movie = {"title": request.form.get("title"),
                      "rating": request.form.get("rating"),
                      "year": request.form.get("year"),
                      "metascore": request.form.get("metascore"),
-                     "img_url": request.form.get("img_url"),
+                     "img_url": img_url,
                      "languages": request.form.getlist("languages[]"),
                      "actors": request.form.getlist("actors[]"),
                      "genre": genre_list,

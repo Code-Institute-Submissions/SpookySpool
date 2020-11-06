@@ -1,5 +1,5 @@
 # Spooky Spool
-Deployed site: [https://sdgreen.github.io/TotalTarot/](https://sdgreen.github.io/TotalTarot/)
+Deployed site: 
 ## Table of Contents
 1. [Aim](#aim)
 2. [UX](#ux)
@@ -12,32 +12,34 @@ Deployed site: [https://sdgreen.github.io/TotalTarot/](https://sdgreen.github.io
 ---
 
 ## Aim
-The aim of Spooky Spool is to create a usable and easily searchable database of scary/horror themed movies.
-Spooky Spool is a place for horror fans to find movies, create accounts and share movies to increase the database.
-Currently designed as an informational store on the movies, once the userbase is large enough the website would transition to include links to streaming platforms. This way users can find films, share films but also be directed to where they are avaliable, revenue being generate from the referal.
+Spooky Spool's aim is to create a usable and easily searchable database of scary/horror themed movies.
+Spooky Spool is a place for horror fans to find movies, create accounts and share movies not included in the database.
+Currently designed as an informational store on movies, once the user base is large enough the website would transition to include links to streaming platforms.
+This way users can find films, share films but also be directed to where they are available, revenue being generated from the referral.
 
 ## UX
 
 ### Target Demographic
 The target demographic for Spooky Spool is scary movie fans across all ages.
-This is a broad demographic but scews towards younger (the average viewer is under 25) with a roughly even split between the sexes [(source)](https://cmpalexgilbey.weebly.com/uploads/3/8/8/7/38878453/horror_film_research.pdf).
+This is a broad demographic but skews towards younger (the average viewer is under 25)
+with a roughly even split between the sexes [(source)](https://cmpalexgilbey.weebly.com/uploads/3/8/8/7/38878453/horror_film_research.pdf).
 As the audience is younger the website must have a mobile first design (which is more often used over traditional desktops by this demographic).
 A gender neutral design has also be used as users are expecting more of a scary feel compared to anything gendered.
 
 
 ### User Stories
 * As a user, I want to know what I can actually do with this website, so I know if I want to create an account.
-* As a user, I want search the database based on my prefrences, so I can find movies I want.
+* As a user, I want search the database based on my preferences, so I can find movies I want.
 * As a user, I want to be able to find out more information on a movie, so I can tell if I want to watch it.
-* As a user, I want to movies I'm interested in to be easily avaliable, so I can refer to them quickly.
+* As a user, I want to movies I'm interested in to be easily available, so I can refer to them quickly.
 * As a user, I want to add movies that aren't on the database, so I can share them with other users.
 * As a user, I want to be able to edit information on my movies, so it can be correct if I make mistakes.
-* As a user, I want to know if I already added a movie to a watchlist or favourites, so I don't have mutliples in my saved lists.
-* As the owner, I want many movies, so users have lot's of options to browse through.
+* As a user, I want to know if I already added a movie to a watchlist or favourites, so I don't have multiples in my saved lists.
+* As the owner, I want many movies, so users have lots of options to browse through.
 * As the owner, I want guests to create accounts, so I can increase my userbase.
 * As the owner, I want it to be simple to create an account, to stop users from leaving with creating an account.
 * As the owner, I want users to add their own movies, so my database increases.
-* As the owner, I want the website to be information to be easily digestable, to stop users leaving due to information overload.
+* As the owner, I want the website to be information to be easily digestible, to stop users leaving due to information overload.
 
 ### Wireframes
 Wireframes for the desktop and mobile versions can be found [here](https://github.com/SDGreen/SpookySpool/tree/master/wireframes)
@@ -45,58 +47,71 @@ Wireframes for the desktop and mobile versions can be found [here](https://githu
 ## Features
 ### Existing Features
 * #### User Login: 
-    Users can create accounts, sign in and logout out. When signing up the website new users using existing usernames or emails are asked to try again (with messages explaining why they failed) to prevent repetition.
-    The siginup form also validates passwords with a retype field which blocks the login button untill their inputs match.
+    Users can create accounts, sign in and logout out. When signing up the website new users using existing usernames or
+    emails are asked to try again (with messages explaining why they failed) to prevent repetition.
+    The siginup form also validates passwords with a retype field which blocks the login button until their inputs match.
     Login will also fail if the username isn't in the database or the password is incorrect with error messages for both.
 * #### Responsive Movie Cards:
-    Cards are generated for each movie in the databse. Clicking on a card image or title will redirect the user to that movie's page where they can get more information about it.
+    Cards are generated for each movie in the database. Clicking on a card image or title will redirect the user to that movie's
+    page where they can get more information about it.
     If a link to the movie's poster isn't provided, the default clapperboard image is used instead.
-    The the user just wants a quick summary they can click the information Icon at the bottom of the card which displays more detailed information about the plot.
-    The cards are also resposive to size, ajusting how many are displayed per row depending on the users device to keep information and the page clutter free clear.
-    The cards will display more options to logged in users with quick links to add that movie to their watchlist or favourites. If the movie is already on the user's lists then these links change to relflect that and provide quick visual clues that the movie was sucessfully added to either list.
-* #### Resposive Movie Page:
-    Each movie has it's data injected into a movie page template to display what information is avaliable. If fields like Age rating or Metascore aren't avaliable then the copy changed to reflect that.
+    The user just wants a quick summary they can click the information Icon at the bottom of the card which displays more detailed
+    information about the plot.
+    The cards are also responsive to size, adjusting how many are displayed per row depending on the user's device to keep information and
+    the page clutter free clear.
+    The cards will display more options to logged in users with quick links to add that movie to their watchlist or favourites.
+    If the movie is already on the user's lists then these links change to reflect that and provide quick visual clues that the movie was successfully added to either list.
+* #### Responsive Movie Page:
+    Each movie has it's data injected into a movie page template to display what information is available.
+    If fields like Age Rating or Metascore aren't available then the copy changed to reflect that.
 * #### Interactive Accordion:
-    A materialize accordion which keeps additional movie information hidden until the user needs it. By click on each accordian title the information is revealed. This keeps a lot of information packed neatly onto one page.
-* #### Mutliple Calls to Sign-up/Login:
-    The browse page, search results page, movie page and navbar can all detect if the visitor is a guest or user. If the user isn't logged in then copy appears with links to the login page, encouring users to signin or create an account to access all the websites functions.
+    A materialize accordion which keeps additional movie information hidden until the user needs it.
+    By clicking on each accordion title the information is revealed. This keeps a lot of information packed neatly onto one page.
+* #### Multiple Calls to Sign-up/Login:
+    The browse page, search results page, movie page and navbar can all detect if the visitor is a guest or user.
+    If the user isn't logged in then copy appears with links to the login page, encouraging users to sign in or create an account to access all the websites functions.
 * #### Search Bar with Advanced Search Options:
     The browse and search results pages each include a search bar where users can search the database by movie title.
-    If they would like to expand that search to include release year, genre or age rating then a dropdown menu can be click which includes these option. By default this is hidden to prevent page cluttering.
-    The results page will also flash how many results are found for the user.
+    If they would like to expand that search to include release year, genre or age rating then a drop down menu can be clicked which includes these option.
+    By default this is hidden to prevent page cluttering.
+    The results page will also flash how many results are found by the search.
 * #### Draggable Watchlist, Favourites and Submitted Movies Carousels:
     The user homepage has interactive carousels which will display a card for each movie in that list. 
-    The carousels are resposinve to device size so smaller pages have less cards per slide, preventing cluttering. They are also draggable on touch devices (see [credits](#credits) for code]) 
+    The carousels are responsive so smaller devices have fewer cards per slide, preventing cluttering.
+    They are also draggable on touch devices (see [credits](#credits) for code]) 
     If no movies are in a list then the carousel turns into a call to action asking the user to browse/input movies to add them into that list.
 * #### Add Movie Insert/Update Form:
     Users can add movies into the database using a form provided by materialize (see [credits](#credits)).
-    The add movie form will insert a movie into the database and has validation so key fields can't be missed. The new movie is also automatically inserted into that user's submitted list.
-    Buttons are provided so users can add/remove input fields for catagories like actors which can have varying numbers of inputs.
+    The add movie form will insert a movie into the database and has validation so key fields can't be missed.
+    The new movie is also automatically inserted into that user's submitted list.
+    Buttons are provided so users can add/remove input fields for categories like actors which can have varying numbers of inputs.
     The update form inserts the current data as values so users can know what the default is. This also means users don't have to re-enter information which doesn't change.
 * #### Selective Update/Delete buttons:
     Buttons which update or remove a movie from the database are only shown on the movie page to the users who created that film.
-    This prevents core movie data being corrupted by malicous users.
-* #### Resposive Navbar:
-    The Navbar is created so that links are displayed on a dropdown for mobile users to prevent cluttering. The large title is also replaced so just the logo is visible to viewers on smaller devices.
-* #### Resposive buttons:
+    This prevents core movie data being corrupted by malicious users.
+* #### Responsive Navbar:
+    The Navbar is created so that links are displayed on a drop down for mobile users to prevent cluttering.
+    The large title is also replaced so just the logo is visible to viewers on smaller devices.
+* #### Responsive buttons:
     Link and buttons throughout the website react when hovered so users know they can be clicked.
 * #### Responsive Pagination:
-    The main browse page and results page are also paginated based on how many movies their are (the browse page always has this feature as the number of movies is always over 36)
-    On small devices the pagination reduces so that less pages are avaliable either side of the active page to reduce clutter.
+    The main browse page and results page are also paginated based on how many movies there are (the browse page always has this feature as the number of movies is always over 36)
+    On small devices the pagination reduces so that fewer pages are available either side of the active page to reduce clutter.
 
 ### Features Left to Implement
 * #### Comment Functionality on Movie Pages:
-    This would help facilitate conversation amoung our users and help expand the userbase.
+    This would help facilitate conversation among our users and help expand the user base.
 * #### Admin Functionality for Movie Inserts:
     With a larger team, admins could be used to review inserts to prevent incorrect or unsuitable data from entering the database.
 * #### Links to Streaming Platforms:
-    In the future we'd like to include links to where the movies are avaliable to add another source of revenue to the site.
-* #### Movie Reccomendation based on Users Watchlist/Favourites:
-    This feature would be added on the search bar so viewers have reccomendations rather than search for things they would like, increasing engagment. 
+    In the future we'd like to include links to where the movies are available to add another source of revenue to the site.
+* #### Movie Recommendation based on User's Watchlist/Favourites:
+    This feature would be added on the search bar so viewers have recommendations rather than search for things they would like, increasing engagement. 
 * #### Advanced Search Functionality:
-    Currently you can search based on four filters, however the movies have more data which coould be searched by (i.e. actors).
-* #### Password Reseting:
-    Currently users can create accounts but that infomation is lost if the user forgets their password. As we currently save emails it can be retrievable, we just need to add a reset password feature.
+    Currently you can search based on four filters, however the movies have more data which could be searched by (i.e. actors).
+* #### Password Resetting:
+    Currently users can create accounts but that information is lost if the user forgets their password.
+    As we currently save emails it can be retrievable, we just need to add a reset password feature.
 * #### Report Feature:
     A report feature would be useful for movies which have broken poster links or inappropriate information.
 
@@ -112,16 +127,16 @@ Wireframes for the desktop and mobile versions can be found [here](https://githu
 * [MongoDB](https://docs.mongodb.com/) - Used to host the database along with retrieve data, save edits, deletions and inserts.
 * [Git](https://git-scm.com/) - Used for version control and tracking changes to the code whilst in development.
 * [Google Fonts](https://fonts.google.com/) - Used for website fonts [Cinzel](https://fonts.google.com/specimen/cinzel) for headings and [Montserrat](https://fonts.google.com/specimen/Montserrat) for content text.
-* [Font Awesome](https://fo*ntawesome.com/) - This library provided the Icons used across the site.
-* [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) - Key for finding bugs and testing resposive design.
+* [Font Awesome](https://fontawesome.com/) - This library provided the Icons used across the site.
+* [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) - Key for finding bugs and testing responsive design.
 * [Autoprefixer](https://autoprefixer.github.io/) - Used to prefix the css, allowing it to work across different browsers.
 
 ## Testing
-Spooky Spool's testing can be split into four catagories: 
+Spooky Spool's testing can be split into four categories: 
 * Database CRUD operations.
 * User validation.
 * DOM Manipulation.
-* Resposive Design.
+* Responsive Design.
 
 ### Database CRUD Operations:
 
@@ -269,13 +284,13 @@ To publish a live version of the side I used GitHub Pages, here are the steps I 
 3. Scroll to "GitHub Pages", select a publishing source (master branch in the drop-down menu)
 4. The site is now published at [https://sdgreen.github.io/TotalTarot/](https://sdgreen.github.io/TotalTarot/)
 
-### How to run Total Tarot's website code locally:
-1. Go to: [https://github.com/SDGreen/TotalTarot](https://github.com/SDGreen/TotalTarot)
+### How to run Spooky Spool's website code locally:
+1. Go to: [https://github.com/SDGreen/SpookySpool](https://github.com/SDGreen/SpookySpool)
 2. Click the "Code" button next to the "Gitpod" button which will have a dropdown including "Clone with HTTPS", "Open with GitHub Desktop" & "Download ZIP"
 3. To clone the repository using HTTPS, under "Clone with HTTPS", click the copy to clipboard icon. To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click the copy to clipboard icon.
 4. Open Git Bash.
 5. Change the current working directory to the location where you want the cloned directory to be made.
-6. Type `git clone`, and then paste the URL you copied in Step 2 (https://github.com/SDGreen/TotalTarot.git).
+6. Type `git clone`, and then paste the URL you copied in Step 2 (https://github.com/SDGreen/SpookySpool.git).
 
 ## Credits
 ### Media
