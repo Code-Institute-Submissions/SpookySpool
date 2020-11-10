@@ -20,22 +20,12 @@ movies = mongo.db.movies
 users = mongo.db.users
 genres = mongo.db.genres
 
-#Homepage
+
+# Homepage
 @app.route("/home")
 @app.route("/")
 def index():
-    """
-    all_movies = movies.find()
 
-    for movie in all_movies.sort("year", -1)[4100:4200]:
-        if movie["img_url"] == "":
-            continue
-        else:
-            try:
-                urllib.request.urlopen(movie["img_url"]).getcode()
-            except urllib.error.HTTPError:
-                movies.update_one({"_id": ObjectId(movie["_id"])}, {"$set": {"img_url": ""}})
-    """
     return render_template("home.html")
 
 
@@ -112,13 +102,17 @@ def browse_movies(page_num=1):
         user = users.find_one({"username": session["username"]})
     else:
         user = ""
-    
+
     movie_genres = genres.find()
 
-    return render_template("browse.html", movies=movies[index_start:index_end], user=user, pages=pages, current_page=int(page_num), genres=movie_genres)
+    return render_template("browse.html", movies=movies[index_start:index_end],
+                           user=user, pages=pages, current_page=int(page_num),
+                           genres=movie_genres)
+
 
 # Search function
-@app.route("/search-results/page=<page_num>/new-search=<query>", methods=["GET", "POST"])
+@app.route("/search-results/page=<page_num>/new-search=<query>",
+           methods=["GET", "POST"])
 def search(page_num, query):
 
     if request.method == "POST":
@@ -151,7 +145,8 @@ def search(page_num, query):
 
     else:
         # This converts the query string into a dictionary
-        query = query.replace("ObjectId('", "'").replace("')", "'").replace("\n", ",")
+        query = query.replace("ObjectId('", "'").replace(
+            "')", "'").replace("\n", ",")
         query = ast.literal_eval(query)
 
         # This added the ObjectId() back onto genres if in the query
@@ -179,6 +174,7 @@ def search(page_num, query):
                            genres=movie_genres, user=user, pages=pages,
                            query=query)
 
+
 @app.route("/movie/<movie_id>")
 def movie_page(movie_id):
     movie_data = movies.find_one({"_id": ObjectId(movie_id)})
@@ -187,7 +183,8 @@ def movie_page(movie_id):
         user = users.find_one({"username": session["username"]})
     else:
         user = ""
-    return render_template('movie_template.html', movie=movie_data, genres=genre_data, user=user)
+    return render_template('movie_template.html', movie=movie_data,
+                           genres=genre_data, user=user)
 
 
 # Add to watchlist/favourites and Remove from watchlist/favourites
@@ -206,7 +203,6 @@ def add_watchlist(movie_id, page, value):
         return redirect(url_for(f"{page}", page_num=1, query=value))
     else:
         return redirect(url_for(f"{page}", movie_id=movie_id))
-
 
 
 @app.route("/remove_watchlist/<movie_id>/redirect=<page>/<value>")
